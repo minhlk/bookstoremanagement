@@ -6,6 +6,7 @@
 package BUS;
 
 import DAO.PHIEUDAO;
+import DTO.CHITIETPHIEUDTO;
 import DTO.PHIEUDTO;
 import java.util.ArrayList;
 
@@ -22,23 +23,40 @@ public class PHIEUBUS {
     public void PHIEUBUS(){
         
     }
-    public void savePhieu(PHIEUDTO mPhieu){
+    public void savePhieu(ArrayList<CHITIETPHIEUDTO> mPhieu){
         phieuDAO = new PHIEUDAO();  
         phieuDAO.savePhieu(mPhieu);   
     }
-//    public ArrayList<PHIEUDTO> loadFormNhap(){
+    public ArrayList<PHIEUDTO> loadFormNhap(){
        
-//         phieuDAO = new PHIEUDAO();  
-//         ArrayList<PHIEUDTO> arr= phieuDAO.loadFormNhap();
+         phieuDAO = new PHIEUDAO();  
+         ArrayList<PHIEUDTO> arr= phieuDAO.loadFormNhap();
 //         for(int i=0;i< arr.size();i++){
 //             System.out.println(arr.get(i).toString());
 //         }
          
-//         return arr;
-//        
-//    }
+         return arr;
+        
+    }
     public void editPhieu(PHIEUDTO mPhieu){
           phieuDAO = new PHIEUDAO(); 
 //          phieuDAO.editPhieu(mPhieu);
     }
+    public ArrayList<CHITIETPHIEUDTO> getChiTietPhieu(int idPhieu){
+        phieuDAO = new PHIEUDAO();
+         ArrayList<CHITIETPHIEUDTO> arr = phieuDAO.getChiTietPhieu(idPhieu);
+        return arr;
+    }
+    public ArrayList<PHIEUDTO> timkiem(int idPhieu){
+       
+         phieuDAO = new PHIEUDAO();  
+         ArrayList<PHIEUDTO> arr= phieuDAO.timkiem(idPhieu);
+//         for(int i=0;i< arr.size();i++){
+//             System.out.println(arr.get(i).toString());
+//         }
+         
+         return arr;
+        
+    }
+   
 }

@@ -5,7 +5,7 @@
  */
 package DTO;
 
-import java.sql.Date;
+
 
 /**
  *
@@ -13,9 +13,9 @@ import java.sql.Date;
  */
 public class PHIEUDTO {
     int idPhieu,tinhTrang;
-    Date ngayLap;
+    String ngayLap;
 
-    public PHIEUDTO(int idPhieu, int tinhTrang, Date ngayLap) {
+    public PHIEUDTO(int idPhieu, int tinhTrang, String ngayLap) {
         this.idPhieu = idPhieu;
         this.tinhTrang = tinhTrang;
         this.ngayLap = ngayLap;
@@ -47,11 +47,11 @@ public class PHIEUDTO {
         this.tinhTrang = tinhTrang;
     }
 
-    public Date getNgayLap() {
+    public String getNgayLap() {
         return ngayLap;
     }
 
-    public void setNgayLap(Date ngayLap) {
+    public void setNgayLap(String ngayLap) {
         this.ngayLap = ngayLap;
     }
     
