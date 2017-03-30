@@ -5,6 +5,21 @@
  */
 package bookstoremanagerment;
 
+import DAO.SACHDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
 /**
  *
  * @author MKZ
@@ -18,6 +33,10 @@ public class BookstoreManagerment {
         // TODO code application logic here
         MainForm mainForm = new MainForm();
         mainForm.setVisible(true);
+//        System.out.println("a");
+//        SACHDAO dao = new SACHDAO();
+        
+        
     }
     
 }
