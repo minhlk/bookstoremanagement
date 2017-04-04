@@ -11,26 +11,37 @@ package DTO;
  */
 public class SACHDTO {
     int idSach,soLuong,giaBan;
-    String tenSach,tacGia;
+    String tenSach,tacGia,nhaCungCap;
 
     @Override
     public String toString() {
-        return "SACHDTO{" + "idSach=" + idSach + ", soLuong=" + soLuong + ", giaBan=" + giaBan + ", tenSach=" + tenSach + ", tacGia=" + tacGia + '}';
+        return "SACHDTO{" + "idSach=" + idSach + ", soLuong=" + soLuong + ", giaBan=" + giaBan + ", tenSach=" + tenSach + ", tacGia=" + tacGia + ", nhaCungCap=" + nhaCungCap + '}';
     }
-    
-    public SACHDTO(int idSach, int soLuong, int giaBan, String tenSach, String tacGia) {
+
+    public SACHDTO(int idSach, int soLuong, int giaBan, String tenSach, String tacGia, String nhaCungCap) {
         this.idSach = idSach;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
+        this.nhaCungCap = nhaCungCap;
     }
-    public SACHDTO(int soLuong, int giaBan, String tenSach, String tacGia) {
+
+    
+//    public SACHDTO(int idSach, int soLuong, int giaBan, String tenSach, String tacGia) {
+//        this.idSach = idSach;
+//        this.soLuong = soLuong;
+//        this.giaBan = giaBan;
+//        this.tenSach = tenSach;
+//        this.tacGia = tacGia;
+//    }
+    public SACHDTO(int soLuong, int giaBan, String tenSach, String tacGia, String nhaCungCap) {
 //        this.idSach = idSach;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
+        this.nhaCungCap = nhaCungCap;
     }
     public SACHDTO() {
 //         this.idSach = idSach;
@@ -38,11 +49,20 @@ public class SACHDTO {
         this.giaBan = 0;
         this.tenSach = "";
         this.tacGia = "";
+        this.nhaCungCap = "";
     }
 
     
     public int getIdSach() {
         return idSach;
+    }
+
+    public String getNhaCungCap() {
+        return nhaCungCap;
+    }
+
+    public void setNhaCungCap(String nhaCungCap) {
+        this.nhaCungCap = nhaCungCap;
     }
 
     public void setIdSach(int idSach) {

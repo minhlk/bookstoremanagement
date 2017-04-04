@@ -41,5 +41,16 @@ public class SACHBUS {
           sachDAO = new SACHDAO(); 
           sachDAO.editSach(mSach);
     }
+
+    public void deleteSach(SACHDTO mSach) {
+          sachDAO = new SACHDAO(); 
+          sachDAO.deleteSach(mSach.getIdSach());
+    }
+
+    public ArrayList<SACHDTO>  loadFormNhap( String value, String key) {
+          sachDAO = new SACHDAO(); 
+          ArrayList<SACHDTO> arr= sachDAO.loadFormNhap(value, key);  
+          return arr;
+    }
     
 }
