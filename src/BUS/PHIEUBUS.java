@@ -58,5 +58,15 @@ public class PHIEUBUS {
          return arr;
         
     }
+    public void deletePhieu(int idPhieu){
+        phieuDAO = new PHIEUDAO();
+        phieuDAO.deletePhieu(idPhieu);
+    
+    }
+
+    public void changeState(int idPhieu,int state) {
+         phieuDAO = new PHIEUDAO();
+        phieuDAO.changeState(idPhieu,state);
+    }
    
 }

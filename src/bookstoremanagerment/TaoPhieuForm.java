@@ -5,6 +5,13 @@
  */
 package bookstoremanagerment;
 
+import BUS.PHIEUBUS;
+import BUS.SACHBUS;
+import DTO.CHITIETPHIEUDTO;
+import DTO.SACHDTO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MKZ
@@ -14,8 +21,12 @@ public class TaoPhieuForm extends javax.swing.JFrame {
     /**
      * Creates new form TaoPhieuForm
      */
+    DefaultTableModel model;
     public TaoPhieuForm() {
         initComponents();
+        
+        loadSach();
+        
     }
 
     /**
@@ -154,6 +165,12 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         });
         jTable1.setColumnSelectionAllowed(true);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -234,33 +251,60 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void loadSach() {
+         SACHBUS sachBus = new SACHBUS();
+        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Tên sách");
+        model.addColumn("Tên tác giả");
+        model.addColumn("Số lượng");
+//        model.addColumn("Giá bán");
+        model.addColumn("Nhà cung cấp");
+        model.addColumn("id Sách");
+//        model.addColumn("1");
+          for(int i=0;i< arr.size();i++){
+            model.addRow(new Object[]{
+                     arr.get(i).getTenSach().trim()
+                    ,arr.get(i).getTacGia().trim()
+                    ,arr.get(i).getSoLuong()
+//                    ,arr.get(i).getGiaBan()
+                    ,arr.get(i).getNhaCungCap()
+                    ,arr.get(i).getIdSach()
+            });
+         }
+          jTable1.setModel(model);
+        
+    }
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
-
-        int soluong = Integer.parseInt(jSpinner2.getValue().toString());
-        int giaBan = 0;
-        try{
-            giaBan = Integer.parseInt(jTextField17.getText().isEmpty()?"0":jTextField17.getText());
+//        DefaultTableModel model = new DefaultTableModel();
+        if(model == null){
+            model = new DefaultTableModel();
+        model.addColumn("Tên sách");
+//        model.addColumn("Tên tác giả");
+        model.addColumn("Số lượng");
+        model.addColumn("Giá mua");
+//        model.addColumn("Nhà cung cấp");
+        model.addColumn("id Sách");
         }
-        catch(java.lang.NumberFormatException e){
-            giaBan = 0;
-        }
-        //        String tacGia = jTextField4.getText();
         String tenSach = jTextField5.getText();
         if(tenSach!="id"){
 //            SACHDTO mSach = new SACHDTO(Integer.parseInt(jTextField7.getText().isEmpty()?"0":jTextField7.getText()),soluong,giaBan,tenSach,"");
 //            SACHBUS sachBus = new SACHBUS();
             //        sachBus.saveSach(mSach);
 
-//            model.addRow(new Object[]{mSach.getTenSach(),mSach.getSoLuong(),mSach.getGiaBan(),mSach.getIdSach()});
+            model.addRow(new Object[]{jTextField5.getText()
+                    ,Integer.parseInt(jSpinner2.getValue().toString())
+                    ,jTextField17.getText().isEmpty()?"1000":jTextField17.getText()
+                    ,jTextField7.getText()});
         }
-//        jTable3.setModel(model);
+        jTable3.setModel(model);
 
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here:
-//        ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
+        ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -269,19 +313,30 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         // save phieu
         //tao phieu
         // tao chi tiet phieu
-//        ArrayList<CHITIETPHIEUDTO> arr = new ArrayList<>();
-//        for(int i =0;i< jTable3.getRowCount();i++){
-//            arr.add(new CHITIETPHIEUDTO(
-//                Integer.parseInt(jTable3.getValueAt(i, 3).toString())
-//                ,Integer.parseInt(jTable3.getValueAt(i, 1).toString())
-//                ,Integer.parseInt(jTable3.getValueAt(i, 2).toString())));
-//        System.out.println(arr.get(i).toString());
-//        }
-//
-//        PHIEUBUS phieuBus = new PHIEUBUS();
-//        //        if(arr.size() > 0)
-//        phieuBus.savePhieu(arr);
+        ArrayList<CHITIETPHIEUDTO> arr = new ArrayList<>();
+//        new CHITIETPHIEUDTO(WIDTH, HEIGHT, WIDTH, tenSach)
+        for(int i =0;i< jTable3.getRowCount();i++){
+            arr.add(new CHITIETPHIEUDTO(
+                Integer.parseInt(jTable3.getValueAt(i, 3).toString())
+                ,Integer.parseInt(jTable3.getValueAt(i, 1).toString())
+                ,Integer.parseInt(jTable3.getValueAt(i, 2).toString())
+                ,jTable3.getValueAt(i, 0).toString()    
+            ));
+        System.out.println(arr.get(i).toString());
+        }
+
+        PHIEUBUS phieuBus = new PHIEUBUS();
+                if(arr.size() > 0)
+        phieuBus.savePhieu(arr);
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        // TODO add your handling code here:
+         jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString().trim());
+//        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());
+        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+//        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim());
+    }//GEN-LAST:event_jTable1MousePressed
 
     /**
      * @param args the command line arguments

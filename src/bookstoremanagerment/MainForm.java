@@ -123,6 +123,7 @@ public class MainForm extends javax.swing.JFrame {
         jSpinner2 = new javax.swing.JSpinner();
         jLabel15 = new javax.swing.JLabel();
         jButton23 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         jButton24 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jRadioButton7 = new javax.swing.JRadioButton();
@@ -597,12 +598,20 @@ public class MainForm extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "12/12/2016", "0,1", "0,1"}
+
             },
             new String [] {
                 "Mã phiếu", "Ngày lập", "Tình trạng", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable4.setColumnSelectionAllowed(true);
         jTable4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable4.getTableHeader().setReorderingAllowed(false);
@@ -639,6 +648,11 @@ public class MainForm extends javax.swing.JFrame {
         jTable5.setColumnSelectionAllowed(true);
         jTable5.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable5.getTableHeader().setReorderingAllowed(false);
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable5MousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable5);
         jTable5.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable5.getColumnModel().getColumnCount() > 0) {
@@ -656,13 +670,20 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Kiểm tra sách"));
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Kiểm tra phiếu"));
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Số lượng nhận"));
 
         jLabel15.setText("Tên sách");
 
         jButton23.setText("Sửa");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Đã nhập");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -673,29 +694,39 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jButton23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jLabel15)
-                        .addGap(44, 44, 44)
+                        .addGap(94, 94, 94))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton23)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jButton24.setText("Cập nhật");
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tình trạng"));
 
-        buttonGroup2.add(jRadioButton7);
+        buttonGroup1.add(jRadioButton7);
         jRadioButton7.setText("Đủ");
+        jRadioButton7.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton7StateChanged(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton8);
+        buttonGroup1.add(jRadioButton8);
         jRadioButton8.setText("Thiếu");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -735,13 +766,14 @@ public class MainForm extends javax.swing.JFrame {
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel15Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel15Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
 
         jButton14.setText("Lọc");
@@ -770,6 +802,11 @@ public class MainForm extends javax.swing.JFrame {
         jButton15.setText("In phiếu");
 
         jButton19.setText("Cập nhật");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Trạng thái"));
 
@@ -963,38 +1000,20 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model;
-         model = new DefaultTableModel();
-        model.addColumn("Mã phiếu");
-//        model.addColumn("Tên tác giả");
-        model.addColumn("Ngày lập");
-        model.addColumn("Tình trạng");
-//        model.addColumn("id Sách");
-PHIEUBUS bus = new PHIEUBUS();
-ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
- for(int i=0;i< arr.size();i++){
-//            jTable1.setValueAt(arr.get(i).getTenSach().trim(), i, 0);
-//            jTable1.setValueAt(arr.get(i).getTacGia().trim(), i, 1);
-//            jTable1.setValueAt(arr.get(i).getSoLuong(), i, 2);
-//            jTable1.setValueAt(arr.get(i).getGiaBan(), i, 3);
-//            jTable1.setValueAt(arr.get(i).getIdSach(), i, 4);
-            model.addRow(new Object[]{arr.get(i).getIdPhieu()
-                    ,arr.get(i).getNgayLap().trim()
-                    ,arr.get(i).getTinhTrang()
-            });
-         }
-          jTable4.setModel(model);
+       loadFormPhieu();
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
         int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
+        jTextField8.setText("Mã phiếu : "+idPhieu);
         ArrayList<CHITIETPHIEUDTO> arr = new PHIEUBUS().getChiTietPhieu(idPhieu);
         DefaultTableModel model;
          model = new DefaultTableModel();
         model.addColumn("Mã phiếu");
         model.addColumn("Tên sách");
-        model.addColumn("Số lượng");
+        model.addColumn("Số lượng nhập");
+        model.addColumn("Số lượng đã nhận");
         model.addColumn("Giá mua");
 //        model.addColumn("id Sách");
 //PHIEUBUS bus = new PHIEUBUS();
@@ -1007,7 +1026,8 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
 //            jTable1.setValueAt(arr.get(i).getIdSach(), i, 4);
             model.addRow(new Object[]{arr.get(i).getIdPhieu()
                     ,arr.get(i).getTenSach().trim()
-                    ,arr.get(i).getSoLuong()
+                    ,arr.get(i).getSoLuongNhap()
+                    ,arr.get(i).getSoLuongNhan()
                     ,arr.get(i).getGiaMua()
             });
          }
@@ -1018,10 +1038,17 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
+        TaoPhieuForm taoPhieuForm = new TaoPhieuForm();
+        taoPhieuForm.setVisible(true);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         // TODO add your handling code here:
+        PHIEUBUS bus = new PHIEUBUS();
+        int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
+        bus.deletePhieu(idPhieu);
+        loadFormPhieu();
+        
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -1064,6 +1091,41 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
 
 
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+        int state = 1;
+       int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
+        
+        if ( jRadioButton10.isSelected())
+            state = 0;
+          PHIEUBUS bus = new PHIEUBUS();
+          bus.changeState(idPhieu,state);
+           loadFormPhieu();
+        
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
+        // TODO add your handling code here:
+        jLabel15.setText(jTable5.getValueAt(jTable5.getSelectedRow(), 1).toString());
+        jSpinner2.setValue(Integer.parseInt(jTable5.getValueAt(jTable5.getSelectedRow(), 3).toString()));
+    }//GEN-LAST:event_jTable5MousePressed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+        jTable5.setValueAt(jSpinner2.getValue().toString(), jTable5.getSelectedRow(), 3);
+       
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jRadioButton7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton7StateChanged
+        // TODO add your handling code here:
+        if(jRadioButton7.isSelected())
+        for(int i = 0 ; i< jTable5.getRowCount();i++) 
+          jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
+        else
+        for(int i = 0 ; i< jTable5.getRowCount();i++) 
+          jTable5.setValueAt(0, i, 3);
+    }//GEN-LAST:event_jRadioButton7StateChanged
 
     /**
      * @param args the command line arguments
@@ -1133,6 +1195,7 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1245,5 +1308,24 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
 //        jTable1.setValueAt("abd", 0, 2);
 //        jTable1.setValueAt("abe", 0, 3);
         
+    }
+
+    private void loadFormPhieu() {
+      DefaultTableModel model;
+         model = new DefaultTableModel();
+        model.addColumn("Mã phiếu");
+        model.addColumn("Ngày lập");
+        model.addColumn("Tình trạng");
+        model.addColumn("Trạng thái");
+PHIEUBUS bus = new PHIEUBUS();
+ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
+ for(int i=0;i< arr.size();i++){
+            model.addRow(new Object[]{arr.get(i).getIdPhieu()
+                    ,arr.get(i).getNgayLap().trim()
+                    ,arr.get(i).getTinhTrang()
+                    ,arr.get(i).getTrangThai()
+            });
+         }
+          jTable4.setModel(model);  
     }
 }

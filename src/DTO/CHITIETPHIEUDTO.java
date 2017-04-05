@@ -10,7 +10,7 @@ package DTO;
  * @author MKZ
  */
 public class CHITIETPHIEUDTO {
-   int idPhieu,idSach,soLuong,giaMua;
+   int idPhieu,idSach,soLuongNhap,soLuongNhan,giaMua;
    String tenSach;
 
     public String getTenSach() {
@@ -21,30 +21,40 @@ public class CHITIETPHIEUDTO {
         this.tenSach = tenSach;
     }
 
-    public CHITIETPHIEUDTO(int idPhieu, int idSach, int soLuong, int giaMua) {
+    public int getSoLuongNhap() {
+        return soLuongNhap;
+    }
+
+    public void setSoLuongNhap(int soLuongNhap) {
+        this.soLuongNhap = soLuongNhap;
+    }
+
+    public int getSoLuongNhan() {
+        return soLuongNhan;
+    }
+
+    public void setSoLuongNhan(int soLuongNhan) {
+        this.soLuongNhan = soLuongNhan;
+    }
+
+    public CHITIETPHIEUDTO(int idPhieu, int idSach, int soLuongNhap, int soLuongNhan, int giaMua, String tenSach) {
         this.idPhieu = idPhieu;
         this.idSach = idSach;
-        this.soLuong = soLuong;
-        this.giaMua = giaMua;
-    }
-    public CHITIETPHIEUDTO(int idSach, int soLuong, int giaMua) {
-        this.idPhieu = 0;
-        this.idSach = idSach;
-        this.soLuong = soLuong;
-        this.giaMua = giaMua;
-    }
-    public CHITIETPHIEUDTO(int idPhieu, int idSach, int soLuong, int giaMua,String tenSach) {
-        this.idPhieu = idPhieu;
-        this.idSach = idSach;
-        this.soLuong = soLuong;
+        this.soLuongNhap = soLuongNhap;
+        this.soLuongNhan = soLuongNhan;
         this.giaMua = giaMua;
         this.tenSach = tenSach;
     }
-
-    @Override
-    public String toString() {
-        return "CHITIETPHIEUDTO{" + "idPhieu=" + idPhieu + ", idSach=" + idSach + ", soLuong=" + soLuong + ", giaMua=" + giaMua + '}';
+     public CHITIETPHIEUDTO( int idSach, int soLuongNhap, int giaMua, String tenSach) {
+//        this.idPhieu = idPhieu;
+        this.idSach = idSach;
+        this.soLuongNhap = soLuongNhap;
+        this.soLuongNhan = 0;
+        this.giaMua = giaMua;
+        this.tenSach = tenSach;
     }
+    
+   
 
     public int getIdPhieu() {
         return idPhieu;
@@ -62,13 +72,6 @@ public class CHITIETPHIEUDTO {
         this.idSach = idSach;
     }
 
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
 
     public int getGiaMua() {
         return giaMua;

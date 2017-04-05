@@ -49,22 +49,28 @@ public class PHIEUDAO {
 //            Calendar calobj = Calendar.getInstance();
 //       System.out.println(df.format(calobj.getTime()));
             st = conn.createStatement();
+            // create new phieunhan
             String Sql = "insert into PhieuNhan(tinhTrang) values('0')";
             st.executeUpdate(Sql);
+            // get id of that new phieunhan
+            
             Sql = "SELECT TOP 1 idPhieu FROM PhieuNhan ORDER BY idPhieu DESC";
             rs = st.executeQuery(Sql);
             int idPhieu = 0;
             while (rs.next()) {
                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
             }
-            Sql = "insert into ChiTietPhieuNhan(idPhieu,idSach,soLuong,giaMua) values";
+            
+            // insert list of sach to chitietphieunhan of phieunha
+             Sql = "insert into ChiTietPhieuNhan(idPhieu,idSach,soLuongNhap,soLuongNhan,giaMua) values";
             for(int i=0;i<mPhieu.size();i++){
-                mPhieu.get(i).setIdPhieu(idPhieu);
+//                mPhieu.get(i).getIdPhieu(idPhieu);
 //                System.out.println(mPhieu.get(i).toString());
                 Sql  += 
-                         " ('"+mPhieu.get(i).getIdPhieu()+"'"
+                         " ('"+idPhieu+"'"
                         + ",'"+mPhieu.get(i).getIdSach()+"'"
-                        + ",'"+mPhieu.get(i).getSoLuong()+"',"
+                        + ",'"+mPhieu.get(i).getSoLuongNhap()+"'"
+                        + ",'0',"
                         + "'"+mPhieu.get(i).getGiaMua()+"') ";
                 if(i+1 != mPhieu.size()) Sql +=",";
             }
@@ -87,6 +93,7 @@ public class PHIEUDAO {
 //                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
                     arr.add(new PHIEUDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("tinhTrang"))
+                            , Integer.parseInt(rs.getString("trangThai"))
                             , rs.getString("ngayLap")));
 }
          } catch (SQLException ex) {
@@ -100,7 +107,7 @@ public class PHIEUDAO {
     ArrayList<CHITIETPHIEUDTO> arr = new ArrayList<>();
          try {
              st = conn.createStatement();
-             String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p where c.idPhieu = p.idPhieu and c.idPhieu="+idPhieu;
+             String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p,sach s where c.idPhieu = p.idPhieu and s.idSach = c.idSach and c.idPhieu="+idPhieu;
              System.out.println(Sql);
              rs = st.executeQuery(Sql);
 //            int idPhieu = 0;
@@ -109,7 +116,8 @@ public class PHIEUDAO {
                     arr.add(new CHITIETPHIEUDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("idSach"))
                             
-                            , Integer.parseInt(rs.getString("soLuong"))
+                            , Integer.parseInt(rs.getString("soLuongNhap"))
+                            , Integer.parseInt(rs.getString("soLuongNhan"))
                             , Integer.parseInt(rs.getString("giaMua"))
                             , rs.getString("tenSach")
                             ));
@@ -117,7 +125,7 @@ public class PHIEUDAO {
 }
             return arr;
          } catch (SQLException ex) {
-//             Logger.getLogger(PHIEUDAO.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(PHIEUDAO.class.getName()).log(Level.SEVERE, null, ex);
 //             return null;
          }
          return arr;
@@ -130,4 +138,39 @@ public class PHIEUDAO {
         
         return new ArrayList<>();
     }
+     public void deletePhieu(int idPhieu){
+     
+          try{
+
+            st = conn.createStatement();
+            String Sql = "delete phieuNhan where idPhieu = " + idPhieu;
+           
+            st.executeUpdate(Sql);
+            
+            
+//            st.executeUpdate(Sql);
+
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+     }
+
+    public void changeState(int idPhieu,int state) {
+        try{
+
+            st = conn.createStatement();
+            String Sql = "update phieuNhan set trangThai ="+state+" where idPhieu = " + idPhieu;
+           
+            st.executeUpdate(Sql);
+            
+            
+//            st.executeUpdate(Sql);
+
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     
 }

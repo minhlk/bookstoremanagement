@@ -12,14 +12,17 @@ package DTO;
  * @author MKZ
  */
 public class PHIEUDTO {
-    int idPhieu,tinhTrang;
-    String ngayLap;
+    private int idPhieu,tinhTrang,trangThai;
+    private String ngayLap;
 
-    public PHIEUDTO(int idPhieu, int tinhTrang, String ngayLap) {
+    public PHIEUDTO(int idPhieu, int tinhTrang, int trangThai, String ngayLap) {
         this.idPhieu = idPhieu;
         this.tinhTrang = tinhTrang;
+        this.trangThai = trangThai;
         this.ngayLap = ngayLap;
     }
+
+    
 
     public PHIEUDTO() {
          this.tinhTrang = 0;
@@ -28,8 +31,18 @@ public class PHIEUDTO {
 
     @Override
     public String toString() {
-        return "PHIEUDTO{" + "idPhieu=" + idPhieu + ", tinhTrang=" + tinhTrang + ", ngayLap=" + ngayLap + '}';
+        return "PHIEUDTO{" + "idPhieu=" + idPhieu + ", tinhTrang=" + tinhTrang + ", trangThai=" + trangThai + ", ngayLap=" + ngayLap + '}';
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    
 
     public int getIdPhieu() {
         return idPhieu;

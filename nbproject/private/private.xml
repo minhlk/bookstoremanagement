@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/BUS/PHIEUBUS.java</file>
+            <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/DTO/CHITIETPHIEUDTO.java</file>
             <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/bookstoremanagerment/TaoPhieuForm.java</file>
             <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/bookstoremanagerment/MainForm.java</file>
-            <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/DTO/SACHDTO.java</file>
+            <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/DTO/PHIEUDTO.java</file>
+            <file>file:/C:/Users/MKZ/Documents/NetBeansProjects/BookstoreManagement/src/DAO/PHIEUDAO.java</file>
         </group>
     </open-files>
 </project-private>
