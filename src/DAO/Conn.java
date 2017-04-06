@@ -33,9 +33,7 @@ public class Conn {
              conn = DriverManager.getConnection(url);
 
 		
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BookstoreManagerment.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BookstoreManagerment.class.getName()).log(Level.SEVERE, null, ex);
         } 
 		return conn;

@@ -299,12 +299,15 @@ public class TaoPhieuForm extends javax.swing.JFrame {
                     ,jTextField7.getText()});
         }
         jTable3.setModel(model);
-
+        ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here:
         ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
+//        ((DefaultTableModel)jTable1.getModel()).addRow(new Object[]{
+//            jTable3.getValueAt(jTable3.getSelectedRow(), 0)
+//        });
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed

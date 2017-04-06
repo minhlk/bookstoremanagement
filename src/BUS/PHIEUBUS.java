@@ -8,7 +8,10 @@ package BUS;
 import DAO.PHIEUDAO;
 import DTO.CHITIETPHIEUDTO;
 import DTO.PHIEUDTO;
+import DTO.THONGKECHIDTO;
 import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -68,5 +71,29 @@ public class PHIEUBUS {
          phieuDAO = new PHIEUDAO();
         phieuDAO.changeState(idPhieu,state);
     }
+
+    public void editChiTietPhieu(ArrayList<CHITIETPHIEUDTO> arr) {
+        phieuDAO = new PHIEUDAO();
+        phieuDAO.editChiTietPhieu(arr);
+    }
+
+    public void changetinhTrang(int idPhieu, int tinhTrang) {
+       phieuDAO = new PHIEUDAO();
+        phieuDAO.changetinhTrang(idPhieu, tinhTrang);
+    }
+
+    public ArrayList<THONGKECHIDTO> loadFormThongKeChi() {
+        phieuDAO = new PHIEUDAO();  
+         ArrayList<THONGKECHIDTO> arr= phieuDAO.loadFormThongKeChi();    
+         return arr;
+    
+    }
+
+    public Map<Integer,Integer> thongKeChi(int year ) {
+        phieuDAO = new PHIEUDAO();
+        return phieuDAO.thongKeChi(year);
+    }
+
+    
    
 }

@@ -53,7 +53,14 @@ public class CHITIETPHIEUDTO {
         this.giaMua = giaMua;
         this.tenSach = tenSach;
     }
-    
+    public CHITIETPHIEUDTO(int idPhieu, int idSach, int soLuongNhan) {
+        this.idPhieu = idPhieu;
+        this.idSach = idSach;
+        this.soLuongNhap = 0;
+        this.soLuongNhan = soLuongNhan;
+        this.giaMua = 0;
+        this.tenSach = "";
+    }
    
 
     public int getIdPhieu() {

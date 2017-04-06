@@ -10,9 +10,29 @@ import BUS.SACHBUS;
 import DTO.CHITIETPHIEUDTO;
 import DTO.PHIEUDTO;
 import DTO.SACHDTO;
+import DTO.THONGKECHIDTO;
+import java.awt.Color;
+import java.awt.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JRadioButton;
+import javax.swing.RowFilter;
+import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 
 /**
@@ -24,9 +44,11 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
+    TableRowSorter sorter;
     DefaultTableModel model;
     public MainForm() {
         initComponents();
+        
         
 
         
@@ -85,10 +107,11 @@ public class MainForm extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jButton9 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton13 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -176,12 +199,22 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton6.setText("Tìm kiếm ");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã phiếu đặt hàng", "Mã sách", "Tên sách" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã phiếu", "Mã sách", "Tên sách" }));
         jComboBox4.setToolTipText("");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tình trạng--", "Đủ (1)", "Thiếu (0)" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Trạng thái--", "hoạt động(1)", "kết thúc(0)" }));
+        jComboBox3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox3ItemStateChanged(evt);
+            }
+        });
 
         jButton16.setText("Lọc");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
@@ -194,13 +227,18 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel23.setText("Thời gian kết thúc ");
 
-        jDateChooser1.setDateFormatString("YYYY-MM-d");
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
 
-        jDateChooser2.setDateFormatString("YYYY-MM-d");
+        jDateChooser2.setDateFormatString("yyyy-MM-dd");
 
         jButton8.setText("In báo cáo ");
 
         jButton9.setText("Hiển thị thống kê");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -276,23 +314,47 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6)))
         );
 
+        jButton13.setText("Refresh");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(443, Short.MAX_VALUE)
+                .addComponent(jButton13))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton13))
+        );
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 200));
+
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã phiếu đặt hàng", "Mã sách ", "Tên sách", "Ngày lập ", "Số lượng Nhập ", "Giá mua ", "Tổng giá ", "Tình trạng", "Trạng thái"
+                "Mã phiếu", "Mã sách ", "Tên sách", "Ngày lập ", "Số lượng Nhập ", "Số lượng Nhận", "Giá mua ", "Tổng giá ", "Tình trạng", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -300,6 +362,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jTable2.setColumnSelectionAllowed(true);
+        jTable2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
         jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -313,24 +376,10 @@ public class MainForm extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(6).setResizable(false);
             jTable2.getColumnModel().getColumn(7).setResizable(false);
             jTable2.getColumnModel().getColumn(8).setResizable(false);
+            jTable2.getColumnModel().getColumn(9).setResizable(false);
         }
 
-        jButton13.setText("Refresh");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton13))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
-                .addComponent(jButton13))
-        );
+        jScrollPane3.setViewportView(jScrollPane2);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -339,12 +388,12 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,9 +402,9 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -370,8 +419,7 @@ public class MainForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê hàng nhập", jPanel1);
@@ -634,11 +682,11 @@ public class MainForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã phiếu", "Tên sách", "Số lượng nhập", "Số lượng nhận", "Giá mua"
+                "Mã phiếu", "Tên sách", "Số lượng nhập", "Số lượng nhận", "Giá mua", "Ma sach"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -661,6 +709,7 @@ public class MainForm extends javax.swing.JFrame {
             jTable5.getColumnModel().getColumn(2).setResizable(false);
             jTable5.getColumnModel().getColumn(3).setResizable(false);
             jTable5.getColumnModel().getColumn(4).setResizable(false);
+            jTable5.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jButton20.setText("Refresh");
@@ -715,6 +764,11 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         jButton24.setText("Cập nhật");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tình trạng"));
 
@@ -1006,6 +1060,17 @@ public class MainForm extends javax.swing.JFrame {
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
         int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
+        int trangThai = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 3).toString());
+        if(trangThai == 1)
+            jRadioButton9.setSelected(true);
+        else jRadioButton10.setSelected(true);
+        
+        int tinhTrang = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 2).toString());
+        if(tinhTrang == 1)
+            jRadioButton7.setSelected(true);
+        else jRadioButton8.setSelected(true);
+        
+        
         jTextField8.setText("Mã phiếu : "+idPhieu);
         ArrayList<CHITIETPHIEUDTO> arr = new PHIEUBUS().getChiTietPhieu(idPhieu);
         DefaultTableModel model;
@@ -1015,7 +1080,7 @@ public class MainForm extends javax.swing.JFrame {
         model.addColumn("Số lượng nhập");
         model.addColumn("Số lượng đã nhận");
         model.addColumn("Giá mua");
-//        model.addColumn("id Sách");
+        model.addColumn("Mã Sách");
 //PHIEUBUS bus = new PHIEUBUS();
 //ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
  for(int i=0;i< arr.size();i++){
@@ -1029,6 +1094,7 @@ public class MainForm extends javax.swing.JFrame {
                     ,arr.get(i).getSoLuongNhap()
                     ,arr.get(i).getSoLuongNhan()
                     ,arr.get(i).getGiaMua()
+                    ,arr.get(i).getIdSach()
             });
          }
           jTable5.setModel(model);
@@ -1053,6 +1119,14 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
+         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+         
+        System.out.println(formatter.format(jDateChooser1.getDate()));
+        ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
+        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate()) );
+        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate()) );
+        RowFilter rf = RowFilter.andFilter(filters);
+        sorter.setRowFilter(rf);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -1126,6 +1200,79 @@ public class MainForm extends javax.swing.JFrame {
         for(int i = 0 ; i< jTable5.getRowCount();i++) 
           jTable5.setValueAt(0, i, 3);
     }//GEN-LAST:event_jRadioButton7StateChanged
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+        int tinhTrang = jRadioButton7.isSelected()?1:0;
+        
+         ArrayList<CHITIETPHIEUDTO> arr = new ArrayList<>();
+//        new CHITIETPHIEUDTO(WIDTH, HEIGHT, WIDTH, tenSach)
+        for(int i =0;i < jTable5.getRowCount();i++){
+            arr.add(new CHITIETPHIEUDTO(
+                Integer.parseInt(jTable5.getValueAt(i, 0).toString())
+                ,Integer.parseInt(jTable5.getValueAt(i, 5).toString())
+                ,Integer.parseInt(jTable5.getValueAt(i, 3).toString())
+//                ,jTable5.getValueAt(i, 0).toString()    
+            ));
+//        System.out.println(arr.get(i).getIdSach());
+        }
+
+        PHIEUBUS phieuBus = new PHIEUBUS();
+//                if(arr.size() > 0)
+        phieuBus.editChiTietPhieu(arr);
+        phieuBus.changetinhTrang( arr.get(0).getIdPhieu(), tinhTrang);
+        loadFormPhieu();
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        loadFormThongKeChi();
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        PHIEUBUS mPhieu = new PHIEUBUS();
+        int year = jYearChooser1.getYear();
+        Map<Integer,Integer> mMap = mPhieu.thongKeChi(year);
+          DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i= 1; i <= 12 ;i++){
+        dataset.setValue(mMap.get(i), "Tổng tiền (VNĐ)", "Tháng : "+i);
+        }
+        JFreeChart chart = ChartFactory.createBarChart("Tổng chi trong năm "+ year, "Thời gian (Tháng)", "Tổng tiền (VNĐ)", dataset,PlotOrientation.HORIZONTAL,false,true,false);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("Tổng chi chart", chart);
+        frame.setVisible(true);
+        frame.setSize(500,500);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        // TODO add your handling code here:
+//        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
+//        jTable2.setRowSorter(sorter);
+        if(sorter != null){
+        if(jComboBox2.getSelectedIndex() == 1){
+            sorter.setRowFilter(RowFilter.regexFilter("1", 8));
+        }
+        if(jComboBox2.getSelectedIndex() == 2)
+              sorter.setRowFilter(RowFilter.regexFilter("0", 8));
+       
+        } 
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
+
+    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
+        // TODO add your handling code here:
+//        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
+//        jTable2.setRowSorter(sorter);
+        if(sorter != null){
+        if(jComboBox3.getSelectedIndex() == 1){
+            sorter.setRowFilter(RowFilter.regexFilter("1", 9));
+        }
+        if(jComboBox3.getSelectedIndex() == 2)
+              sorter.setRowFilter(RowFilter.regexFilter("0", 9));
+        
+        }
+    }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1223,6 +1370,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner1;
@@ -1310,6 +1458,7 @@ public class MainForm extends javax.swing.JFrame {
         
     }
 
+   
     private void loadFormPhieu() {
       DefaultTableModel model;
          model = new DefaultTableModel();
@@ -1328,4 +1477,54 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
          }
           jTable4.setModel(model);  
     }
+    
+    private void loadFormThongKeChi(){
+    if(sorter != null) sorter.setRowFilter(null);
+ DefaultTableModel model;
+         model = new DefaultTableModel();
+        model.addColumn("Mã phiếu");
+        model.addColumn("Mã sách");
+        model.addColumn("Tên sách");
+        model.addColumn("Ngày lập");
+        model.addColumn("Số lượng nhập");
+        model.addColumn("Số lượng nhận");
+        model.addColumn("Giá mua");
+        model.addColumn("Tổng giá");
+        model.addColumn("Tình trạng");
+        model.addColumn("Trạng thái");
+PHIEUBUS bus = new PHIEUBUS();
+ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
+ for(int i=0;i< arr.size();i++){
+            model.addRow(new Object[]{arr.get(i).getIdPhieu()
+                    ,arr.get(i).getIdSach()
+                    ,arr.get(i).getTenSach().trim()
+                    ,dateFormat(arr.get(i).getNgayLap())
+                    ,arr.get(i).getSoLuongNhap()
+                    ,arr.get(i).getSoLuongNhan()
+                    ,arr.get(i).getGiaMua()
+                    ,arr.get(i).getTongGia()
+                    ,arr.get(i).getTinhTrang()
+                    ,arr.get(i).getTrangThai()
+            });
+         }
+          jTable2.setModel(model);  
+          sorter = new TableRowSorter<TableModel>(jTable2.getModel());
+          jTable2.setRowSorter(sorter);
+    }
+    private Date dateFormat(String startDateString){
+        try {
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            return formatter.parse(startDateString);
+            
+//            DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+//            Date date = (Date)formatter.parse(startDateString);
+//            SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+//            String finalString = newFormat.format(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+   }
 }
+
