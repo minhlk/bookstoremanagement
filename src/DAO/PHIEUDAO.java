@@ -27,9 +27,9 @@ import java.util.logging.Logger;
  * @author MKZ
  */
 public class PHIEUDAO {
-     private Statement st;
+    private Statement st;
     private ResultSet rs;
-    private Connection conn = Conn.getConnect();
+    private Connection conn = ConnectionSql.conn;
     public PHIEUDAO(){
 //        try {
 //            conn = Conn.getConnect();
@@ -205,7 +205,9 @@ public class PHIEUDAO {
              Logger.getLogger(PHIEUDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+    
 
+    // Thống kê chi DAO start
     public ArrayList<THONGKECHIDTO> loadFormThongKeChi() {
         ArrayList<THONGKECHIDTO> arr = new ArrayList();
         try{
@@ -263,6 +265,6 @@ public class PHIEUDAO {
              return mMap;
          }
     }
-     
+    // Thống kê chi DAO end 
      
 }

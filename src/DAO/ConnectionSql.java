@@ -18,19 +18,19 @@ import java.util.logging.Logger;
  *
  * @author MKZ
  */
-public class Conn {
+public class ConnectionSql {
 
     /**
      *
      */
-    public static Connection conn;
+    public static Connection conn = getConnect();
     
     public static Connection getConnect(){
     try {	
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHASACH1;user=sa;password=123";
+            String path = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHASACH1;user=sa;password=123";
 
-             conn = DriverManager.getConnection(url);
+             conn = DriverManager.getConnection(path);
 
 		
         } catch (ClassNotFoundException | SQLException ex) {

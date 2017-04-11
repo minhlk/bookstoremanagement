@@ -15,20 +15,20 @@ import java.util.ArrayList;
  */
 public class SACHBUS {
     private SACHDTO sach ;
-    private SACHDAO sachDAO;
+    private SACHDAO sachDAO=  new SACHDAO();
 //    public SACHDTO getSach(){
 //        return new ;
 //    }
     public void SACHBUS(){
-        
+//        sachDAO = ;
     }
     public void saveSach(SACHDTO mSach){
-        sachDAO = new SACHDAO();  
+          
         sachDAO.saveSach(mSach);   
     }
     public ArrayList<SACHDTO> loadFormNhap(){
        
-         sachDAO = new SACHDAO();  
+//         sachDAO = new SACHDAO();  
          ArrayList<SACHDTO> arr= sachDAO.loadFormNhap();
 //         for(int i=0;i< arr.size();i++){
 //             System.out.println(arr.get(i).toString());
@@ -38,17 +38,17 @@ public class SACHBUS {
         
     }
     public void editSach(SACHDTO mSach){
-          sachDAO = new SACHDAO(); 
+//          sachDAO = new SACHDAO(); 
           sachDAO.editSach(mSach);
     }
 
     public void deleteSach(SACHDTO mSach) {
-          sachDAO = new SACHDAO(); 
+//          sachDAO = new SACHDAO(); 
           sachDAO.deleteSach(mSach.getIdSach());
     }
 
     public ArrayList<SACHDTO>  loadFormNhap( String value, String key) {
-          sachDAO = new SACHDAO(); 
+//          sachDAO = new SACHDAO(); 
           ArrayList<SACHDTO> arr= sachDAO.loadFormNhap(value, key);  
           return arr;
     }

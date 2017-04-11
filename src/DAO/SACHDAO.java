@@ -21,11 +21,11 @@ import java.util.logging.Logger;
  */
 public class SACHDAO {
     private Statement st;
-    private ResultSet rs;
-    private Connection conn = Conn.getConnect();
+    private ResultSet rs ;
+    private Connection conn = ConnectionSql.getConnect();
     public SACHDAO(){
 //        try {
-            conn = Conn.getConnect();
+//            conn = Conn.getConnect();
 //            System.out.println("test");
 //            st = conn.createStatement();
 //            String Sql = "select * from family";
@@ -39,15 +39,23 @@ public class SACHDAO {
     }
     public void saveSach(SACHDTO mSach){
         try{
-            
+//            conn = ConnectionSql.getConnect();
+//            conn = ConnectionSql.conn;
 //            System.out.println("test");
             st = conn.createStatement();
-            String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan,nhaCungCap) values("
+//            String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan,nhaCungCap) values("
+//                    +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()+"','"+mSach.getNhaCungCap()
+//                    + "')  "
+//                    + "  where not exists (select * from sach where tenSach = '"+mSach.getTenSach().toUpperCase()+"')";
+//             System.out.println(Sql);
+//            if(checkExist(mSach.getTenSach(), st)==0)
+ String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan,nhaCungCap) select "
                     +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()+"','"+mSach.getNhaCungCap()
-                    + "')";
-            if(checkExist(mSach.getTenSach(), st)==0)
-            
-            rs = st.executeQuery(Sql);
+                    + "'  "
+                    + "  where not exists (select * from sach where tenSach = '"+mSach.getTenSach().toUpperCase()+"')";
+//             
+               
+            st.executeUpdate(Sql);
 //            while (rs.next()) {
 //                System.out.println(rs.getString("tenSach"));
 //            }
@@ -116,8 +124,8 @@ public class SACHDAO {
 //                    +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()
 //                    + "')";
             String Sql = "select * from sach where tenSach='"+tenSach+"'";
-            boolean rs = st.execute(Sql);
-            return rs==true?1:0;
+            boolean result = st.execute(Sql);
+            return result == true?1:0;
           
 //            System.out.println(mSach.toString());
         } catch (SQLException ex ) {

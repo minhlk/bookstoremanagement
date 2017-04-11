@@ -19,8 +19,10 @@ public class SACHGUI extends javax.swing.JPanel {
     /**
      * Creates new form SACHGUI
      */
+    private SACHBUS sachBus;
     public SACHGUI() {
         initComponents();
+        sachBus = new SACHBUS();
     }
 
     /**
@@ -210,9 +212,6 @@ public class SACHGUI extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
-            }
         });
         jScrollPane1.setViewportView(jTable1);
 
@@ -260,13 +259,7 @@ public class SACHGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        SACHDTO mSach = getSach();
-        if(mSach!=null){
-            SACHBUS sachBus = new SACHBUS();
-            sachBus.editSach(mSach);
-            loadSach();
-        }
+      editSach();
     }//GEN-LAST:event_jButton2ActionPerformed
  private void loadSach(ArrayList<SACHDTO> arr) {
 //         SACHBUS sachBus = new SACHBUS();
@@ -302,7 +295,7 @@ public class SACHGUI extends javax.swing.JPanel {
         
     }
  private void loadSach() {
-         SACHBUS sachBus = new SACHBUS();
+//         SACHBUS sachBus = new SACHBUS();
         ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Tên sách");
@@ -345,36 +338,97 @@ public class SACHGUI extends javax.swing.JPanel {
         try{
         giaBan = Integer.parseInt(jTextField13.getText().isEmpty()?"0":jTextField13.getText());
         }
-        catch(java.lang.NumberFormatException e){
+        catch(java.lang.NumberFormatException  e){
         giaBan = 0;
         }
         String tacGia = jTextField4.getText().toUpperCase();
         String tenSach = jTextField2.getText().toUpperCase();
         String nhaCungCap = jTextField5.getText().toUpperCase();
         if(!tenSach.isEmpty()&&!tacGia.isEmpty()){
-        SACHDTO mSach = new SACHDTO(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString())
-                ,soluong,giaBan,tenSach,tacGia,nhaCungCap);
+            SACHDTO mSach ;
+           if(!jTable1.getSelectionModel().isSelectionEmpty())
+         mSach = new SACHDTO(
+                Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString())
+                ,soluong
+                ,giaBan
+                ,tenSach
+                ,tacGia
+                ,nhaCungCap);
+           else
+                mSach = new SACHDTO(
+//                Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString())
+                soluong
+                ,giaBan
+                ,tenSach
+                ,tacGia
+                ,nhaCungCap);
         return mSach;
         }
+        
         else
         return null;
     }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-        //SAVE SACH
-        SACHDTO mSach = getSach();
-        if(mSach!=null){
-            SACHBUS sachBus = new SACHBUS();
-            sachBus.saveSach(mSach);
-            loadSach();
-        }
+        addSach();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        searchSach();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+
+        loadSach();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+       deleteSach();
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        jTextField2.setText(getTSach(0));
+        jTextField4.setText(getTSach(1));
+        jSpinner1.setValue(Integer.parseInt(getTSach(2)));
+        jTextField13.setText(getTSach(3));
+        jTextField5.setText(getTSach(4));
+        //        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString().trim());
+    }//GEN-LAST:event_jTable1MouseClicked
+    private void addSach() { 
+        SACHDTO mSach = getSach();
+        if(mSach!=null){
+//               System.out.println( mSach.toString());
+//               sachBus = new SACHBUS();
+            sachBus.saveSach(mSach);
+            loadSach();
+        }
+    }
+    private void editSach(){
+          // TODO add your handling code here:
+        SACHDTO mSach = getSach();
+        if(mSach!=null){
+//            SACHBUS sachBus = new SACHBUS();
+            sachBus.editSach(mSach);
+            loadSach();
+        }
+    }
+    private void deleteSach(){
+         // TODO add your handling code here:
+        SACHDTO mSach = getSach();
+        if(mSach!=null){
+//            SACHBUS sachBus = new SACHBUS();
+            sachBus.deleteSach(mSach);
+            loadSach();
+        }
+        
+    }
+    private void searchSach(){
         // TODO add your handling code here:
 
         String value = jTextField12.getText().toUpperCase();
-        SACHBUS sachBus = new SACHBUS();
+//        SACHBUS sachBus = new SACHBUS();
         //        System.out.println(jComboBox1.getSelectedItem().toString());
         switch (jComboBox1.getSelectedItem().toString()){
             case "Tác giả":
@@ -392,43 +446,7 @@ public class SACHGUI extends javax.swing.JPanel {
                 loadSach(sachBus.loadFormNhap(value,"idSach"));
                 break;
             }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
-
-        loadSach();
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
-        SACHDTO mSach = getSach();
-        if(mSach!=null){
-            SACHBUS sachBus = new SACHBUS();
-            sachBus.deleteSach(mSach);
-            loadSach();
-        }
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-
-        jTextField2.setText(getTSach(0));
-        jTextField4.setText(getTSach(1));
-        jSpinner1.setValue(Integer.parseInt(getTSach(2)));
-        jTextField13.setText(getTSach(3));
-        jTextField5.setText(getTSach(4));
-        //        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString().trim());
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        // TODO add your handling code here:
-        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString().trim());
-        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());
-        jSpinner1.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
-        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim());
-    }//GEN-LAST:event_jTable1MousePressed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton11;
@@ -453,4 +471,6 @@ public class SACHGUI extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+    
 }
