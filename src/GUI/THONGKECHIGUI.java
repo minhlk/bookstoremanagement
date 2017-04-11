@@ -8,7 +8,10 @@ package GUI;
 import BUS.PHIEUBUS;
 import DTO.THONGKECHIDTO;
 import bookstoremanagerment.MainForm;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
 import java.awt.Color;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +30,20 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+//import org.w3c.dom.Document;
 
+
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 /**
  *
  * @author MKZ
@@ -78,18 +94,23 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         jPanel6.setName("adf"); // NOI18N
 
         jButton6.setText("Tìm kiếm ");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã phiếu", "Mã sách", "Tên sách" }));
         jComboBox4.setToolTipText("");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tình trạng--", "Đủ (1)", "Thiếu (0)" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tình trạng--", "Đủ", "Thiếu" }));
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox2ItemStateChanged(evt);
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Trạng thái--", "hoạt động(1)", "kết thúc(0)" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Trạng thái--", "hoạt động", "kết thúc" }));
         jComboBox3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox3ItemStateChanged(evt);
@@ -112,6 +133,11 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         jDateChooser2.setDateFormatString("yyyy-MM-dd");
 
         jButton8.setText("In báo cáo ");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("Hiển thị thống kê");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +251,7 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
 
         jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 200));
 
+        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -325,7 +352,7 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
             return null;
         }
    }
-    private void loadFormThongKeChi(){
+    private void loadFormThongKeChi() throws ParseException{
     if(sorter != null) sorter.setRowFilter(null);
  DefaultTableModel model;
          model = new DefaultTableModel();
@@ -345,13 +372,14 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
             model.addRow(new Object[]{arr.get(i).getIdPhieu()
                     ,arr.get(i).getIdSach()
                     ,arr.get(i).getTenSach().trim()
-                    ,dateFormat(arr.get(i).getNgayLap())
+                    ,new SimpleDateFormat("yyyy-MM-dd").parse(arr.get(i).getNgayLap())
+//                    ,arr.get(i).getNgayLap()
                     ,arr.get(i).getSoLuongNhap()
                     ,arr.get(i).getSoLuongNhan()
                     ,arr.get(i).getGiaMua()
                     ,arr.get(i).getTongGia()
-                    ,arr.get(i).getTinhTrang()
-                    ,arr.get(i).getTrangThai()
+                    ,arr.get(i).getTinhTrang()==1?"Đủ":"Thiếu"
+                    ,arr.get(i).getTrangThai()==1?"Hoạt động":"Kết thúc"
             });
          }
           jTable2.setModel(model);  
@@ -364,10 +392,10 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
         //        jTable2.setRowSorter(sorter);
         if(sorter != null){
             if(jComboBox2.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("1", 8));
+                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 8));
             }
             if(jComboBox2.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("0", 8));
+            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 8));
 
         }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
@@ -378,24 +406,31 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
         //        jTable2.setRowSorter(sorter);
         if(sorter != null){
             if(jComboBox3.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("1", 9));
+                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 9));
             }
             if(jComboBox3.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("0", 9));
+            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 9));
 
         }
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        System.out.println(formatter.format(jDateChooser1.getDate()));
+//        try {
+            // TODO add your handling code here:
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            
+//            Date date = formatter.parse(jDateChooser1.getDate().toString());
+//            Date date = jDateChooser1.getDate();
         ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
-        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate()) );
-        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate()) );
+        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate(),3) );
+        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate(),3) );
         RowFilter rf = RowFilter.andFilter(filters);
+
         sorter.setRowFilter(rf);
+//System.out.println(date.toString());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -416,10 +451,87 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-        loadFormThongKeChi();
+        try {
+            // TODO add your handling code here:
+            loadFormThongKeChi();
+             jComboBox2.setSelectedIndex(0);
+            jComboBox3.setSelectedIndex(0);
+        } catch (ParseException ex) {
+            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton13ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here: Mã phiếu, Mã sách, Tên sách
+        if(sorter != null){
+            if(jComboBox4.getSelectedIndex() == 0){
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 0));
+            }
+            if(jComboBox4.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 1));
+            }
+            if(jComboBox4.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 2));
+
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if(jTable2.getRowCount()>0)
+        inThongKeChi();   
+
+    
+        
+    }//GEN-LAST:event_jButton8ActionPerformed
+    private void inThongKeChi(){
+     String path = "";
+       JFileChooser fileChooser = new JFileChooser();
+fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+int result = fileChooser.showOpenDialog(this);
+if (result == JFileChooser.APPROVE_OPTION) {
+    File selectedFile = fileChooser.getSelectedFile();
+    path = selectedFile.getAbsolutePath().isEmpty()?"thongke.pdf":selectedFile.getAbsolutePath()+".pdf";
+     try {
+//            BaseFont courier = BaseFont.createFont(BaseFont.COURIER, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+//            Font font = new Font(courier, 12, Font.NORMAL);
+            BaseFont baseFont=BaseFont.createFont("C://Windows//Fonts//vuTimes.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font=new Font(baseFont, 8);
+//            FontFactory.registerDirectories();
+
+//            Font font = FontFactory.getFont("Times New Roman");
+            Chunk chunk = new Chunk("",font);
+           
+            Document doc = new Document();
+            
+            PdfWriter.getInstance(doc, new FileOutputStream(path));
+            doc.open();
+            doc.add(chunk);
+            PdfPTable pdfTable = new PdfPTable(jTable2.getColumnCount());
+            //adding table headers
+            for (int i = 0; i < jTable2.getColumnCount(); i++) {
+                pdfTable.addCell(new Phrase(jTable2.getColumnName(i),font));
+            }
+            //extracting data from the JTable and inserting it to PdfPTable
+            for (int rows = 0; rows < jTable2.getRowCount() - 1; rows++) {
+                for (int cols = 0; cols < jTable2.getColumnCount(); cols++) {
+                    pdfTable.addCell(new Phrase(jTable2.getModel().getValueAt(rows, cols).toString(),font));
+
+                }
+            }
+            doc.add(pdfTable);
+            doc.close();
+            System.out.println("done");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+       
+     
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton13;

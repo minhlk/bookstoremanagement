@@ -10,7 +10,10 @@ import BUS.SACHBUS;
 import DTO.CHITIETPHIEUDTO;
 import DTO.SACHDTO;
 import java.util.ArrayList;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -21,6 +24,7 @@ public class TaoPhieuForm extends javax.swing.JFrame {
     /**
      * Creates new form TaoPhieuForm
      */
+    TableRowSorter sorter;
     DefaultTableModel model;
     public TaoPhieuForm() {
         initComponents();
@@ -188,6 +192,12 @@ public class TaoPhieuForm extends javax.swing.JFrame {
             }
         });
 
+        jTextField18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField18KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -274,6 +284,8 @@ public class TaoPhieuForm extends javax.swing.JFrame {
             });
          }
           jTable1.setModel(model);
+          sorter = new TableRowSorter<TableModel>(jTable1.getModel());
+          jTable1.setRowSorter(sorter);
         
     }
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -341,6 +353,15 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
 //        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim());
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTextField18KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField18KeyReleased
+        // TODO add your handling code here:
+        if(sorter != null)
+            sorter.setRowFilter(RowFilter.regexFilter(jTextField18.getText().toUpperCase(), 0));
+            
+
+        
+    }//GEN-LAST:event_jTextField18KeyReleased
 
     /**
      * @param args the command line arguments
