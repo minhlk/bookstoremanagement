@@ -5,7 +5,7 @@
  */
 package bookstoremanagerment;
 
-import GUI.DATHANGGUI;
+import GUI.PHIEUDHGUI;
 import GUI.SACHGUI;
 import GUI.THONGKECHIGUI;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +26,7 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         THONGKECHIGUI tabThongKeChi = new THONGKECHIGUI();
         tabThongKeChi.setName("Thống kê chi");
-        DATHANGGUI tabDatHang = new DATHANGGUI();
+        PHIEUDHGUI tabDatHang = new PHIEUDHGUI();
         tabDatHang.setName("Quản lý đặt hàng");
         SACHGUI tabSach = new SACHGUI();
         tabSach.setName("Quản lý sách");

@@ -5,9 +5,8 @@
  */
 package GUI;
 
-import BUS.PHIEUBUS;
+import BUS.PHIEUDHBUS;
 import DTO.THONGKECHIDTO;
-import bookstoremanagerment.MainForm;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import java.awt.Color;
@@ -15,14 +14,12 @@ import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -35,7 +32,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -191,9 +187,9 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jButton8))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,21 +199,22 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23)))
-                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel22)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel23)))
+                        .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
@@ -338,7 +335,43 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void loadFormThongKeChi() throws ParseException{
+    
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+       changeTinhTrang();
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
+
+    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
+      changeTrangThai();
+    }//GEN-LAST:event_jComboBox3ItemStateChanged
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+            locDanhSach();
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+            hienThiThongKe();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+
+        loadFormThongKeChi();
+        jComboBox2.setSelectedIndex(0);
+        jComboBox3.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       timKiem();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if(jTable2.getRowCount()>0)
+        inThongKeChi();   
+
+    
+        
+    }//GEN-LAST:event_jButton8ActionPerformed
+    
+    private void loadFormThongKeChi(){
     if(sorter != null) sorter.setRowFilter(null);
  DefaultTableModel model;
          model = new DefaultTableModel();
@@ -352,9 +385,10 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         model.addColumn("Tổng giá");
         model.addColumn("Tình trạng");
         model.addColumn("Trạng thái");
-PHIEUBUS bus = new PHIEUBUS();
+PHIEUDHBUS bus = new PHIEUDHBUS();
 ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
  for(int i=0;i< arr.size();i++){
+        try {
             model.addRow(new Object[]{arr.get(i).getIdPhieu()
                     ,arr.get(i).getIdSach()
                     ,arr.get(i).getTenSach().trim()
@@ -367,108 +401,15 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
                     ,arr.get(i).getTinhTrang()==1?"Đủ":"Thiếu"
                     ,arr.get(i).getTrangThai()==1?"Hoạt động":"Kết thúc"
             });
-         }
-          jTable2.setModel(model);  
-          sorter = new TableRowSorter<TableModel>(jTable2.getModel());
-          jTable2.setRowSorter(sorter);
-    }
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-        // TODO add your handling code here:
-        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
-        //        jTable2.setRowSorter(sorter);
-        if(sorter != null){
-            if(jComboBox2.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 8));
-            }
-            if(jComboBox2.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 8));
-
-        }
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
-
-    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
-        // TODO add your handling code here:
-        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
-        //        jTable2.setRowSorter(sorter);
-        if(sorter != null){
-            if(jComboBox3.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 9));
-            }
-            if(jComboBox3.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 9));
-
-        }
-    }//GEN-LAST:event_jComboBox3ItemStateChanged
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-//        try {
-            // TODO add your handling code here:
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            
-//            Date date = formatter.parse(jDateChooser1.getDate().toString());
-//            Date date = jDateChooser1.getDate();
-        ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
-        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate(),3) );
-        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate(),3) );
-        RowFilter rf = RowFilter.andFilter(filters);
-
-        sorter.setRowFilter(rf);
-//System.out.println(date.toString());
-//        } catch (ParseException ex) {
-//            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-        PHIEUBUS mPhieu = new PHIEUBUS();
-        int year = jYearChooser1.getYear();
-        Map<Integer,Integer> mMap = mPhieu.thongKeChi(year);
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for(int i= 1; i <= 12 ;i++){
-            dataset.setValue(mMap.get(i), "Tổng tiền (VNĐ)", "Tháng : "+i);
-        }
-        JFreeChart chart = ChartFactory.createBarChart("Tổng chi trong năm "+ year, "Thời gian (Tháng)", "Tổng tiền (VNĐ)", dataset,PlotOrientation.HORIZONTAL,false,true,false);
-        CategoryPlot p = chart.getCategoryPlot();
-        p.setRangeGridlinePaint(Color.BLACK);
-        ChartFrame frame = new ChartFrame("Tổng chi chart", chart);
-        frame.setVisible(true);
-        frame.setSize(500,500);
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        try {
-            // TODO add your handling code here:
-            loadFormThongKeChi();
-             jComboBox2.setSelectedIndex(0);
-            jComboBox3.setSelectedIndex(0);
         } catch (ParseException ex) {
             Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here: Mã phiếu, Mã sách, Tên sách
-        if(sorter != null){
-            if(jComboBox4.getSelectedIndex() == 0){
-                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 0));
-            }
-            if(jComboBox4.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 1));
-            }
-            if(jComboBox4.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 2));
-
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(jTable2.getRowCount()>0)
-        inThongKeChi();   
-
+         }
+          jTable2.setModel(model);  
+          sorter = new TableRowSorter<>(jTable2.getModel());
+          jTable2.setRowSorter(sorter);
+    }
     
-        
-    }//GEN-LAST:event_jButton8ActionPerformed
     private void inThongKeChi(){
      String path = "";
        JFileChooser fileChooser = new JFileChooser();
@@ -519,22 +460,84 @@ if (result == JFileChooser.APPROVE_OPTION) {
      
     }
     
-    
-//     private Date dateFormat(String startDateString){
-//        try {
-//            
+    private void locDanhSach() {
+        //        try {
+            // TODO add your handling code here:
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//            return formatter.parse(startDateString);
-//            
-////            DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
-////            Date date = (Date)formatter.parse(startDateString);
-////            SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
-////            String finalString = newFormat.format(date);
+            
+//            Date date = formatter.parse(jDateChooser1.getDate().toString());
+//            Date date = jDateChooser1.getDate();
+        ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
+        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate(),3) );
+        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate(),3) );
+        RowFilter rf = RowFilter.andFilter(filters);
+
+        sorter.setRowFilter(rf);
+//System.out.println(date.toString());
 //        } catch (ParseException ex) {
-//            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
+//            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//   }
+    }
+
+    private void hienThiThongKe() {
+                // TODO add your handling code here:
+        PHIEUDHBUS mPhieu = new PHIEUDHBUS();
+        int year = jYearChooser1.getYear();
+        Map<Integer,Integer> mMap = mPhieu.thongKeChi(year);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i= 1; i <= 12 ;i++){
+            dataset.setValue(mMap.get(i), "Tổng tiền (VNĐ)", "Tháng : "+i);
+        }
+        JFreeChart chart = ChartFactory.createBarChart("Tổng chi trong năm "+ year, "Thời gian (Tháng)", "Tổng tiền (VNĐ)", dataset,PlotOrientation.HORIZONTAL,false,true,false);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("Tổng chi chart", chart);
+        frame.setVisible(true);
+        frame.setSize(500,500);
+     }
+
+    private void timKiem() {
+         // TODO add your handling code here: Mã phiếu, Mã sách, Tên sách
+        if(sorter != null){
+            if(jComboBox4.getSelectedIndex() == 0){
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 0));
+            }
+            if(jComboBox4.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 1));
+            }
+            if(jComboBox4.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 2));
+
+        }
+    }
+
+    private void changeTinhTrang() {
+         // TODO add your handling code here:
+        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
+        //        jTable2.setRowSorter(sorter);
+        if(sorter != null){
+            if(jComboBox2.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 8));
+            }
+            if(jComboBox2.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 8));
+
+        }
+    }
+
+    private void changeTrangThai() {
+          // TODO add your handling code here:
+        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
+        //        jTable2.setRowSorter(sorter);
+        if(sorter != null){
+            if(jComboBox3.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 9));
+            }
+            if(jComboBox3.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 9));
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton13;
@@ -560,4 +563,5 @@ if (result == JFileChooser.APPROVE_OPTION) {
     private javax.swing.JTextField jTextField10;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
+
 }

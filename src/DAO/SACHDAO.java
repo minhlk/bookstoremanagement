@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class SACHDAO {
     private Statement st;
     private ResultSet rs ;
-    private Connection conn = ConnectionSql.getConnect();
+    private Connection conn = GetConnection.conn;
     public SACHDAO(){
 //        try {
 //            conn = Conn.getConnect();
@@ -90,7 +90,6 @@ public class SACHDAO {
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
             return mSachs;
     }
-    
     public void editSach(SACHDTO mSach){
         try{
             
@@ -117,24 +116,6 @@ public class SACHDAO {
         }
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
     }
-//    public int checkExist(String tenSach,Statement st){
-//         try{
-////     st = conn.createStatement();
-////            String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan) values("
-////                    +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()
-////                    + "')";
-//            String Sql = "select * from sach where tenSach='"+tenSach+"'";
-//            boolean result = st.execute(Sql);
-//            return result == true?1:0;
-//          
-////            System.out.println(mSach.toString());
-//        } catch (SQLException ex ) {
-//            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        return 0;
-//        }
-////        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
-//        
-//    }
     public void deleteSach(int id){
         try{
             
@@ -177,6 +158,5 @@ public class SACHDAO {
         }
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
             return mSachs;
-    }
-    
+    } 
 }

@@ -261,77 +261,32 @@ public class SACHGUI extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       editSach();
     }//GEN-LAST:event_jButton2ActionPerformed
- private void searchSach(ArrayList<SACHDTO> arr) {
-//         SACHBUS sachBus = new SACHBUS();
-//        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Tên sách");
-        model.addColumn("Tên tác giả");
-        model.addColumn("Số lượng");
-        model.addColumn("Giá bán");
-        model.addColumn("Nhà cung cấp");
-        model.addColumn("id Sách");
-//        model.addColumn("1");
-          for(int i=0;i< arr.size();i++){
-//            jTable1.setValueAt(arr.get(i).getTenSach().trim(), i, 0);
-//            jTable1.setValueAt(arr.get(i).getTacGia().trim(), i, 1);
-//            jTable1.setValueAt(arr.get(i).getSoLuong(), i, 2);
-//            jTable1.setValueAt(arr.get(i).getGiaBan(), i, 3);
-//            jTable1.setValueAt(arr.get(i).getIdSach(), i, 4);
-            model.addRow(new Object[]{arr.get(i).getTenSach().trim()
-                    ,arr.get(i).getTacGia().trim()
-                    ,arr.get(i).getSoLuong()
-                    ,arr.get(i).getGiaBan()
-                    ,arr.get(i).getNhaCungCap()
-                    ,arr.get(i).getIdSach()
-            });
-         }
-          jTable1.setModel(model);
-//          jTable1.setAutoResizeMode(jTable1.AUTO);
-//        jTable1.setValueAt("ab", 0, 0);
-//        jTable1.setValueAt("abc", 0, 1);
-//        jTable1.setValueAt("abd", 0, 2);
-//        jTable1.setValueAt("abe", 0, 3);
-        
-    }
- private void loadSach() {
-//         SACHBUS sachBus = new SACHBUS();
-        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Tên sách");
-        model.addColumn("Tên tác giả");
-        model.addColumn("Số lượng");
-        model.addColumn("Giá bán");
-        model.addColumn("Nhà cung cấp");
-        model.addColumn("id Sách");
-//        model.addColumn("1");
-          for(int i=0;i< arr.size();i++){
-//            jTable1.setValueAt(arr.get(i).getTenSach().trim(), i, 0);
-//            jTable1.setValueAt(arr.get(i).getTacGia().trim(), i, 1);
-//            jTable1.setValueAt(arr.get(i).getSoLuong(), i, 2);
-//            jTable1.setValueAt(arr.get(i).getGiaBan(), i, 3);
-//            jTable1.setValueAt(arr.get(i).getIdSach(), i, 4);
-            model.addRow(new Object[]{arr.get(i).getTenSach().trim()
-                    ,arr.get(i).getTacGia()
-                    ,arr.get(i).getSoLuong()
-                    ,arr.get(i).getGiaBan()
-                    ,arr.get(i).getNhaCungCap()
-                    ,arr.get(i).getIdSach()
-            });
-         }
-          jTable1.setModel(model);
-//          jTable1.setAutoResizeMode(jTable1.AUTO);
-//        jTable1.setValueAt("ab", 0, 0);
-//        jTable1.setValueAt("abc", 0, 1);
-//        jTable1.setValueAt("abd", 0, 2);
-//        jTable1.setValueAt("abe", 0, 3);
-        
-    }
-  private String getTSach(int col){
-        Object res = jTable1.getValueAt(jTable1.getSelectedRow(), col);
-        
-        return res == null? "" : res.toString().trim();
-    } 
+    
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        addSach();
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        searchSach();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+
+        loadSach();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+       deleteSach();
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+//        String tenSach = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+//        tenSach = tenSach == null? "" : tenSach.trim();
+        //check if user is select any row
+        setSach();
+    }//GEN-LAST:event_jTable1MouseClicked
+    //use getSach in every method
     private SACHDTO getSach(){
         int soluong = Integer.parseInt(jSpinner1.getValue().toString().isEmpty()?"0":jSpinner1.getValue().toString());
         soluong = soluong > 0 ? soluong : 0;
@@ -366,34 +321,37 @@ public class SACHGUI extends javax.swing.JPanel {
         else
         return null;
     }
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        addSach();
-    }//GEN-LAST:event_jButton11ActionPerformed
+    
+    private void loadSach() {
+           ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
+           DefaultTableModel model = new DefaultTableModel();
+           model.addColumn("Tên sách");
+           model.addColumn("Tên tác giả");
+           model.addColumn("Số lượng");
+           model.addColumn("Giá bán");
+           model.addColumn("Nhà cung cấp");
+           model.addColumn("id Sách");
+             for(int i=0;i< arr.size();i++){
+               model.addRow(new Object[]{arr.get(i).getTenSach().trim()
+                       ,arr.get(i).getTacGia()
+                       ,arr.get(i).getSoLuong()
+                       ,arr.get(i).getGiaBan()
+                       ,arr.get(i).getNhaCungCap()
+                       ,arr.get(i).getIdSach()
+               });
+            }
+             jTable1.setModel(model);
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        searchSach();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
-
-        loadSach();
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-       deleteSach();
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-
-        jTextField2.setText(getTSach(0));
-        jTextField4.setText(getTSach(1));
-        jSpinner1.setValue(Integer.parseInt(getTSach(2)));
-        jTextField13.setText(getTSach(3));
-        jTextField5.setText(getTSach(4));
-        //        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString().trim());
-    }//GEN-LAST:event_jTable1MouseClicked
+       }
+    private void setSach(){
+    if(jTable1.getSelectedRow() != -1){
+        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        jSpinner1.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
+        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        }
+    }
     private void addSach() { 
         SACHDTO mSach = getSach();
         if(mSach!=null){
@@ -426,25 +384,39 @@ public class SACHGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         String value = jTextField12.getText().toUpperCase();
-//        SACHBUS sachBus = new SACHBUS();
-        //        System.out.println(jComboBox1.getSelectedItem().toString());
+        ArrayList<SACHDTO> mSachs ;
         switch (jComboBox1.getSelectedItem().toString()){
             case "Tác giả":
-
-            searchSach(sachBus.timKiem(value,"tacGia"));
-
-            break;
+                mSachs = (sachBus.timKiem(value,"tacGia"));
+                break;
             case "Tên sách":
-            //                sachBus.loadFormNhap(value,"tenSach
-                //                     System.out.println("ab");
-                searchSach(sachBus.timKiem(value,"tenSach"));
+                mSachs = (sachBus.timKiem(value,"tenSach"));
                 break;
-                case "Mã sách":
-                //                sachBus.loadFormNhap(value,"maSach");
-                searchSach(sachBus.timKiem(value,"idSach"));
-                break;
+//          case "Mã sách":
+            default :
+                mSachs = (sachBus.timKiem(value,"idSach"));
+                
             }
+        
+        DefaultTableModel model = new DefaultTableModel();
+           model.addColumn("Tên sách");
+           model.addColumn("Tên tác giả");
+           model.addColumn("Số lượng");
+           model.addColumn("Giá bán");
+           model.addColumn("Nhà cung cấp");
+           model.addColumn("id Sách");
+             for(int i=0;i< mSachs.size();i++){
+               model.addRow(new Object[]{mSachs.get(i).getTenSach().trim()
+                       ,mSachs.get(i).getTacGia().trim()
+                       ,mSachs.get(i).getSoLuong()
+                       ,mSachs.get(i).getGiaBan()
+                       ,mSachs.get(i).getNhaCungCap()
+                       ,mSachs.get(i).getIdSach()
+               });
+            }
+             jTable1.setModel(model);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton11;
