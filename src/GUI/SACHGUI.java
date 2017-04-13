@@ -261,7 +261,7 @@ public class SACHGUI extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       editSach();
     }//GEN-LAST:event_jButton2ActionPerformed
- private void loadSach(ArrayList<SACHDTO> arr) {
+ private void searchSach(ArrayList<SACHDTO> arr) {
 //         SACHBUS sachBus = new SACHBUS();
 //        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
         DefaultTableModel model = new DefaultTableModel();
@@ -312,7 +312,7 @@ public class SACHGUI extends javax.swing.JPanel {
 //            jTable1.setValueAt(arr.get(i).getGiaBan(), i, 3);
 //            jTable1.setValueAt(arr.get(i).getIdSach(), i, 4);
             model.addRow(new Object[]{arr.get(i).getTenSach().trim()
-                    ,arr.get(i).getTacGia().trim()
+                    ,arr.get(i).getTacGia()
                     ,arr.get(i).getSoLuong()
                     ,arr.get(i).getGiaBan()
                     ,arr.get(i).getNhaCungCap()
@@ -333,14 +333,12 @@ public class SACHGUI extends javax.swing.JPanel {
         return res == null? "" : res.toString().trim();
     } 
     private SACHDTO getSach(){
-         int soluong = Integer.parseInt(jSpinner1.getValue().toString());
-        int giaBan = 0;
-        try{
-        giaBan = Integer.parseInt(jTextField13.getText().isEmpty()?"0":jTextField13.getText());
-        }
-        catch(java.lang.NumberFormatException  e){
-        giaBan = 0;
-        }
+        int soluong = Integer.parseInt(jSpinner1.getValue().toString().isEmpty()?"0":jSpinner1.getValue().toString());
+        soluong = soluong > 0 ? soluong : 0;
+        int giaBan = Integer.parseInt(jTextField13.getText().isEmpty()?"0":jTextField13.getText());
+        giaBan = giaBan > 0 ? giaBan : 0;
+        
+       
         String tacGia = jTextField4.getText().toUpperCase();
         String tenSach = jTextField2.getText().toUpperCase();
         String nhaCungCap = jTextField5.getText().toUpperCase();
@@ -433,17 +431,17 @@ public class SACHGUI extends javax.swing.JPanel {
         switch (jComboBox1.getSelectedItem().toString()){
             case "Tác giả":
 
-            loadSach(sachBus.loadFormNhap(value,"tacGia"));
+            searchSach(sachBus.timKiem(value,"tacGia"));
 
             break;
             case "Tên sách":
             //                sachBus.loadFormNhap(value,"tenSach
                 //                     System.out.println("ab");
-                loadSach(sachBus.loadFormNhap(value,"tenSach"));
+                searchSach(sachBus.timKiem(value,"tenSach"));
                 break;
                 case "Mã sách":
                 //                sachBus.loadFormNhap(value,"maSach");
-                loadSach(sachBus.loadFormNhap(value,"idSach"));
+                searchSach(sachBus.timKiem(value,"idSach"));
                 break;
             }
     }

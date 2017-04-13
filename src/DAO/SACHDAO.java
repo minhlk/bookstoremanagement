@@ -50,11 +50,11 @@ public class SACHDAO {
 //             System.out.println(Sql);
 //            if(checkExist(mSach.getTenSach(), st)==0)
  String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan,nhaCungCap) select "
-                    +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()+"','"+mSach.getNhaCungCap()
+                    +"N'"+mSach.getTenSach().toUpperCase()+"',N'"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()+"',N'"+mSach.getNhaCungCap()
                     + "'  "
                     + "  where not exists (select * from sach where tenSach = '"+mSach.getTenSach().toUpperCase()+"')";
 //             
-               
+               System.out.println(Sql);
             st.executeUpdate(Sql);
 //            while (rs.next()) {
 //                System.out.println(rs.getString("tenSach"));
@@ -117,24 +117,24 @@ public class SACHDAO {
         }
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
     }
-    public int checkExist(String tenSach,Statement st){
-         try{
-//     st = conn.createStatement();
-//            String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan) values("
-//                    +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()
-//                    + "')";
-            String Sql = "select * from sach where tenSach='"+tenSach+"'";
-            boolean result = st.execute(Sql);
-            return result == true?1:0;
-          
-//            System.out.println(mSach.toString());
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        return 0;
-        }
-//        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
-        
-    }
+//    public int checkExist(String tenSach,Statement st){
+//         try{
+////     st = conn.createStatement();
+////            String Sql = "insert into sach(tenSach,tacGia,soLuong,giaBan) values("
+////                    +"'"+mSach.getTenSach().toUpperCase()+"','"+mSach.getTacGia().toUpperCase()+"','"+mSach.getSoLuong()+"','"+mSach.getGiaBan()
+////                    + "')";
+//            String Sql = "select * from sach where tenSach='"+tenSach+"'";
+//            boolean result = st.execute(Sql);
+//            return result == true?1:0;
+//          
+////            System.out.println(mSach.toString());
+//        } catch (SQLException ex ) {
+//            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        return 0;
+//        }
+////        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
+//        
+//    }
     public void deleteSach(int id){
         try{
             
@@ -153,7 +153,7 @@ public class SACHDAO {
         }
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
     }
-    public ArrayList<SACHDTO> loadFormNhap(String value,String key){
+    public ArrayList<SACHDTO> timKiem(String value,String key){
         ArrayList<SACHDTO> mSachs = new ArrayList<>();
         try{
      st = conn.createStatement();

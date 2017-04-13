@@ -5,37 +5,10 @@
  */
 package bookstoremanagerment;
 
-import BUS.PHIEUBUS;
-import BUS.SACHBUS;
-import DTO.CHITIETPHIEUDTO;
-import DTO.PHIEUDTO;
-import DTO.SACHDTO;
-import DTO.THONGKECHIDTO;
 import GUI.DATHANGGUI;
 import GUI.SACHGUI;
 import GUI.THONGKECHIGUI;
-import java.awt.Color;
-import java.awt.List;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JRadioButton;
-import javax.swing.RowFilter;
-import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 
 /**
@@ -74,12 +47,12 @@ public class MainForm extends javax.swing.JFrame {
         
         
 //        jTable3.setVisible(false);
-  model = new DefaultTableModel();
-        model.addColumn("Tên sách");
-//        model.addColumn("Tên tác giả");
-        model.addColumn("Số lượng");
-        model.addColumn("Giá mua");
-        model.addColumn("id Sách");
+//  model = new DefaultTableModel();
+//        model.addColumn("Tên sách");
+////        model.addColumn("Tên tác giả");
+//        model.addColumn("Số lượng");
+//        model.addColumn("Giá mua");
+//        model.addColumn("id Sách");
 //        jTextField7.setVisible(false);
     }
     

@@ -423,13 +423,14 @@ public class DATHANGGUI extends javax.swing.JPanel {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton20)
-                            .addComponent(jButton14)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton20)
+                                .addComponent(jButton14)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -476,8 +477,7 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
 
     private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
         // TODO add your handling code here:
-        jLabel15.setText(jTable5.getValueAt(jTable5.getSelectedRow(), 1).toString());
-        jSpinner2.setValue(Integer.parseInt(jTable5.getValueAt(jTable5.getSelectedRow(), 3).toString()));
+        getChiTietPhieu();
     }//GEN-LAST:event_jTable5MousePressed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
@@ -489,8 +489,7 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
-        jTable5.setValueAt(jSpinner2.getValue().toString(), jTable5.getSelectedRow(), 3);
-
+        suaSoLuong();
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
@@ -498,19 +497,11 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jRadioButton7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton7StateChanged
-        // TODO add your handling code here:
-        if(jRadioButton7.isSelected())
-        for(int i = 0 ; i< jTable5.getRowCount();i++)
-        jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
-        else
-        for(int i = 0 ; i< jTable5.getRowCount();i++)
-        jTable5.setValueAt(0, i, 3);
+       changeTinhTrang();
     }//GEN-LAST:event_jRadioButton7StateChanged
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
-        TaoPhieuForm taoPhieuForm = new TaoPhieuForm();
-        taoPhieuForm.setVisible(true);
+      loadFormTaoPhieu();
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -557,6 +548,7 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
        
         
     }//GEN-LAST:event_jButton15ActionPerformed
+    
     private void capNhatTrangThai() {
      // TODO add your handling code here:
         int state = 1;
@@ -621,7 +613,7 @@ ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
         jTable5.setModel(model);
 
     }
- private void filterDatHang() {
+    private void filterDatHang() {
          if(sorter != null)
                 sorter.setRowFilter(RowFilter.regexFilter(jTextField6.getText().toUpperCase(), 0));
     }
@@ -695,6 +687,31 @@ if (result == JFileChooser.APPROVE_OPTION) {
         }
 }
     }
+    private void loadFormTaoPhieu() {
+          // TODO add your handling code here:
+        TAOPHIEUGUI taoPhieuForm = new TAOPHIEUGUI();
+        taoPhieuForm.setVisible(true);
+    }
+
+    private void suaSoLuong() {
+        jTable5.setValueAt(jSpinner2.getValue().toString(), jTable5.getSelectedRow(), 3);
+
+    }
+
+    private void changeTinhTrang() {
+         // TODO add your handling code here:
+        if(jRadioButton7.isSelected())
+        for(int i = 0 ; i< jTable5.getRowCount();i++)
+        jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
+        else
+        for(int i = 0 ; i< jTable5.getRowCount();i++)
+        jTable5.setValueAt(0, i, 3);
+    }
+
+    private void getChiTietPhieu() {
+        jLabel15.setText(jTable5.getValueAt(jTable5.getSelectedRow(), 1).toString());
+        jSpinner2.setValue(Integer.parseInt(jTable5.getValueAt(jTable5.getSelectedRow(), 3).toString()));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -730,6 +747,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
     private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 
+    
     
    
    

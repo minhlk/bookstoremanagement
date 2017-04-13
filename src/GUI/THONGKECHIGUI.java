@@ -337,21 +337,7 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-     private Date dateFormat(String startDateString){
-        try {
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            return formatter.parse(startDateString);
-            
-//            DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
-//            Date date = (Date)formatter.parse(startDateString);
-//            SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
-//            String finalString = newFormat.format(date);
-        } catch (ParseException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-   }
+    
     private void loadFormThongKeChi() throws ParseException{
     if(sorter != null) sorter.setRowFilter(null);
  DefaultTableModel model;
@@ -532,6 +518,23 @@ if (result == JFileChooser.APPROVE_OPTION) {
        
      
     }
+    
+    
+//     private Date dateFormat(String startDateString){
+//        try {
+//            
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            return formatter.parse(startDateString);
+//            
+////            DateFormat formatter = new SimpleDateFormat("yyyy-MM-DD"); 
+////            Date date = (Date)formatter.parse(startDateString);
+////            SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+////            String finalString = newFormat.format(date);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton13;

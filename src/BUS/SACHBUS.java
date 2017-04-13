@@ -14,42 +14,26 @@ import java.util.ArrayList;
  * @author MKZ
  */
 public class SACHBUS {
-    private SACHDTO sach ;
-    private SACHDAO sachDAO=  new SACHDAO();
-//    public SACHDTO getSach(){
-//        return new ;
-//    }
-    public void SACHBUS(){
-//        sachDAO = ;
-    }
+    private SACHDAO sachDAO =  new SACHDAO();
     public void saveSach(SACHDTO mSach){
           
         sachDAO.saveSach(mSach);   
     }
     public ArrayList<SACHDTO> loadFormNhap(){
-       
-//         sachDAO = new SACHDAO();  
          ArrayList<SACHDTO> arr= sachDAO.loadFormNhap();
-//         for(int i=0;i< arr.size();i++){
-//             System.out.println(arr.get(i).toString());
-//         }
-         
          return arr;
         
     }
     public void editSach(SACHDTO mSach){
-//          sachDAO = new SACHDAO(); 
           sachDAO.editSach(mSach);
     }
 
     public void deleteSach(SACHDTO mSach) {
-//          sachDAO = new SACHDAO(); 
           sachDAO.deleteSach(mSach.getIdSach());
     }
 
-    public ArrayList<SACHDTO>  loadFormNhap( String value, String key) {
-//          sachDAO = new SACHDAO(); 
-          ArrayList<SACHDTO> arr= sachDAO.loadFormNhap(value, key);  
+    public ArrayList<SACHDTO>  timKiem( String value, String key) {
+          ArrayList<SACHDTO> arr= sachDAO.timKiem(value, key);  
           return arr;
     }
     

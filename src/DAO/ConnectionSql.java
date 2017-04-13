@@ -29,9 +29,8 @@ public class ConnectionSql {
     try {	
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String path = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHASACH1;user=sa;password=123";
-
+//            String path = "jdbc:sqlserver://localhost:1433;\\SQLEXPRESS;databaseName=QUANLYNHASACH1","sa","123";
              conn = DriverManager.getConnection(path);
-
 		
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BookstoreManagerment.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,14 +19,14 @@ import javax.swing.table.TableRowSorter;
  *
  * @author MKZ
  */
-public class TaoPhieuForm extends javax.swing.JFrame {
+public class TAOPHIEUGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form TaoPhieuForm
      */
     TableRowSorter sorter;
     DefaultTableModel model;
-    public TaoPhieuForm() {
+    public TAOPHIEUGUI() {
         initComponents();
         //closing program without closing main UI
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -262,7 +262,7 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void loadSach() {
+    private void loadSach() {
          SACHBUS sachBus = new SACHBUS();
         ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
         DefaultTableModel model = new DefaultTableModel();
@@ -289,7 +289,30 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         
     }
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+      addToList();
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+       deleteFromList();
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+       savePhieu();
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        getSach();
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTextField18KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField18KeyReleased
         // TODO add your handling code here:
+       findSach();
+
+        
+    }//GEN-LAST:event_jTextField18KeyReleased
+
+    private void addToList() {
+          // TODO add your handling code here:
 //        DefaultTableModel model = new DefaultTableModel();
         if(model == null){
             model = new DefaultTableModel();
@@ -313,18 +336,19 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         }
         jTable3.setModel(model);
         ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());
-    }//GEN-LAST:event_jButton15ActionPerformed
+    }
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
+    private void deleteFromList() {
+         // TODO add your handling code here:
+        if(jTable3.getSelectedRow()!=-1)
         ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
 //        ((DefaultTableModel)jTable1.getModel()).addRow(new Object[]{
 //            jTable3.getValueAt(jTable3.getSelectedRow(), 0)
 //        });
-    }//GEN-LAST:event_jButton19ActionPerformed
+    }
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
+    private void savePhieu() {
+         // TODO add your handling code here:
 
         // save phieu
         //tao phieu
@@ -344,25 +368,21 @@ public class TaoPhieuForm extends javax.swing.JFrame {
         PHIEUBUS phieuBus = new PHIEUBUS();
                 if(arr.size() > 0)
         phieuBus.savePhieu(arr);
-    }//GEN-LAST:event_jButton16ActionPerformed
+    }
 
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        // TODO add your handling code here:
+    private void findSach() {
+         if(sorter != null)
+            sorter.setRowFilter(RowFilter.regexFilter(jTextField18.getText().toUpperCase(), 0));
+            
+    }
+
+    private void getSach() {
+         // TODO add your handling code here:
          jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString().trim());
 //        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());
         jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
 //        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim());
-    }//GEN-LAST:event_jTable1MousePressed
-
-    private void jTextField18KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField18KeyReleased
-        // TODO add your handling code here:
-        if(sorter != null)
-            sorter.setRowFilter(RowFilter.regexFilter(jTextField18.getText().toUpperCase(), 0));
-            
-
-        
-    }//GEN-LAST:event_jTextField18KeyReleased
-
+    }
     /**
      * @param args the command line arguments
      */
@@ -380,20 +400,21 @@ public class TaoPhieuForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TaoPhieuForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TaoPhieuForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TaoPhieuForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TaoPhieuForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TaoPhieuForm().setVisible(true);
+                new TAOPHIEUGUI().setVisible(true);
             }
         });
     }
@@ -416,4 +437,5 @@ public class TaoPhieuForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
 }
