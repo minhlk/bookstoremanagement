@@ -10,18 +10,21 @@ package DTO;
  * @author MKZ
  */
 public class SACHDTO {
-    int idSach,soLuong,giaBan;
+    int idSach,soLuong,giaBan,giaMua;
     String tenSach,tacGia,nhaCungCap;
 
     @Override
     public String toString() {
-        return "SACHDTO{" + "idSach=" + idSach + ", soLuong=" + soLuong + ", giaBan=" + giaBan + ", tenSach=" + tenSach + ", tacGia=" + tacGia + ", nhaCungCap=" + nhaCungCap + '}';
+        return "SACHDTO{" + "idSach=" + idSach + ", soLuong=" + soLuong + ", giaBan=" + giaBan + ", giaMua=" + giaMua + ", tenSach=" + tenSach + ", tacGia=" + tacGia + ", nhaCungCap=" + nhaCungCap + '}';
     }
 
-    public SACHDTO(int idSach, int soLuong, int giaBan, String tenSach, String tacGia, String nhaCungCap) {
+    
+
+    public SACHDTO(int idSach, int soLuong, int giaBan, int giaMua, String tenSach, String tacGia, String nhaCungCap) {
         this.idSach = idSach;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.giaMua = giaMua;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
         this.nhaCungCap = nhaCungCap;
@@ -35,10 +38,11 @@ public class SACHDTO {
 //        this.tenSach = tenSach;
 //        this.tacGia = tacGia;
 //    }
-    public SACHDTO(int soLuong, int giaBan, String tenSach, String tacGia, String nhaCungCap) {
+    public SACHDTO(int soLuong, int giaBan, int giaMua, String tenSach, String tacGia, String nhaCungCap) {
 //        this.idSach = idSach;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.giaMua = giaMua;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
         this.nhaCungCap = nhaCungCap;
@@ -47,9 +51,18 @@ public class SACHDTO {
 //         this.idSach = idSach;
         this.soLuong = 0;
         this.giaBan = 0;
+        this.giaMua = 0;
         this.tenSach = "";
         this.tacGia = "";
         this.nhaCungCap = "";
+    }
+
+    public int getGiaMua() {
+        return giaMua;
+    }
+
+    public void setGiaMua(int giaMua) {
+        this.giaMua = giaMua;
     }
 
     

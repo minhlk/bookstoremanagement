@@ -337,11 +337,11 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
     
     
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-       changeTinhTrang();
+       locTinhTrang();
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
-      changeTrangThai();
+      locTrangThai();
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -408,7 +408,7 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
           jTable2.setModel(model);  
           sorter = new TableRowSorter<>(jTable2.getModel());
           jTable2.setRowSorter(sorter);
-    }
+    }//
     
     private void inThongKeChi(){
      String path = "";
@@ -458,7 +458,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
 }
        
      
-    }
+    }//
     
     private void locDanhSach() {
         //        try {
@@ -477,7 +477,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
 //        } catch (ParseException ex) {
 //            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-    }
+    }//
 
     private void hienThiThongKe() {
                 // TODO add your handling code here:
@@ -494,7 +494,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
         ChartFrame frame = new ChartFrame("Tổng chi chart", chart);
         frame.setVisible(true);
         frame.setSize(500,500);
-     }
+     }//
 
     private void timKiem() {
          // TODO add your handling code here: Mã phiếu, Mã sách, Tên sách
@@ -509,9 +509,9 @@ if (result == JFileChooser.APPROVE_OPTION) {
             sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 2));
 
         }
-    }
+    }//
 
-    private void changeTinhTrang() {
+    private void locTinhTrang() {
          // TODO add your handling code here:
         //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
         //        jTable2.setRowSorter(sorter);
@@ -525,7 +525,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
         }
     }
 
-    private void changeTrangThai() {
+    private void locTrangThai() {
           // TODO add your handling code here:
         //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
         //        jTable2.setRowSorter(sorter);

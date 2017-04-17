@@ -37,7 +37,6 @@ public class SACHGUI extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
@@ -53,6 +52,9 @@ public class SACHGUI extends javax.swing.JPanel {
         jButton18 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jSpinner2 = new javax.swing.JSpinner();
+        jSpinner3 = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -106,6 +108,10 @@ public class SACHGUI extends javax.swing.JPanel {
 
         jLabel2.setText("Nhà cung cấp");
 
+        jLabel14.setText("Giá Mua");
+
+        jSpinner2.setToolTipText("");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -116,22 +122,28 @@ public class SACHGUI extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                        .addComponent(jTextField5))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(16, 16, 16))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(11, 11, 11)))
-                            .addComponent(jLabel4))
-                        .addGap(29, 29, 29)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(16, 16, 16))
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(11, 11, 11)))
+                                    .addComponent(jLabel4))
+                                .addGap(29, 29, 29))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jTextField13)
-                            .addComponent(jTextField4))))
+                            .addComponent(jTextField4)
+                            .addComponent(jSpinner2)
+                            .addComponent(jSpinner3))))
                 .addGap(18, 40, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -175,16 +187,20 @@ public class SACHGUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton18))
+                    .addComponent(jButton18)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jLabel14)
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -192,11 +208,11 @@ public class SACHGUI extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên sách", "Tác giả", "Số lượng", "Giá bán", "Nhà cung cấp", "Mã sách"
+                "Tên sách", "Tác giả", "Số lượng", "Giá bán", "Giá mua", "Nhà cung cấp", "Mã sách"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -214,6 +230,7 @@ public class SACHGUI extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -249,7 +266,7 @@ public class SACHGUI extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
+            .addGap(0, 522, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -281,18 +298,16 @@ public class SACHGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-//        String tenSach = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//        tenSach = tenSach == null? "" : tenSach.trim();
-        //check if user is select any row
         setSach();
     }//GEN-LAST:event_jTable1MouseClicked
     //use getSach in every method
     private SACHDTO getSach(){
         int soluong = Integer.parseInt(jSpinner1.getValue().toString().isEmpty()?"0":jSpinner1.getValue().toString());
         soluong = soluong > 0 ? soluong : 0;
-        int giaBan = Integer.parseInt(jTextField13.getText().isEmpty()?"0":jTextField13.getText());
+        int giaBan = Integer.parseInt(jSpinner2.getValue().toString().isEmpty()?"0":jSpinner2.getValue().toString());
         giaBan = giaBan > 0 ? giaBan : 0;
-        
+        int giaMua = Integer.parseInt(jSpinner3.getValue().toString().isEmpty()?"0":jSpinner3.getValue().toString());
+        giaMua = giaMua > 0 ? giaMua : 0;
        
         String tacGia = jTextField4.getText().toUpperCase();
         String tenSach = jTextField2.getText().toUpperCase();
@@ -301,9 +316,10 @@ public class SACHGUI extends javax.swing.JPanel {
             SACHDTO mSach ;
            if(!jTable1.getSelectionModel().isSelectionEmpty())
          mSach = new SACHDTO(
-                Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString())
+                Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString())
                 ,soluong
                 ,giaBan
+                ,giaMua
                 ,tenSach
                 ,tacGia
                 ,nhaCungCap);
@@ -312,6 +328,7 @@ public class SACHGUI extends javax.swing.JPanel {
 //                Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString())
                 soluong
                 ,giaBan
+                ,giaMua
                 ,tenSach
                 ,tacGia
                 ,nhaCungCap);
@@ -329,13 +346,15 @@ public class SACHGUI extends javax.swing.JPanel {
            model.addColumn("Tên tác giả");
            model.addColumn("Số lượng");
            model.addColumn("Giá bán");
+           model.addColumn("Giá mua");
            model.addColumn("Nhà cung cấp");
            model.addColumn("id Sách");
              for(int i=0;i< arr.size();i++){
                model.addRow(new Object[]{arr.get(i).getTenSach().trim()
-                       ,arr.get(i).getTacGia()
+                       ,arr.get(i).getTacGia().trim()
                        ,arr.get(i).getSoLuong()
-                       ,arr.get(i).getGiaBan()
+                       ,arr.get(i).getGiaBan() 
+                       ,arr.get(i).getGiaMua()
                        ,arr.get(i).getNhaCungCap()
                        ,arr.get(i).getIdSach()
                });
@@ -348,15 +367,14 @@ public class SACHGUI extends javax.swing.JPanel {
         jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         jSpinner1.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
-        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        jSpinner2.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()));
+        jSpinner3.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString()));
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
         }
     }
     private void addSach() { 
         SACHDTO mSach = getSach();
         if(mSach!=null){
-//               System.out.println( mSach.toString());
-//               sachBus = new SACHBUS();
             sachBus.saveSach(mSach);
             loadSach();
         }
@@ -426,6 +444,7 @@ public class SACHGUI extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -434,9 +453,10 @@ public class SACHGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;

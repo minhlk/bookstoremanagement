@@ -44,7 +44,7 @@ public class CHITIETPHIEUDHDAO {
             }
             
             // insert list of sach to chitietphieunhan of phieunha
-             Sql = "insert into ChiTietPhieuNhan(idPhieu,idSach,soLuongNhap,soLuongNhan,giaMua) values";
+             Sql = "insert into ChiTietPhieuNhan(idPhieu,idSach,soLuongNhap,soLuongNhan) values";
             for(int i=0;i<mPhieu.size();i++){
 //                mPhieu.get(i).getIdPhieu(idPhieu);
 //                System.out.println(mPhieu.get(i).toString());
@@ -52,8 +52,7 @@ public class CHITIETPHIEUDHDAO {
                          " ('"+idPhieu+"'"
                         + ",'"+mPhieu.get(i).getIdSach()+"'"
                         + ",'"+mPhieu.get(i).getSoLuongNhap()+"'"
-                        + ",'0',"
-                        + "'"+mPhieu.get(i).getGiaMua()+"') ";
+                        + ",'0')";
                 if(i+1 != mPhieu.size()) Sql +=",";
             }
 //            System.out.println(Sql);
@@ -78,7 +77,7 @@ public class CHITIETPHIEUDHDAO {
                             
                             , Integer.parseInt(rs.getString("soLuongNhap"))
                             , Integer.parseInt(rs.getString("soLuongNhan"))
-                            , Integer.parseInt(rs.getString("giaMua"))
+//                            , Integer.parseInt(rs.getString("giaMua"))
                             , rs.getString("tenSach")
                             ));
 //                    System.out.println(arr.get(0).toString());;
@@ -104,6 +103,25 @@ public class CHITIETPHIEUDHDAO {
             condition = condition.substring(0, condition.length()-1);
             
             String sql ="update ChiTietPhieuNhan set soLuongNhan = (case "+Case+" end)" +
+" where idSach in ("+condition+") and idPhieu = "+arr.get(0).getIdPhieu();
+            System.out.println(sql);
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+    public void huyChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr){
+        try{
+            String Case="",condition="";
+            st = conn.createStatement();
+            for(int i= 0; i< arr.size(); i++){
+            Case += " when idSach = "+arr.get(i).getIdSach()+" then "+arr.get(i).getSoLuongNhan();
+            condition += arr.get(i).getIdSach()+",";
+            }
+            condition = condition.substring(0, condition.length()-1);
+            
+            String sql ="update ChiTietPhieuNhan set soLuongNhap = (case "+Case+" end)" +
 " where idSach in ("+condition+") and idPhieu = "+arr.get(0).getIdPhieu();
 //            System.out.println(sql);
             st.executeUpdate(sql);

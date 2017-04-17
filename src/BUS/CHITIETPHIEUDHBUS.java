@@ -31,4 +31,7 @@ public class CHITIETPHIEUDHBUS {
     public void editChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr) {
         chiTietPhieuDAO.editChiTietPhieu(arr);
     }
+    public void huyChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr) {
+        chiTietPhieuDAO.huyChiTietPhieu(arr);
+    }
 }

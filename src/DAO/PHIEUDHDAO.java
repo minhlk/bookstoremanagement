@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DTO.CHITIETPHIEUDHDTO;
 import DTO.PHIEUDHDTO;
 import DTO.THONGKECHIDTO;
 import java.sql.Connection;
@@ -27,18 +26,7 @@ public class PHIEUDHDAO {
     private ResultSet rs;
     private Connection conn = GetConnection.conn;
     public PHIEUDHDAO(){
-//        try {
-//            conn = Conn.getConnect();
-//            System.out.println("test");
-//            st = conn.createStatement();
-//            String Sql = "select * from family";
-//            rs = st.executeQuery(Sql);
-//            while (rs.next()) {
-//                System.out.println(rs.getString("firstName"));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PHIEUDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }
     
     public ArrayList<PHIEUDHDTO> loadFormNhap(){
@@ -47,9 +35,7 @@ public class PHIEUDHDAO {
               st = conn.createStatement();
              String Sql = "SELECT * FROM PhieuNhan ORDER BY idPhieu DESC";
              rs = st.executeQuery(Sql);
-//            int idPhieu = 0;
             while (rs.next()) {
-//                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
                     arr.add(new PHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("tinhTrang"))
                             , Integer.parseInt(rs.getString("trangThai"))
@@ -57,7 +43,6 @@ public class PHIEUDHDAO {
 }
          } catch (SQLException ex) {
              Logger.getLogger(PHIEUDHDAO.class.getName()).log(Level.SEVERE, null, ex);
-//             return null;
          }
     
          return arr;
@@ -77,9 +62,6 @@ public class PHIEUDHDAO {
            
             st.executeUpdate(Sql);
             
-            
-//            st.executeUpdate(Sql);
-
         } catch (SQLException ex ) {
             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -90,12 +72,10 @@ public class PHIEUDHDAO {
 
             st = conn.createStatement();
             String Sql = "update phieuNhan set trangThai ="+state+" where idPhieu = " + idPhieu;
-           
+            System.out.println(Sql);
             st.executeUpdate(Sql);
             
             
-//            st.executeUpdate(Sql);
-
         } catch (SQLException ex ) {
             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

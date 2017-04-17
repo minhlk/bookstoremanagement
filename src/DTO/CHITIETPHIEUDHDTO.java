@@ -10,7 +10,7 @@ package DTO;
  * @author MKZ
  */
 public class CHITIETPHIEUDHDTO {
-   int idPhieu,idSach,soLuongNhap,soLuongNhan,giaMua;
+   int idPhieu,idSach,soLuongNhap,soLuongNhan;
    String tenSach;
 
     public String getTenSach() {
@@ -37,20 +37,20 @@ public class CHITIETPHIEUDHDTO {
         this.soLuongNhan = soLuongNhan;
     }
 
-    public CHITIETPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhap, int soLuongNhan, int giaMua, String tenSach) {
+    public CHITIETPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhap, int soLuongNhan, String tenSach) {
         this.idPhieu = idPhieu;
         this.idSach = idSach;
         this.soLuongNhap = soLuongNhap;
         this.soLuongNhan = soLuongNhan;
-        this.giaMua = giaMua;
+//        this.giaMua = giaMua;
         this.tenSach = tenSach;
     }
-     public CHITIETPHIEUDHDTO( int idSach, int soLuongNhap, int giaMua, String tenSach) {
+     public CHITIETPHIEUDHDTO( int idSach, int soLuongNhap,  String tenSach) {
 //        this.idPhieu = idPhieu;
         this.idSach = idSach;
         this.soLuongNhap = soLuongNhap;
         this.soLuongNhan = 0;
-        this.giaMua = giaMua;
+//        this.giaMua = giaMua;
         this.tenSach = tenSach;
     }
     public CHITIETPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhan) {
@@ -58,9 +58,10 @@ public class CHITIETPHIEUDHDTO {
         this.idSach = idSach;
         this.soLuongNhap = 0;
         this.soLuongNhan = soLuongNhan;
-        this.giaMua = 0;
+//        this.giaMua = 0;
         this.tenSach = "";
     }
+   
    
 
     public int getIdPhieu() {
@@ -80,12 +81,12 @@ public class CHITIETPHIEUDHDTO {
     }
 
 
-    public int getGiaMua() {
-        return giaMua;
-    }
-
-    public void setGiaMua(int giaMua) {
-        this.giaMua = giaMua;
-    }
+//    public int getGiaMua() {
+//        return giaMua;
+//    }
+//
+//    public void setGiaMua(int giaMua) {
+//        this.giaMua = giaMua;
+//    }
    
 }

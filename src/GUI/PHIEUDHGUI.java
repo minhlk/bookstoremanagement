@@ -62,28 +62,23 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jTable5 = new javax.swing.JTable();
         jButton20 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jButton24 = new javax.swing.JButton();
+        jTextField6 = new javax.swing.JTextField();
+        jButton14 = new javax.swing.JButton();
+        jTextField8 = new javax.swing.JTextField();
+        jButton15 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton21 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jPanel16 = new javax.swing.JPanel();
         jSpinner2 = new javax.swing.JSpinner();
         jLabel15 = new javax.swing.JLabel();
         jButton23 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        jButton24 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jTextField6 = new javax.swing.JTextField();
-        jButton14 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
-        jButton15 = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jRadioButton9 = new javax.swing.JRadioButton();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jButton19 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,22 +139,12 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             }
         });
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Kiểm tra phiếu"));
-
-        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Số lượng nhận"));
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel15.setText("Tên sách");
-
-        jButton23.setText("Sửa");
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
+        jCheckBox1.setText("Đủ");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
             }
         });
-
-        jLabel16.setText("Đã nhập");
 
         jButton24.setText("Cập nhật");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
@@ -168,95 +153,26 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(142, 142, 142)
-                                .addComponent(jLabel15))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(jLabel16)
-                                .addGap(46, 46, 46)
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jButton24)))
-                .addGap(71, 85, Short.MAX_VALUE))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tình trạng"));
-
-        buttonGroup2.add(jRadioButton7);
-        jRadioButton7.setText("Đủ");
-        jRadioButton7.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jRadioButton7StateChanged(evt);
-            }
-        });
-
-        buttonGroup2.add(jRadioButton8);
-        jRadioButton8.setText("Thiếu");
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton7)
-                    .addComponent(jRadioButton8))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(0, 262, Short.MAX_VALUE)
+                .addComponent(jButton24))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jButton14.setText("Lọc");
@@ -280,61 +196,26 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             }
         });
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Trạng thái"));
-
-        buttonGroup1.add(jRadioButton9);
-        jRadioButton9.setSelected(true);
-        jRadioButton9.setText("Hoạt động");
-
-        buttonGroup1.add(jRadioButton10);
-        jRadioButton10.setText("Kết thúc");
-
-        jButton19.setText("Cập nhật");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton9)
-                    .addComponent(jRadioButton10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton19)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jRadioButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tùy chọn"));
 
-        jButton21.setText("Tạo phiếu đặt hàng");
+        jButton21.setText("Tạo phiếu ");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton21ActionPerformed(evt);
             }
         });
 
-        jButton22.setText("Xóa phiếu đặt hàng");
+        jButton22.setText("Xóa phiếu ");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton22ActionPerformed(evt);
+            }
+        });
+
+        jButton25.setText("Hủy phiếu ");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
             }
         });
 
@@ -342,21 +223,23 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton21, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton22, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton25, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jButton21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton22)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton25)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tình trạng--", "Đủ", "Thiếu" }));
@@ -373,6 +256,50 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel15.setText("Tên sách");
+
+        jButton23.setText("Sửa");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Đã nhập");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42))
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton23)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -381,30 +308,33 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(135, 135, 135))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jTextField6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jTextField8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 5, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -413,28 +343,31 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton20))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton20)
-                                .addComponent(jButton14)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -443,7 +376,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,7 +392,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
 
     private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
         // TODO add your handling code here:
-        getChiTietPhieu();
+        getSachofPhieu();
     }//GEN-LAST:event_jTable5MousePressed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
@@ -468,19 +401,6 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jComboBox2.setSelectedIndex(0);
         jComboBox3.setSelectedIndex(0);
     }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
-        suaSoLuong();
-    }//GEN-LAST:event_jButton23ActionPerformed
-
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-            capNhatChiTietPhieu();
-    }//GEN-LAST:event_jButton24ActionPerformed
-
-    private void jRadioButton7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton7StateChanged
-       changeTinhTrang();
-    }//GEN-LAST:event_jRadioButton7StateChanged
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
       loadFormTaoPhieu();
@@ -491,11 +411,6 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
        xoaPhieu();
 
     }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-       capNhatTrangThai();
-
-    }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
@@ -518,6 +433,45 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
        
         
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        
+        changeTinhTrang();
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        capNhatChiTietPhieu();
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+        suaSoLuong();
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // Hủy phiếu
+        
+        int tinhTrang = 1 ;
+        
+        ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
+        for(int i =0;i < jTable5.getRowCount();i++){
+            int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
+            int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
+            int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
+            arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
+        }
+        // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
+        CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
+        PHIEUDHBUS phieuBus = new PHIEUDHBUS();
+        chiTietPhieuBus.huyChiTietPhieu(arr);
+        phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
+        
+        int trangThai = 0;
+        phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
+        //  Load lại form
+        loadFormPhieu();
+        
+    }//GEN-LAST:event_jButton25ActionPerformed
     
     
     private void loadFormPhieu() {
@@ -537,44 +491,25 @@ ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
             });
          }
           jTable4.setModel(model);  
-          sorter = new TableRowSorter<TableModel>(jTable4.getModel());
+          sorter = new TableRowSorter<>(jTable4.getModel());
           jTable4.setRowSorter(sorter);
-    }
-    private void capNhatTrangThai() {
-     // TODO add your handling code here:
-        int state = 1;
-        int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
-
-        if ( jRadioButton10.isSelected())
-        state = 0;
-        PHIEUDHBUS bus = new PHIEUDHBUS();
-        bus.changeState(idPhieu,state);
-        loadFormPhieu();   
-    }
-    private void xoaPhieu() {
-        PHIEUDHBUS bus = new PHIEUDHBUS();
-        int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
-        bus.deletePhieu(idPhieu);
-        loadFormPhieu();
-    }
-
+    }//
     private void loadChiTietPhieu() {
          // TODO add your handling code here:
         int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
-        int trangThai = jTable4
-                .getValueAt(jTable4.getSelectedRow(), 3)
-                == "Hoạt động"?1:0;
-        if(trangThai == 1)
-        jRadioButton9.setSelected(true);
-        else jRadioButton10.setSelected(true);
-
-        int tinhTrang = jTable4
-                .getValueAt(jTable4.getSelectedRow(), 2)
-                =="Đủ"?1:0;
-        if(tinhTrang == 1)
-        jRadioButton7.setSelected(true);
-        else jRadioButton8.setSelected(true);
-
+        int tinhTrang = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 2).toString() =="Đủ"? "1":"0");
+        
+        if(tinhTrang == 1){
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setEnabled(false);
+        jButton24.setEnabled(false);
+        
+        }
+        else{    
+        jCheckBox1.setSelected(false);
+        jCheckBox1.setEnabled(true);
+        jButton24.setEnabled(true);
+        }
         jTextField8.setText("Mã phiếu : "+idPhieu);
         ArrayList<CHITIETPHIEUDHDTO> arr = new CHITIETPHIEUDHBUS().getChiTietPhieu(idPhieu);
         DefaultTableModel model;
@@ -583,27 +518,47 @@ ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
         model.addColumn("Tên sách");
         model.addColumn("Số lượng nhập");
         model.addColumn("Số lượng đã nhận");
-        model.addColumn("Giá mua");
+//        model.addColumn("Giá mua");
         model.addColumn("Mã Sách");
-        //PHIEUBUS bus = new PHIEUBUS();
-        //ArrayList<PHIEUDTO> arr = bus.loadFormNhap();
         for(int i=0;i< arr.size();i++){
-            //            jTable1.setValueAt(arr.get(i).getTenSach().trim(), i, 0);
-            //            jTable1.setValueAt(arr.get(i).getTacGia().trim(), i, 1);
-            //            jTable1.setValueAt(arr.get(i).getSoLuong(), i, 2);
-            //            jTable1.setValueAt(arr.get(i).getGiaBan(), i, 3);
-            //            jTable1.setValueAt(arr.get(i).getIdSach(), i, 4);
             model.addRow(new Object[]{arr.get(i).getIdPhieu()
                 ,arr.get(i).getTenSach().trim()
                 ,arr.get(i).getSoLuongNhap()
                 ,arr.get(i).getSoLuongNhan()
-                ,arr.get(i).getGiaMua()
+//                ,arr.get(i).getGiaMua()
                 ,arr.get(i).getIdSach()
             });
         }
         jTable5.setModel(model);
 
     }
+   
+    private void changeTinhTrang() {
+         // TODO add your handling code here:
+        if(jCheckBox1.isSelected()){
+        for(int i = 0 ; i< jTable5.getRowCount();i++)
+        jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
+        jLabel16.setVisible(false);
+        jSpinner2.setVisible(false);
+        jButton23.setVisible(false);
+        }
+        else{
+        for(int i = 0 ; i< jTable5.getRowCount();i++)
+        jTable5.setValueAt(0, i, 3);
+        jLabel16.setVisible(true);
+        jSpinner2.setVisible(true);
+        jButton23.setVisible(true);
+        }
+        
+    }
+    private void xoaPhieu() {
+        PHIEUDHBUS bus = new PHIEUDHBUS();
+        int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
+        bus.deletePhieu(idPhieu);
+        loadFormPhieu();
+    }//
+
+    
     private void filterDatHang() {
          if(sorter != null)
                 sorter.setRowFilter(RowFilter.regexFilter(jTextField6.getText().toUpperCase(), 0));
@@ -611,25 +566,27 @@ ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
 
     private void capNhatChiTietPhieu() {
                 // TODO add your handling code here:
-        int tinhTrang = jRadioButton7.isSelected()?1:0;
-
+        int tinhTrang = 1 ;
+        
         ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
-        //        new CHITIETPHIEUDTO(WIDTH, HEIGHT, WIDTH, tenSach)
         for(int i =0;i < jTable5.getRowCount();i++){
-            arr.add(new CHITIETPHIEUDHDTO(
-                Integer.parseInt(jTable5.getValueAt(i, 0).toString())
-                ,Integer.parseInt(jTable5.getValueAt(i, 5).toString())
-                ,Integer.parseInt(jTable5.getValueAt(i, 3).toString())
-                //                ,jTable5.getValueAt(i, 0).toString()
-            ));
-            //        System.out.println(arr.get(i).getIdSach());
+            int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
+            int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
+            int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
+            int soLuongNhap = Integer.parseInt(jTable5.getValueAt(i, 2).toString());
+            if(soLuongNhap > soLuongNhan) tinhTrang = 0;
+            arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
         }
-
+        // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
         CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
         PHIEUDHBUS phieuBus = new PHIEUDHBUS();
-        //                if(arr.size() > 0)
         chiTietPhieuBus.editChiTietPhieu(arr);
         phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
+        
+        // Nếu trình trạng là thiếu thì trạng thái trả về 0(đang chờ),và ngược lại(kết thúc)
+        int trangThai = tinhTrang == 1? 0:1;
+        phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
+        //  Load lại form
         loadFormPhieu();
     }
     private void inPhieuDatHang() {
@@ -678,7 +635,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
             Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-    }
+    }//
     private void loadFormTaoPhieu() {
           // TODO add your handling code here:
         CHITIETPHIEUDHGUI taoPhieuForm = new CHITIETPHIEUDHGUI();
@@ -688,22 +645,14 @@ if (result == JFileChooser.APPROVE_OPTION) {
     private void suaSoLuong() {
         jTable5.setValueAt(jSpinner2.getValue().toString(), jTable5.getSelectedRow(), 3);
 
-    }
+    }//
 
-    private void changeTinhTrang() {
-         // TODO add your handling code here:
-        if(jRadioButton7.isSelected())
-        for(int i = 0 ; i< jTable5.getRowCount();i++)
-        jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
-        else
-        for(int i = 0 ; i< jTable5.getRowCount();i++)
-        jTable5.setValueAt(0, i, 3);
-    }
+    
 
-    private void getChiTietPhieu() {
+    private void getSachofPhieu() {
         jLabel15.setText(jTable5.getValueAt(jTable5.getSelectedRow(), 1).toString());
         jSpinner2.setValue(Integer.parseInt(jTable5.getValueAt(jTable5.getSelectedRow(), 3).toString()));
-    }
+    }//
     private void locTinhTrang() {
          if(sorter != null){
             if(jComboBox2.getSelectedIndex() == 1){
@@ -712,7 +661,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
             if(jComboBox2.getSelectedIndex() == 2)
             sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 2));
             }
-    }
+    }//
 
     private void locTrangThai() {
         if(sorter != null){
@@ -722,33 +671,28 @@ if (result == JFileChooser.APPROVE_OPTION) {
             if(jComboBox3.getSelectedIndex() == 2)
             sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 3));
             }
-    }
+    }//
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner2;
