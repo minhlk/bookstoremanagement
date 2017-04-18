@@ -6,6 +6,7 @@
 package BUS;
 
 import DAO.SACHDAO;
+import DTO.CHITIETPHIEUDHDTO;
 import DTO.SACHDTO;
 import java.util.ArrayList;
 
@@ -35,6 +36,9 @@ public class SACHBUS {
     public ArrayList<SACHDTO>  timKiem( String value, String key) {
           ArrayList<SACHDTO> arr= sachDAO.timKiem(value, key);  
           return arr;
+    }
+    public void tangSoLuong(ArrayList<CHITIETPHIEUDHDTO> arr){
+        sachDAO.tangSoLuong(arr);
     }
     
 }

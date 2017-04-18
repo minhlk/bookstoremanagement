@@ -17,6 +17,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Button;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -42,6 +44,8 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
     TableRowSorter sorter;
     public PHIEUDHGUI() {
         initComponents();
+        jPanel15.setVisible(false);
+        jPanel16.setVisible(false);
     }
 
     /**
@@ -70,7 +74,6 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton15 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
@@ -101,7 +104,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jTable4.getTableHeader().setReorderingAllowed(false);
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable4MouseClicked(evt);
+                loadChiTietPhieuEvent(evt);
             }
         });
         jScrollPane4.setViewportView(jTable4);
@@ -127,7 +130,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jTable5.getTableHeader().setReorderingAllowed(false);
         jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable5MousePressed(evt);
+                GetChiTietSachEvent(evt);
             }
         });
         jScrollPane5.setViewportView(jTable5);
@@ -135,21 +138,21 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton20.setText("Refresh");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
+                RefreshEvent(evt);
             }
         });
 
         jCheckBox1.setText("Đủ");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBox1ItemStateChanged(evt);
+                ChangeTinhTrangEvent(evt);
             }
         });
 
         jButton24.setText("Cập nhật");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton24ActionPerformed(evt);
+                capNhatChiTietPhieuEvent(evt);
             }
         });
 
@@ -162,7 +165,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                 .addComponent(jCheckBox1)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(0, 262, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton24))
         );
         jPanel15Layout.setVerticalGroup(
@@ -170,15 +173,15 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
 
         jButton14.setText("Lọc");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                locMaPhieuEvent(evt);
             }
         });
 
@@ -192,7 +195,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton15.setText("In phiếu");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                InPhieuEvent(evt);
             }
         });
 
@@ -201,21 +204,14 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton21.setText("Tạo phiếu ");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
-            }
-        });
-
-        jButton22.setText("Xóa phiếu ");
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
+                loadFormTaoPhieuEvent(evt);
             }
         });
 
         jButton25.setText("Hủy phiếu ");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                HuyPhieuEvent(evt);
             }
         });
 
@@ -227,7 +223,6 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton21, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton22, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton25, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -236,8 +231,6 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton25)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -245,14 +238,14 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tình trạng--", "Đủ", "Thiếu" }));
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+                locTinhTrangEvent(evt);
             }
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Trạng thái--", "hoạt động", "kết thúc" }));
         jComboBox3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox3ItemStateChanged(evt);
+                locTrangThaiEvent(evt);
             }
         });
 
@@ -263,7 +256,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton23.setText("Sửa");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
+                suaSoLuongEvent(evt);
             }
         });
 
@@ -274,7 +267,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
@@ -308,17 +301,18 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField6))
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                            .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4))
                 .addGap(18, 18, 18)
@@ -331,8 +325,8 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 5, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -355,7 +349,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
                                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton20))))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -386,119 +380,13 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
   
-    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
-       loadChiTietPhieu();
-    }//GEN-LAST:event_jTable4MouseClicked
-
-    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
+    private void loadChiTietPhieuEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadChiTietPhieuEvent
         // TODO add your handling code here:
-        getSachofPhieu();
-    }//GEN-LAST:event_jTable5MousePressed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
-        loadFormPhieu();
-        jComboBox2.setSelectedIndex(0);
-        jComboBox3.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-      loadFormTaoPhieu();
-    }//GEN-LAST:event_jButton21ActionPerformed
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        // TODO add your handling code here:
-       xoaPhieu();
-
-    }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-        filterDatHang();
-        
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-           locTinhTrang();
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
-
-    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
-            locTrangThai();
-    }//GEN-LAST:event_jComboBox3ItemStateChanged
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
-        if(jTable5.getRowCount()>0)
-            inPhieuDatHang();
-       
-        
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-        
-        changeTinhTrang();
-    }//GEN-LAST:event_jCheckBox1ItemStateChanged
-
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        capNhatChiTietPhieu();
-    }//GEN-LAST:event_jButton24ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
-        suaSoLuong();
-    }//GEN-LAST:event_jButton23ActionPerformed
-
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        // Hủy phiếu
-        
-        int tinhTrang = 1 ;
-        
-        ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
-        for(int i =0;i < jTable5.getRowCount();i++){
-            int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
-            int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
-            int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
-            arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
-        }
-        // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
-        CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
-        PHIEUDHBUS phieuBus = new PHIEUDHBUS();
-        chiTietPhieuBus.huyChiTietPhieu(arr);
-        phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
-        
-        int trangThai = 0;
-        phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
-        //  Load lại form
-        loadFormPhieu();
-        
-    }//GEN-LAST:event_jButton25ActionPerformed
-    
-    
-    private void loadFormPhieu() {
-      DefaultTableModel model;
-         model = new DefaultTableModel();
-        model.addColumn("Mã phiếu");
-        model.addColumn("Ngày lập");
-        model.addColumn("Tình trạng");
-        model.addColumn("Trạng thái");
-PHIEUDHBUS bus = new PHIEUDHBUS();
-ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
- for(int i=0;i< arr.size();i++){
-            model.addRow(new Object[]{arr.get(i).getIdPhieu()
-                    ,arr.get(i).getNgayLap().trim()
-                    ,arr.get(i).getTinhTrang()==1?"Đủ":"Thiếu"
-                    ,arr.get(i).getTrangThai()==1?"Hoạt động":"Kết thúc"
-            });
-         }
-          jTable4.setModel(model);  
-          sorter = new TableRowSorter<>(jTable4.getModel());
-          jTable4.setRowSorter(sorter);
-    }//
-    private void loadChiTietPhieu() {
-         // TODO add your handling code here:
+        if(jTable4.getSelectedRow()!=-1){
         int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
         int tinhTrang = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 2).toString() =="Đủ"? "1":"0");
-        
+        jPanel15.setVisible(true);
+        jPanel16.setVisible(true);
         if(tinhTrang == 1){
         jCheckBox1.setSelected(true);
         jCheckBox1.setEnabled(false);
@@ -516,8 +404,8 @@ ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
         model = new DefaultTableModel();
         model.addColumn("Mã phiếu");
         model.addColumn("Tên sách");
-        model.addColumn("Số lượng nhập");
-        model.addColumn("Số lượng đã nhận");
+        model.addColumn("Số lượng đặt");
+        model.addColumn("Đã nhận");
 //        model.addColumn("Giá mua");
         model.addColumn("Mã Sách");
         for(int i=0;i< arr.size();i++){
@@ -530,67 +418,60 @@ ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
             });
         }
         jTable5.setModel(model);
+        }
+    }//GEN-LAST:event_loadChiTietPhieuEvent
 
-    }
-   
-    private void changeTinhTrang() {
-         // TODO add your handling code here:
-        if(jCheckBox1.isSelected()){
-        for(int i = 0 ; i< jTable5.getRowCount();i++)
-        jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
-        jLabel16.setVisible(false);
-        jSpinner2.setVisible(false);
-        jButton23.setVisible(false);
-        }
-        else{
-        for(int i = 0 ; i< jTable5.getRowCount();i++)
-        jTable5.setValueAt(0, i, 3);
-        jLabel16.setVisible(true);
-        jSpinner2.setVisible(true);
-        jButton23.setVisible(true);
-        }
-        
-    }
-    private void xoaPhieu() {
-        PHIEUDHBUS bus = new PHIEUDHBUS();
-        int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
-        bus.deletePhieu(idPhieu);
+    private void GetChiTietSachEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GetChiTietSachEvent
+        // TODO add your handling code here:
+        jLabel15.setText(jTable5.getValueAt(jTable5.getSelectedRow(), 1).toString());
+        jSpinner2.setValue(Integer.parseInt(jTable5.getValueAt(jTable5.getSelectedRow(), 3).toString()));
+    }//GEN-LAST:event_GetChiTietSachEvent
+
+    private void RefreshEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshEvent
+        // TODO add your handling code here:
         loadFormPhieu();
-    }//
+        jComboBox2.setSelectedIndex(0);
+        jComboBox3.setSelectedIndex(0);
+    }//GEN-LAST:event_RefreshEvent
 
-    
-    private void filterDatHang() {
+    private void loadFormTaoPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFormTaoPhieuEvent
+      CHITIETPHIEUDHGUI taoPhieuForm = new CHITIETPHIEUDHGUI();
+        taoPhieuForm.setVisible(true);
+    }//GEN-LAST:event_loadFormTaoPhieuEvent
+
+    private void locMaPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locMaPhieuEvent
          if(sorter != null)
-                sorter.setRowFilter(RowFilter.regexFilter(jTextField6.getText().toUpperCase(), 0));
-    }
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField6.getText().toUpperCase(), 0));        
+        
+    }//GEN-LAST:event_locMaPhieuEvent
 
-    private void capNhatChiTietPhieu() {
-                // TODO add your handling code here:
-        int tinhTrang = 1 ;
+    private void locTinhTrangEvent(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_locTinhTrangEvent
+          if(sorter != null){
+            if(jComboBox2.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 2));
+            }
+            if(jComboBox2.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 2));
+            jComboBox3.setSelectedIndex(0);
+            }
+    }//GEN-LAST:event_locTinhTrangEvent
+
+    private void locTrangThaiEvent(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_locTrangThaiEvent
+        if(sorter != null){
+            if(jComboBox3.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 3));
+            }
+            if(jComboBox3.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 3));
+            jComboBox2.setSelectedIndex(0);
+            }   
         
-        ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
-        for(int i =0;i < jTable5.getRowCount();i++){
-            int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
-            int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
-            int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
-            int soLuongNhap = Integer.parseInt(jTable5.getValueAt(i, 2).toString());
-            if(soLuongNhap > soLuongNhan) tinhTrang = 0;
-            arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
-        }
-        // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
-        CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
-        PHIEUDHBUS phieuBus = new PHIEUDHBUS();
-        chiTietPhieuBus.editChiTietPhieu(arr);
-        phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
-        
-        // Nếu trình trạng là thiếu thì trạng thái trả về 0(đang chờ),và ngược lại(kết thúc)
-        int trangThai = tinhTrang == 1? 0:1;
-        phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
-        //  Load lại form
-        loadFormPhieu();
-    }
-    private void inPhieuDatHang() {
-          String path = "";
+    }//GEN-LAST:event_locTrangThaiEvent
+
+    private void InPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InPhieuEvent
+        // TODO add your handling code here:
+        if(jTable5.getRowCount()>0){
+                String path = "";
        JFileChooser fileChooser = new JFileChooser();
 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 int result = fileChooser.showOpenDialog(this);
@@ -635,43 +516,147 @@ if (result == JFileChooser.APPROVE_OPTION) {
             Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-    }//
-    private void loadFormTaoPhieu() {
-          // TODO add your handling code here:
-        CHITIETPHIEUDHGUI taoPhieuForm = new CHITIETPHIEUDHGUI();
-        taoPhieuForm.setVisible(true);
-    }
+        }
+        else
+            JOptionPane.showMessageDialog(this,"Chọn phiếu cần in");
+       
+        
+    }//GEN-LAST:event_InPhieuEvent
 
-    private void suaSoLuong() {
-        jTable5.setValueAt(jSpinner2.getValue().toString(), jTable5.getSelectedRow(), 3);
+    private void ChangeTinhTrangEvent(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChangeTinhTrangEvent
+         // TODO add your handling code here:
+        if(jCheckBox1.isSelected()){
+        for(int i = 0 ; i< jTable5.getRowCount();i++)
+        jTable5.setValueAt(jTable5.getValueAt(i, 2), i, 3);
+//        jLabel16.setVisible(false);
+//        jSpinner2.setVisible(false);
+//        jButton23.setVisible(false);
+          jPanel16.setVisible(false);
+        }
+        else{
+        for(int i = 0 ; i< jTable5.getRowCount();i++)
+        jTable5.setValueAt(0, i, 3);
+//        jLabel16.setVisible(true);
+//        jSpinner2.setVisible(true);
+//        jButton23.setVisible(true);
+          jPanel16.setVisible(true);
+        }
+    }//GEN-LAST:event_ChangeTinhTrangEvent
 
+    private void capNhatChiTietPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capNhatChiTietPhieuEvent
+                // TODO add your handling code here:
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Chắc chắn muốn cập nhật?","Lưu ý",JOptionPane.YES_NO_OPTION);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                        int tinhTrang = 1 ;
+        
+                        ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
+                        for(int i =0;i < jTable5.getRowCount();i++){
+                            int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
+                            int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
+                            int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
+                            int soLuongNhap = Integer.parseInt(jTable5.getValueAt(i, 2).toString());
+                            if(soLuongNhap > soLuongNhan) tinhTrang = 0;
+                            arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
+                        }
+                        // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
+                        CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
+                        PHIEUDHBUS phieuBus = new PHIEUDHBUS();
+                        chiTietPhieuBus.tangSoLuong(arr);
+                        chiTietPhieuBus.editChiTietPhieu(arr);
+                        phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
+
+                        // Nếu trình trạng là thiếu thì trạng thái trả về 0(đang chờ),và ngược lại(kết thúc)
+                        int trangThai = tinhTrang == 1? 0:1;
+                        phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
+                        //  Load lại form
+                        loadFormPhieu();
+                        ((DefaultTableModel)jTable5.getModel()).setRowCount(0);
+                }
+    }//GEN-LAST:event_capNhatChiTietPhieuEvent
+
+    private void suaSoLuongEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaSoLuongEvent
+      if(jTable5.getSelectedRow()!=-1){
+            // TODO add your handling code here:
+        int soLuongNhan = (Integer) jSpinner2.getValue();
+        int soLuongNhap = (Integer) jTable5.getValueAt(jTable5.getSelectedRow(), 2);
+        if(0 <= soLuongNhan && soLuongNhan <=  soLuongNhap)
+            jTable5.setValueAt(soLuongNhan, jTable5.getSelectedRow(), 3);
+        else
+            JOptionPane.showMessageDialog(this, "Đã nhận vượt quá yêu cầu đặt hàng");
+      }
+       else
+            JOptionPane.showMessageDialog(this, "Chọn sách cần sửa");
+    }//GEN-LAST:event_suaSoLuongEvent
+
+    private void HuyPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuyPhieuEvent
+        // Hủy phiếu
+        if(jTable4.getSelectedRow() != -1){
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Chắc chắn muốn hủy phiếu?","Lưu ý",JOptionPane.YES_NO_OPTION);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                    int tinhTrang = 1 ;
+        
+                    ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
+                    for(int i =0;i < jTable5.getRowCount();i++){
+                        int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
+                        int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
+                        int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
+                        arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
+                    }
+                    // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
+                    CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
+                    PHIEUDHBUS phieuBus = new PHIEUDHBUS();
+                    chiTietPhieuBus.huyChiTietPhieu(arr);
+                    phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
+
+                    int trangThai = 0;
+                    phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
+                    //  Load lại form
+                    loadFormPhieu();
+                    ((DefaultTableModel)jTable5.getModel()).setRowCount(0);
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Chọn phiếu cần hủy");
+        
+    }//GEN-LAST:event_HuyPhieuEvent
+    
+    
+    private void loadFormPhieu() {
+      DefaultTableModel model;
+         model = new DefaultTableModel();
+        model.addColumn("Mã phiếu");
+        model.addColumn("Ngày lập");
+        model.addColumn("Tình trạng");
+        model.addColumn("Trạng thái");
+PHIEUDHBUS bus = new PHIEUDHBUS();
+ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
+ for(int i=0;i< arr.size();i++){
+            model.addRow(new Object[]{arr.get(i).getIdPhieu()
+                    ,arr.get(i).getNgayLap().trim()
+                    ,arr.get(i).getTinhTrang()==1?"Đủ":"Thiếu"
+                    ,arr.get(i).getTrangThai()==1?"Hoạt động":"Kết thúc"
+            });
+         }
+          jTable4.setModel(model);  
+          sorter = new TableRowSorter<>(jTable4.getModel());
+          jTable4.setRowSorter(sorter);
     }//
+  
+  
+  
+    
+  
+
+    
+   
+    
 
     
 
-    private void getSachofPhieu() {
-        jLabel15.setText(jTable5.getValueAt(jTable5.getSelectedRow(), 1).toString());
-        jSpinner2.setValue(Integer.parseInt(jTable5.getValueAt(jTable5.getSelectedRow(), 3).toString()));
-    }//
-    private void locTinhTrang() {
-         if(sorter != null){
-            if(jComboBox2.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 2));
-            }
-            if(jComboBox2.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 2));
-            }
-    }//
+   
+    
 
-    private void locTrangThai() {
-        if(sorter != null){
-            if(jComboBox3.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 3));
-            }
-            if(jComboBox3.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 3));
-            }
-    }//
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -680,7 +665,6 @@ if (result == JFileChooser.APPROVE_OPTION) {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;

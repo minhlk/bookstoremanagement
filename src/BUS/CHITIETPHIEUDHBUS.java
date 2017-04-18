@@ -6,6 +6,7 @@
 package BUS;
 
 import DAO.CHITIETPHIEUDHDAO;
+import DAO.SACHDAO;
 import DTO.CHITIETPHIEUDHDTO;
 import java.util.ArrayList;
 
@@ -33,5 +34,8 @@ public class CHITIETPHIEUDHBUS {
     }
     public void huyChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr) {
         chiTietPhieuDAO.huyChiTietPhieu(arr);
+    }
+    public void tangSoLuong(ArrayList<CHITIETPHIEUDHDTO> arr){
+        new SACHDAO().tangSoLuong(arr);
     }
 }

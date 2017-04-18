@@ -97,7 +97,7 @@ public class PHIEUDHDAO {
         try{
             
          st = conn.createStatement();
-             String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,c.giaMua,c.soLuongNhan * c.giaMua as tongGia,p.tinhTrang,p.trangThai " +
+             String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhap * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
 "from PhieuNhan p,ChiTietPhieuNhan c, SACH s where p.idPhieu = c.idPhieu and s.idSach = c.idSach";
 //             System.out.println(Sql);
              rs = st.executeQuery(Sql);
@@ -130,9 +130,9 @@ public class PHIEUDHDAO {
         Map<Integer,Integer> mMap = new HashMap<>();
          try {
              st = conn.createStatement();
-             String sql = "select MONTH(ngayLap) as thang,sum(soLuongNhap * giaMua ) as tongGia " +
-                     "from PhieuNhan p,ChiTietPhieuNhan c " +
-                     "where p.idPhieu = c.idPhieu and YEAR(ngayLap) = " +year + 
+             String sql = "select MONTH(ngayLap) as thang,sum(soLuongNhap * s.giaMua ) as tongGia " +
+                     "from PhieuNhan p,ChiTietPhieuNhan c,sach s " +
+                     "where p.idPhieu = c.idPhieu and s.idSach = c.idSach and YEAR(ngayLap) = " +year + 
                      " group by ngayLap";
              rs = st.executeQuery(sql);
 //            int idPhieu = 0;

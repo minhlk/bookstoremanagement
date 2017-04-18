@@ -51,7 +51,6 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jSpinner2 = new javax.swing.JSpinner();
         jButton15 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -77,10 +76,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField7.setEditable(false);
-        jTextField7.setText("id");
-
-        jLabel13.setText("Số lượng nhập");
+        jLabel13.setText("Số lượng đặt");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -97,8 +93,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 71, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -111,8 +106,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,11 +120,11 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên sách", "Số lượng đặt", "id Sách"
+                "Tên sách", "Số lượng đặt", "id Sách", "Tác giả", "Số lượng", "NXB"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -160,11 +154,11 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tên sách", "Tác giả", "Số lượng", "id Sách"
+                "Tên sách", "Tác giả", "Số lượng", "NXB", "id Sách"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -185,7 +179,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton19.setText("Xóa");
@@ -295,7 +289,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         
         jTextField5.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString());
         jSpinner2.setValue((Integer)jTable3.getValueAt(jTable3.getSelectedRow(), 1));
-        jTextField7.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 1).toString());
+//        jTextField7.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 1).toString());
         
 //        if(jTable3.getSelectedRow() != -1){
 //            jTable3.setValueAt((Integer)jSpinner2.getValue(), jTable3.getSelectedRow(), 1);
@@ -336,16 +330,20 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         if(model == null){
             model = new DefaultTableModel();
         model.addColumn("Tên sách");
-//        model.addColumn("Tên tác giả");
         model.addColumn("Số lượng đặt");
-//        model.addColumn("Giá mua");
-//        model.addColumn("Nhà cung cấp");
         model.addColumn("id Sách");
+        model.addColumn("Tác giả");
+        model.addColumn("Số lượng");
+        model.addColumn("Nhà cung cấp");
+        
         }
         
 //        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());
         String idSach = jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString();
         String tenSach = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString().trim();
+        String tacGia = jTable1.getValueAt(jTable1.getSelectedRow(), 1)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim();
+        String soLuong = jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String nhaCungCap = jTable1.getValueAt(jTable1.getSelectedRow(), 3)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim();
 //        if(tenSach!="id"){
 //            SACHDTO mSach = new SACHDTO(Integer.parseInt(jTextField7.getText().isEmpty()?"0":jTextField7.getText()),soluong,giaBan,tenSach,"");
 //            SACHBUS sachBus = new SACHBUS();
@@ -354,19 +352,43 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
             model.addRow(new Object[]{tenSach
                     ,1
 //                    ,jTextField17.getText().isEmpty()?"1000":jTextField17.getText()
-                    ,idSach});
+                    ,idSach
+                    ,tacGia
+                    ,soLuong
+                    ,nhaCungCap
+            });
 //        }
         jTable3.setModel(model);
         ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());
+        
+        jTable3.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTable3.getColumnModel().getColumn(2).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(2).setPreferredWidth(0);
+        jTable3.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTable3.getColumnModel().getColumn(3).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(3).setPreferredWidth(0);
+        jTable3.getColumnModel().getColumn(4).setMaxWidth(0);
+        jTable3.getColumnModel().getColumn(4).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(4).setPreferredWidth(0);
+        jTable3.getColumnModel().getColumn(5).setMaxWidth(0);
+        jTable3.getColumnModel().getColumn(5).setMinWidth(0);
+        jTable3.getColumnModel().getColumn(5).setPreferredWidth(0);
     }//
 
     private void deleteFromList() {
          // TODO add your handling code here:
-        if(jTable3.getSelectedRow()!=-1)
+        if(jTable3.getSelectedRow()!=-1){
+        
+        ((DefaultTableModel)jTable1.getModel()).addRow(new Object[]{
+            jTable3.getValueAt(jTable3.getSelectedRow(), 0)
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 3)     
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 4)     
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 5)
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 2)     
+                
+        });
         ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
-//        ((DefaultTableModel)jTable1.getModel()).addRow(new Object[]{
-//            jTable3.getValueAt(jTable3.getSelectedRow(), 0)
-//        });
+        }
     }//
 
     private void savePhieu() {
@@ -402,7 +424,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
          // TODO add your handling code here:
          jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString().trim());
 //        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());
-        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+//        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
 //        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim());
     }
     private void editList() {
@@ -467,7 +489,6 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
     

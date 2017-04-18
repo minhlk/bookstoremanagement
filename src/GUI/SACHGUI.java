@@ -365,11 +365,11 @@ public class SACHGUI extends javax.swing.JPanel {
     private void setSach(){
     if(jTable1.getSelectedRow() != -1){
         jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());//
         jSpinner1.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
         jSpinner2.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()));
         jSpinner3.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString()));
-        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString().trim());//
         }
     }
     private void addSach() { 

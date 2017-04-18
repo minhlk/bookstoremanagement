@@ -104,7 +104,7 @@ public class CHITIETPHIEUDHDAO {
             
             String sql ="update ChiTietPhieuNhan set soLuongNhan = (case "+Case+" end)" +
 " where idSach in ("+condition+") and idPhieu = "+arr.get(0).getIdPhieu();
-            System.out.println(sql);
+//            System.out.println(sql);
             st.executeUpdate(sql);
 
         } catch (SQLException ex ) {

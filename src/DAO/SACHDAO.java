@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import DTO.CHITIETPHIEUDHDTO;
 import DTO.SACHDTO;
 import java.awt.List;
 import java.sql.Connection;
@@ -137,4 +138,30 @@ public class SACHDAO {
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
             return mSachs;
     } 
+    public void tangSoLuong(ArrayList<CHITIETPHIEUDHDTO> arr){
+    try{
+        //tang so luong sach khi cap nhat so luong sach nhan duoc
+            st = conn.createStatement();
+            String Case="",condition="";
+            st = conn.createStatement();
+            for(int i= 0; i< arr.size(); i++){
+            Case += " when idSach = "+arr.get(i).getIdSach()+" then (select soLuong  + ( select "+arr.get(i).getSoLuongNhan()+" - soLuongNhan"
+                    + " from sach s,ChiTietPhieuNhan c where s.idSach = c.idSach and s.idSach = "+arr.get(i).getIdSach()+" and c.idPhieu ="+arr.get(i).getIdPhieu()
+                   + " ) as soLuong "
+                   + " from sach where idSach = "+arr.get(i).getIdSach()+" )  ";
+            
+            
+            condition += arr.get(i).getIdSach()+",";
+            }
+            condition = condition.substring(0, condition.length()-1);
+            
+            String Sql ="update sach set soLuong = (case "+Case+" end)" +
+" where idSach in ("+condition+")" ;
+            st.executeUpdate(Sql);
+//System.out.println(Sql);
+            
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
