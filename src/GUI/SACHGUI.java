@@ -65,7 +65,7 @@ public class SACHGUI extends javax.swing.JPanel {
         jButton2.setText("Sửa");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                editSachEvent(evt);
             }
         });
 
@@ -76,7 +76,7 @@ public class SACHGUI extends javax.swing.JPanel {
         jButton11.setText("Thêm ");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                saveSachEvent(evt);
             }
         });
 
@@ -88,21 +88,21 @@ public class SACHGUI extends javax.swing.JPanel {
         jButton5.setText("Tìm kiếm");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                searchSachEvent(evt);
             }
         });
 
         jButton17.setText("Refresh");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+                refreshSachEvent(evt);
             }
         });
 
         jButton18.setText("Xóa");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                xoaSachEvent(evt);
             }
         });
 
@@ -226,7 +226,7 @@ public class SACHGUI extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                getSachEvent(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -275,31 +275,80 @@ public class SACHGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      editSach();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void editSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSachEvent
+       SACHDTO mSach = getSach();
+        if(mSach!=null){
+            sachBus.editSach(mSach);
+            loadSach();
+        }
+    }//GEN-LAST:event_editSachEvent
     
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        addSach();
-    }//GEN-LAST:event_jButton11ActionPerformed
+    private void saveSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSachEvent
+        SACHDTO mSach = getSach();
+        if(mSach!=null){
+            sachBus.saveSach(mSach);
+            loadSach();
+        }
+    }//GEN-LAST:event_saveSachEvent
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        searchSach();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void searchSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSachEvent
+       
+        String value = jTextField12.getText().toUpperCase();
+        ArrayList<SACHDTO> mSachs ;
+        switch (jComboBox1.getSelectedItem().toString()){
+            case "Tác giả":
+                mSachs = (sachBus.timKiem(value,"tacGia"));
+                break;
+            case "Tên sách":
+                mSachs = (sachBus.timKiem(value,"tenSach"));
+                break;
+            default :
+                mSachs = (sachBus.timKiem(value,"idSach"));
+                
+            }
+        
+        DefaultTableModel model = new DefaultTableModel();
+           model.addColumn("Tên sách");
+           model.addColumn("Tên tác giả");
+           model.addColumn("Số lượng");
+           model.addColumn("Giá bán");
+           model.addColumn("Nhà cung cấp");
+           model.addColumn("id Sách");
+             for(int i=0;i< mSachs.size();i++){
+               model.addRow(new Object[]{mSachs.get(i).getTenSach().trim()
+                       ,mSachs.get(i).getTacGia().trim()
+                       ,mSachs.get(i).getSoLuong()
+                       ,mSachs.get(i).getGiaBan()
+                       ,mSachs.get(i).getNhaCungCap()
+                       ,mSachs.get(i).getIdSach()
+               });
+            }
+             jTable1.setModel(model);
+    }//GEN-LAST:event_searchSachEvent
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    private void refreshSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshSachEvent
         // TODO add your handling code here:
-
         loadSach();
-    }//GEN-LAST:event_jButton17ActionPerformed
+    }//GEN-LAST:event_refreshSachEvent
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-       deleteSach();
-    }//GEN-LAST:event_jButton18ActionPerformed
+    private void xoaSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaSachEvent
+         SACHDTO mSach = getSach();
+        if(mSach!=null){
+            sachBus.deleteSach(mSach);
+            loadSach();
+        }
+    }//GEN-LAST:event_xoaSachEvent
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        setSach();
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void getSachEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getSachEvent
+      if(jTable1.getSelectedRow() != -1){
+        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());//
+        jSpinner1.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
+        jSpinner2.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()));
+        jSpinner3.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString()));
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString().trim());//
+        }
+    }//GEN-LAST:event_getSachEvent
     //use getSach in every method
     private SACHDTO getSach(){
         int soluong = Integer.parseInt(jSpinner1.getValue().toString().isEmpty()?"0":jSpinner1.getValue().toString());
@@ -362,80 +411,6 @@ public class SACHGUI extends javax.swing.JPanel {
              jTable1.setModel(model);
 
        }
-    private void setSach(){
-    if(jTable1.getSelectedRow() != -1){
-        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());//
-        jSpinner1.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
-        jSpinner2.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()));
-        jSpinner3.setValue(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString()));
-        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5)==null?"":jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString().trim());//
-        }
-    }
-    private void addSach() { 
-        SACHDTO mSach = getSach();
-        if(mSach!=null){
-            sachBus.saveSach(mSach);
-            loadSach();
-        }
-    }
-    private void editSach(){
-          // TODO add your handling code here:
-        SACHDTO mSach = getSach();
-        if(mSach!=null){
-//            SACHBUS sachBus = new SACHBUS();
-            sachBus.editSach(mSach);
-            loadSach();
-        }
-    }
-    private void deleteSach(){
-         // TODO add your handling code here:
-        SACHDTO mSach = getSach();
-        if(mSach!=null){
-//            SACHBUS sachBus = new SACHBUS();
-            sachBus.deleteSach(mSach);
-            loadSach();
-        }
-        
-    }
-    private void searchSach(){
-        // TODO add your handling code here:
-
-        String value = jTextField12.getText().toUpperCase();
-        ArrayList<SACHDTO> mSachs ;
-        switch (jComboBox1.getSelectedItem().toString()){
-            case "Tác giả":
-                mSachs = (sachBus.timKiem(value,"tacGia"));
-                break;
-            case "Tên sách":
-                mSachs = (sachBus.timKiem(value,"tenSach"));
-                break;
-//          case "Mã sách":
-            default :
-                mSachs = (sachBus.timKiem(value,"idSach"));
-                
-            }
-        
-        DefaultTableModel model = new DefaultTableModel();
-           model.addColumn("Tên sách");
-           model.addColumn("Tên tác giả");
-           model.addColumn("Số lượng");
-           model.addColumn("Giá bán");
-           model.addColumn("Nhà cung cấp");
-           model.addColumn("id Sách");
-             for(int i=0;i< mSachs.size();i++){
-               model.addRow(new Object[]{mSachs.get(i).getTenSach().trim()
-                       ,mSachs.get(i).getTacGia().trim()
-                       ,mSachs.get(i).getSoLuong()
-                       ,mSachs.get(i).getGiaBan()
-                       ,mSachs.get(i).getNhaCungCap()
-                       ,mSachs.get(i).getIdSach()
-               });
-            }
-             jTable1.setModel(model);
-    }
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton17;

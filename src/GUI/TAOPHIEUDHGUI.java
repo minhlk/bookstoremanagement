@@ -5,34 +5,33 @@
  */
 package GUI;
 
-import BUS.CHITIETPHIEUDHBUS;
+import BUS.TAOPHIEUDHBUS;
 import BUS.SACHBUS;
-import DTO.CHITIETPHIEUDHDTO;
+import DTO.TAOPHIEUDHDTO;
 import DTO.SACHDTO;
 import java.util.ArrayList;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author MKZ
  */
-public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
+public class TAOPHIEUDHGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form TaoPhieuForm
      */
     TableRowSorter sorter;
     DefaultTableModel model;
-    CHITIETPHIEUDHBUS chiTietPhieuBus ;
-    public CHITIETPHIEUDHGUI() {
+    TAOPHIEUDHBUS chiTietPhieuBus ;
+    public TAOPHIEUDHGUI() {
         initComponents();
         //closing program without closing main UI
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         loadSach();
-        chiTietPhieuBus = new CHITIETPHIEUDHBUS();
+        chiTietPhieuBus = new TAOPHIEUDHBUS();
         
     }
 
@@ -72,7 +71,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jButton15.setText("Sửa");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                editSoLuongEvent(evt);
             }
         });
 
@@ -136,7 +135,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jTable3.getTableHeader().setReorderingAllowed(false);
         jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable3MousePressed(evt);
+                getSoLuongEvent(evt);
             }
         });
         jScrollPane3.setViewportView(jTable3);
@@ -145,7 +144,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jButton16.setText("Tạo phiếu đặt hàng");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                luuPhieuEvent(evt);
             }
         });
 
@@ -170,7 +169,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
+                addSachEvent(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -185,13 +184,13 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jButton19.setText("Xóa");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+                xoaSachListEvent(evt);
             }
         });
 
         jTextField18.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField18KeyReleased(evt);
+                timSachEvent(evt);
             }
         });
 
@@ -260,72 +259,53 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-      editList();
-    }//GEN-LAST:event_jButton15ActionPerformed
+    private void editSoLuongEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSoLuongEvent
+       if(jTable3.getSelectedRow() != -1){
+            jTable3.setValueAt((Integer)jSpinner2.getValue(), jTable3.getSelectedRow(), 1);
+        }
+    }//GEN-LAST:event_editSoLuongEvent
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-       deleteFromList();
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-       savePhieu();
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-
-      addToList();
-    }//GEN-LAST:event_jTable1MousePressed
-
-    private void jTextField18KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField18KeyReleased
+    private void xoaSachListEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaSachListEvent
         // TODO add your handling code here:
-       findSach();
-
+        if(jTable3.getSelectedRow()!=-1){
         
-    }//GEN-LAST:event_jTextField18KeyReleased
+        ((DefaultTableModel)jTable1.getModel()).addRow(new Object[]{
+            jTable3.getValueAt(jTable3.getSelectedRow(), 0)
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 3)     
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 4)     
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 5)
+           ,jTable3.getValueAt(jTable3.getSelectedRow(), 2)     
+                
+        });
+        ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
+        }
+    }//GEN-LAST:event_xoaSachListEvent
 
-    private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
+    private void luuPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luuPhieuEvent
        
+        // save phieu
+        //tao phieu
+        // tao chi tiet phieu
+        ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
+//        new CHITIETPHIEUDTO(WIDTH, HEIGHT, WIDTH, tenSach)
+        for(int i =0;i< jTable3.getRowCount();i++){
+            arr.add(new TAOPHIEUDHDTO(
+                Integer.parseInt(jTable3.getValueAt(i, 2).toString())
+                ,Integer.parseInt(jTable3.getValueAt(i, 1).toString())
+//                ,Integer.parseInt(jTable3.getValueAt(i, 2).toString())
+                ,jTable3.getValueAt(i, 0).toString()    
+            ));
+        System.out.println(arr.get(i).toString());
+        }
+
         
-        jTextField5.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString());
-        jSpinner2.setValue((Integer)jTable3.getValueAt(jTable3.getSelectedRow(), 1));
-//        jTextField7.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 1).toString());
-        
-//        if(jTable3.getSelectedRow() != -1){
-//            jTable3.setValueAt((Integer)jSpinner2.getValue(), jTable3.getSelectedRow(), 1);
-//        }
-        
-        
-    }//GEN-LAST:event_jTable3MousePressed
-    private void loadSach() {
-         SACHBUS sachBus = new SACHBUS();
-        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Tên sách");
-        model.addColumn("Tên tác giả");
-        model.addColumn("Số lượng");
-//        model.addColumn("Giá bán");
-        model.addColumn("Nhà cung cấp");
-        model.addColumn("id Sách");
-//        model.addColumn("1");
-          for(int i=0;i< arr.size();i++){
-            model.addRow(new Object[]{
-                     arr.get(i).getTenSach().trim()
-                    ,arr.get(i).getTacGia().trim()
-                    ,arr.get(i).getSoLuong()
-//                    ,arr.get(i).getGiaBan()
-                    ,arr.get(i).getNhaCungCap()
-                    ,arr.get(i).getIdSach()
-            });
-         }
-          jTable1.setModel(model);
-          sorter = new TableRowSorter<>(jTable1.getModel());
-          jTable1.setRowSorter(sorter);
-        
-    }//
-    
-    private void addToList() {
-          // TODO add your handling code here:
+                if(arr.size() > 0)
+        chiTietPhieuBus.savePhieu(arr);
+    }//GEN-LAST:event_luuPhieuEvent
+
+    private void addSachEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSachEvent
+
+       // TODO add your handling code here:
 //        DefaultTableModel model = new DefaultTableModel();
         if(model == null){
             model = new DefaultTableModel();
@@ -373,64 +353,56 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         jTable3.getColumnModel().getColumn(5).setMaxWidth(0);
         jTable3.getColumnModel().getColumn(5).setMinWidth(0);
         jTable3.getColumnModel().getColumn(5).setPreferredWidth(0);
-    }//
+    }//GEN-LAST:event_addSachEvent
 
-    private void deleteFromList() {
-         // TODO add your handling code here:
-        if(jTable3.getSelectedRow()!=-1){
-        
-        ((DefaultTableModel)jTable1.getModel()).addRow(new Object[]{
-            jTable3.getValueAt(jTable3.getSelectedRow(), 0)
-           ,jTable3.getValueAt(jTable3.getSelectedRow(), 3)     
-           ,jTable3.getValueAt(jTable3.getSelectedRow(), 4)     
-           ,jTable3.getValueAt(jTable3.getSelectedRow(), 5)
-           ,jTable3.getValueAt(jTable3.getSelectedRow(), 2)     
-                
-        });
-        ((DefaultTableModel)jTable3.getModel()).removeRow(jTable3.getSelectedRow());
-        }
-    }//
-
-    private void savePhieu() {
-         // TODO add your handling code here:
-
-        // save phieu
-        //tao phieu
-        // tao chi tiet phieu
-        ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
-//        new CHITIETPHIEUDTO(WIDTH, HEIGHT, WIDTH, tenSach)
-        for(int i =0;i< jTable3.getRowCount();i++){
-            arr.add(new CHITIETPHIEUDHDTO(
-                Integer.parseInt(jTable3.getValueAt(i, 2).toString())
-                ,Integer.parseInt(jTable3.getValueAt(i, 1).toString())
-//                ,Integer.parseInt(jTable3.getValueAt(i, 2).toString())
-                ,jTable3.getValueAt(i, 0).toString()    
-            ));
-        System.out.println(arr.get(i).toString());
-        }
-
-        
-                if(arr.size() > 0)
-        chiTietPhieuBus.savePhieu(arr);
-    }//
-
-    private void findSach() {
-         if(sorter != null)
+    private void timSachEvent(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_timSachEvent
+        // TODO add your handling code here:
+        if(sorter != null)
             sorter.setRowFilter(RowFilter.regexFilter(jTextField18.getText().toUpperCase(), 0));
             
-    }
 
-    private void getSach() {
-         // TODO add your handling code here:
-         jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString().trim());
-//        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString().trim());
-//        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-//        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().trim());
-    }
-    private void editList() {
-        if(jTable3.getSelectedRow() != -1){
-            jTable3.setValueAt((Integer)jSpinner2.getValue(), jTable3.getSelectedRow(), 1);
-        }
+        
+    }//GEN-LAST:event_timSachEvent
+
+    private void getSoLuongEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getSoLuongEvent
+       
+        
+        jTextField5.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString());
+        jSpinner2.setValue((Integer)jTable3.getValueAt(jTable3.getSelectedRow(), 1));
+//        jTextField7.setText( jTable3.getValueAt(jTable3.getSelectedRow(), 1).toString());
+        
+//        if(jTable3.getSelectedRow() != -1){
+//            jTable3.setValueAt((Integer)jSpinner2.getValue(), jTable3.getSelectedRow(), 1);
+//        }
+        
+        
+    }//GEN-LAST:event_getSoLuongEvent
+    
+    private void loadSach() {
+         SACHBUS sachBus = new SACHBUS();
+        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Tên sách");
+        model.addColumn("Tên tác giả");
+        model.addColumn("Số lượng");
+//        model.addColumn("Giá bán");
+        model.addColumn("Nhà cung cấp");
+        model.addColumn("id Sách");
+//        model.addColumn("1");
+          for(int i=0;i< arr.size();i++){
+            model.addRow(new Object[]{
+                     arr.get(i).getTenSach().trim()
+                    ,arr.get(i).getTacGia().trim()
+                    ,arr.get(i).getSoLuong()
+//                    ,arr.get(i).getGiaBan()
+                    ,arr.get(i).getNhaCungCap()
+                    ,arr.get(i).getIdSach()
+            });
+         }
+          jTable1.setModel(model);
+          sorter = new TableRowSorter<>(jTable1.getModel());
+          jTable1.setRowSorter(sorter);
+        
     }
     /**
      * @param args the command line arguments
@@ -449,14 +421,22 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CHITIETPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CHITIETPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CHITIETPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CHITIETPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TAOPHIEUDHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -469,7 +449,7 @@ public class CHITIETPHIEUDHGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CHITIETPHIEUDHGUI().setVisible(true);
+                new TAOPHIEUDHGUI().setVisible(true);
             }
         });
     }

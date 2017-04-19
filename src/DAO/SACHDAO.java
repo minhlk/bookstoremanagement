@@ -5,9 +5,8 @@
  */
 package DAO;
 
-import DTO.CHITIETPHIEUDHDTO;
+import DTO.TAOPHIEUDHDTO;
 import DTO.SACHDTO;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -138,7 +137,7 @@ public class SACHDAO {
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
             return mSachs;
     } 
-    public void tangSoLuong(ArrayList<CHITIETPHIEUDHDTO> arr){
+    public void tangSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
     try{
         //tang so luong sach khi cap nhat so luong sach nhan duoc
             st = conn.createStatement();

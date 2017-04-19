@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import DTO.CHITIETPHIEUDHDTO;
+import DTO.TAOPHIEUDHDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +18,12 @@ import java.util.logging.Logger;
  *
  * @author MKZ
  */
-public class CHITIETPHIEUDHDAO {
+public class TAOPHIEUDHDAO {
     private Statement st;
     private ResultSet rs;
     private Connection conn = GetConnection.conn;
     
-    public void savePhieu(ArrayList<CHITIETPHIEUDHDTO> mPhieu){
+    public void savePhieu(ArrayList<TAOPHIEUDHDTO> mPhieu){
         try{
             
 //            System.out.println("test");
@@ -62,8 +62,8 @@ public class CHITIETPHIEUDHDAO {
             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-    public ArrayList<CHITIETPHIEUDHDTO> getChiTietPhieu(int idPhieu){
-    ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
+    public ArrayList<TAOPHIEUDHDTO> getChiTietPhieu(int idPhieu){
+    ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
          try {
              st = conn.createStatement();
              String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p,sach s where c.idPhieu = p.idPhieu and s.idSach = c.idSach and c.idPhieu="+idPhieu;
@@ -72,7 +72,7 @@ public class CHITIETPHIEUDHDAO {
 //            int idPhieu = 0;
             while (rs.next()) {
 //                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
-                    arr.add(new CHITIETPHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
+                    arr.add(new TAOPHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("idSach"))
                             
                             , Integer.parseInt(rs.getString("soLuongNhap"))
@@ -92,7 +92,7 @@ public class CHITIETPHIEUDHDAO {
     
     
     }
-    public void editChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr){
+    public void editChiTietPhieu(ArrayList<TAOPHIEUDHDTO> arr){
         try{
             String Case="",condition="";
             st = conn.createStatement();
@@ -111,24 +111,24 @@ public class CHITIETPHIEUDHDAO {
             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-    public void huyChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr){
-        try{
-            String Case="",condition="";
-            st = conn.createStatement();
-            for(int i= 0; i< arr.size(); i++){
-            Case += " when idSach = "+arr.get(i).getIdSach()+" then "+arr.get(i).getSoLuongNhan();
-            condition += arr.get(i).getIdSach()+",";
-            }
-            condition = condition.substring(0, condition.length()-1);
-            
-            String sql ="update ChiTietPhieuNhan set soLuongNhap = (case "+Case+" end)" +
-" where idSach in ("+condition+") and idPhieu = "+arr.get(0).getIdPhieu();
-//            System.out.println(sql);
-            st.executeUpdate(sql);
-
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}
-    
+//    public void huyChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr){
+//        try{
+//            String Case="",condition="";
+//            st = conn.createStatement();
+//            for(int i= 0; i< arr.size(); i++){
+//            Case += " when idSach = "+arr.get(i).getIdSach()+" then "+arr.get(i).getSoLuongNhan();
+//            condition += arr.get(i).getIdSach()+",";
+//            }
+//            condition = condition.substring(0, condition.length()-1);
+//            
+//            String sql ="update ChiTietPhieuNhan set soLuongNhap = (case "+Case+" end)" +
+//" where idSach in ("+condition+") and idPhieu = "+arr.get(0).getIdPhieu();
+////            System.out.println(sql);
+//            st.executeUpdate(sql);
+//
+//        } catch (SQLException ex ) {
+//            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//}
+//    
 }

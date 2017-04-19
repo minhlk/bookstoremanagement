@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 /**
  *
  * @author MKZ
@@ -87,7 +88,7 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         jButton6.setText("Tìm kiếm ");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                filterEvent(evt);
             }
         });
 
@@ -97,21 +98,21 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Tình trạng--", "Đủ", "Thiếu" }));
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+                filterTinhTrangEvent(evt);
             }
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Trạng thái--", "hoạt động", "kết thúc" }));
         jComboBox3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox3ItemStateChanged(evt);
+                filterTrangThaiEvent(evt);
             }
         });
 
         jButton16.setText("Lọc");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                filterThoiGian(evt);
             }
         });
 
@@ -126,21 +127,21 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         jButton8.setText("In báo cáo ");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                inThongKeChiEvent(evt);
             }
         });
 
         jButton13.setText("Refresh");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                refreshThongKeChiEvent(evt);
             }
         });
 
         jButton9.setText("Hiển thị thống kê");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                hienThiThongKeEvent(evt);
             }
         });
 
@@ -255,43 +256,64 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-       locTinhTrang();
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
+    private void filterTinhTrangEvent(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filterTinhTrangEvent
+        if(sorter != null){
+            if(jComboBox2.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 8));
+            }
+            if(jComboBox2.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 8));
 
-    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
-      locTrangThai();
-    }//GEN-LAST:event_jComboBox3ItemStateChanged
+        }
+    }//GEN-LAST:event_filterTinhTrangEvent
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-            locDanhSach();
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void filterTrangThaiEvent(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filterTrangThaiEvent
+        // TODO add your handling code here:
+        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
+        //        jTable2.setRowSorter(sorter);
+        if(sorter != null){
+            if(jComboBox3.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 9));
+            }
+            if(jComboBox3.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 9));
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-            hienThiThongKe();
-    }//GEN-LAST:event_jButton9ActionPerformed
+        }
+    }//GEN-LAST:event_filterTrangThaiEvent
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void filterThoiGian(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterThoiGian
+        if(jDateChooser1.getDate() != null && jDateChooser2.getDate() != null && jTable2.getRowCount() > 0){
+        ArrayList<RowFilter<Object,Object>> filters = new ArrayList<>(2);
+        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate(),3) );
+        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate(),3) );
+        RowFilter rf = RowFilter.andFilter(filters);
 
-        loadFormThongKeChi();
-        jComboBox2.setSelectedIndex(0);
-        jComboBox3.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton13ActionPerformed
+        sorter.setRowFilter(rf);
+        }
+        else
+            JOptionPane.showMessageDialog(this,"Chọn thời gian cần lọc");
+    }//GEN-LAST:event_filterThoiGian
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       timKiem();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void hienThiThongKeEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hienThiThongKeEvent
+                     // TODO add your handling code here:
+        PHIEUDHBUS mPhieu = new PHIEUDHBUS();
+        int year = jYearChooser1.getYear();
+        Map<Integer,Integer> mMap = mPhieu.thongKeChi(year);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i= 1; i <= 12 ;i++){
+            dataset.setValue(mMap.get(i), "Tổng tiền (VNĐ)", "Tháng : "+i);
+        }
+        JFreeChart chart = ChartFactory.createBarChart("Tổng chi trong năm "+ year, "Thời gian (Tháng)", "Tổng tiền (VNĐ)", dataset,PlotOrientation.HORIZONTAL,false,true,false);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("Tổng chi chart", chart);
+        frame.setVisible(true);
+        frame.setSize(500,500);
+    }//GEN-LAST:event_hienThiThongKeEvent
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(jTable2.getRowCount()>0)
-        inThongKeChi();   
+    private void refreshThongKeChiEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshThongKeChiEvent
 
-    
-        
-    }//GEN-LAST:event_jButton8ActionPerformed
-    
-    private void loadFormThongKeChi(){
-    if(sorter != null) sorter.setRowFilter(null);
+       if(sorter != null) sorter.setRowFilter(null);
  DefaultTableModel model;
          model = new DefaultTableModel();
         model.addColumn("Mã phiếu");
@@ -327,10 +349,27 @@ ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
           jTable2.setModel(model);  
           sorter = new TableRowSorter<>(jTable2.getModel());
           jTable2.setRowSorter(sorter);
-    }//
-    
-    private void inThongKeChi(){
-     String path = "";
+        jComboBox2.setSelectedIndex(0);
+        jComboBox3.setSelectedIndex(0);
+    }//GEN-LAST:event_refreshThongKeChiEvent
+
+    private void filterEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterEvent
+       if(sorter != null){
+            if(jComboBox4.getSelectedIndex() == 0){
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 0));
+            }
+            if(jComboBox4.getSelectedIndex() == 1){
+                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 1));
+            }
+            if(jComboBox4.getSelectedIndex() == 2)
+            sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 2));
+
+        };
+    }//GEN-LAST:event_filterEvent
+
+    private void inThongKeChiEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inThongKeChiEvent
+        if(jTable2.getRowCount()>0){
+        String path = "";
        JFileChooser fileChooser = new JFileChooser();
 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 int result = fileChooser.showOpenDialog(this);
@@ -375,88 +414,13 @@ if (result == JFileChooser.APPROVE_OPTION) {
             Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-       
-     
-    }//
+        }
+        
+
     
-    private void locDanhSach() {
-        //        try {
-            // TODO add your handling code here:
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            
-//            Date date = formatter.parse(jDateChooser1.getDate().toString());
-//            Date date = jDateChooser1.getDate();
-        ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
-        filters.add( RowFilter.dateFilter(ComparisonType.AFTER, jDateChooser1.getDate(),3) );
-        filters.add( RowFilter.dateFilter(ComparisonType.BEFORE, jDateChooser2.getDate(),3) );
-        RowFilter rf = RowFilter.andFilter(filters);
-
-        sorter.setRowFilter(rf);
-//System.out.println(date.toString());
-//        } catch (ParseException ex) {
-//            Logger.getLogger(THONGKECHIGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//
-
-    private void hienThiThongKe() {
-                // TODO add your handling code here:
-        PHIEUDHBUS mPhieu = new PHIEUDHBUS();
-        int year = jYearChooser1.getYear();
-        Map<Integer,Integer> mMap = mPhieu.thongKeChi(year);
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for(int i= 1; i <= 12 ;i++){
-            dataset.setValue(mMap.get(i), "Tổng tiền (VNĐ)", "Tháng : "+i);
-        }
-        JFreeChart chart = ChartFactory.createBarChart("Tổng chi trong năm "+ year, "Thời gian (Tháng)", "Tổng tiền (VNĐ)", dataset,PlotOrientation.HORIZONTAL,false,true,false);
-        CategoryPlot p = chart.getCategoryPlot();
-        p.setRangeGridlinePaint(Color.BLACK);
-        ChartFrame frame = new ChartFrame("Tổng chi chart", chart);
-        frame.setVisible(true);
-        frame.setSize(500,500);
-     }//
-
-    private void timKiem() {
-         // TODO add your handling code here: Mã phiếu, Mã sách, Tên sách
-        if(sorter != null){
-            if(jComboBox4.getSelectedIndex() == 0){
-                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 0));
-            }
-            if(jComboBox4.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 1));
-            }
-            if(jComboBox4.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter(jTextField10.getText().toUpperCase(), 2));
-
-        }
-    }//
-
-    private void locTinhTrang() {
-         // TODO add your handling code here:
-        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
-        //        jTable2.setRowSorter(sorter);
-        if(sorter != null){
-            if(jComboBox2.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("Đủ", 8));
-            }
-            if(jComboBox2.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("Thiếu", 8));
-
-        }
-    }
-
-    private void locTrangThai() {
-          // TODO add your handling code here:
-        //        TableRowSorter sorter = new TableRowSorter<TableModel>(jTable2.getModel());
-        //        jTable2.setRowSorter(sorter);
-        if(sorter != null){
-            if(jComboBox3.getSelectedIndex() == 1){
-                sorter.setRowFilter(RowFilter.regexFilter("Hoạt động", 9));
-            }
-            if(jComboBox3.getSelectedIndex() == 2)
-            sorter.setRowFilter(RowFilter.regexFilter("Kết thúc", 9));
-
-        }
-    }
+        
+    }//GEN-LAST:event_inThongKeChiEvent
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton13;

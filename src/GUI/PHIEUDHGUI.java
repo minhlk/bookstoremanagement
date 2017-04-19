@@ -5,9 +5,9 @@
  */
 package GUI;
 
-import BUS.CHITIETPHIEUDHBUS;
+import BUS.TAOPHIEUDHBUS;
 import BUS.PHIEUDHBUS;
-import DTO.CHITIETPHIEUDHDTO;
+import DTO.TAOPHIEUDHDTO;
 import DTO.PHIEUDHDTO;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -384,10 +384,12 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(jTable4.getSelectedRow()!=-1){
         int idPhieu = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
-        int tinhTrang = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 2).toString() =="Đủ"? "1":"0");
+        int trangThai = Integer.parseInt(jTable4.getValueAt(jTable4.getSelectedRow(), 3).toString() =="Hoạt động"? "1":"0");
         jPanel15.setVisible(true);
-        jPanel16.setVisible(true);
-        if(tinhTrang == 1){
+        if(jCheckBox1.isSelected())
+        jPanel16.setVisible(false);
+        else jPanel16.setVisible(true);
+        if(trangThai == 0){
         jCheckBox1.setSelected(true);
         jCheckBox1.setEnabled(false);
         jButton24.setEnabled(false);
@@ -399,7 +401,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton24.setEnabled(true);
         }
         jTextField8.setText("Mã phiếu : "+idPhieu);
-        ArrayList<CHITIETPHIEUDHDTO> arr = new CHITIETPHIEUDHBUS().getChiTietPhieu(idPhieu);
+        ArrayList<TAOPHIEUDHDTO> arr = new TAOPHIEUDHBUS().getChiTietPhieu(idPhieu);
         DefaultTableModel model;
         model = new DefaultTableModel();
         model.addColumn("Mã phiếu");
@@ -435,7 +437,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_RefreshEvent
 
     private void loadFormTaoPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFormTaoPhieuEvent
-      CHITIETPHIEUDHGUI taoPhieuForm = new CHITIETPHIEUDHGUI();
+      TAOPHIEUDHGUI taoPhieuForm = new TAOPHIEUDHGUI();
         taoPhieuForm.setVisible(true);
     }//GEN-LAST:event_loadFormTaoPhieuEvent
 
@@ -549,17 +551,17 @@ if (result == JFileChooser.APPROVE_OPTION) {
                 if(dialogResult == JOptionPane.YES_OPTION){
                         int tinhTrang = 1 ;
         
-                        ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
+                        ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
                         for(int i =0;i < jTable5.getRowCount();i++){
                             int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
                             int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
                             int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
                             int soLuongNhap = Integer.parseInt(jTable5.getValueAt(i, 2).toString());
                             if(soLuongNhap > soLuongNhan) tinhTrang = 0;
-                            arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
+                            arr.add(new TAOPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
                         }
                         // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
-                        CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
+                        TAOPHIEUDHBUS chiTietPhieuBus = new TAOPHIEUDHBUS();
                         PHIEUDHBUS phieuBus = new PHIEUDHBUS();
                         chiTietPhieuBus.tangSoLuong(arr);
                         chiTietPhieuBus.editChiTietPhieu(arr);
@@ -593,20 +595,20 @@ if (result == JFileChooser.APPROVE_OPTION) {
         if(jTable4.getSelectedRow() != -1){
         int dialogResult = JOptionPane.showConfirmDialog (null, "Chắc chắn muốn hủy phiếu?","Lưu ý",JOptionPane.YES_NO_OPTION);
             if(dialogResult == JOptionPane.YES_OPTION){
-                    int tinhTrang = 1 ;
+//                    int tinhTrang = 1 ;
         
-                    ArrayList<CHITIETPHIEUDHDTO> arr = new ArrayList<>();
+                    ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
                     for(int i =0;i < jTable5.getRowCount();i++){
                         int idPhieu = Integer.parseInt(jTable5.getValueAt(i, 0).toString());
                         int idSach = Integer.parseInt(jTable5.getValueAt(i, 4).toString());
                         int soLuongNhan = Integer.parseInt(jTable5.getValueAt(i, 3).toString());
-                        arr.add(new CHITIETPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
+                        arr.add(new TAOPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
                     }
                     // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
-                    CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
+//                    CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
                     PHIEUDHBUS phieuBus = new PHIEUDHBUS();
-                    chiTietPhieuBus.huyChiTietPhieu(arr);
-                    phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
+//                    chiTietPhieuBus.huyChiTietPhieu(arr);
+//                    phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
 
                     int trangThai = 0;
                     phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);

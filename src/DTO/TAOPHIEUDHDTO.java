@@ -9,7 +9,7 @@ package DTO;
  *
  * @author MKZ
  */
-public class CHITIETPHIEUDHDTO {
+public class TAOPHIEUDHDTO {
    int idPhieu,idSach,soLuongNhap,soLuongNhan;
    String tenSach;
 
@@ -37,7 +37,7 @@ public class CHITIETPHIEUDHDTO {
         this.soLuongNhan = soLuongNhan;
     }
 
-    public CHITIETPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhap, int soLuongNhan, String tenSach) {
+    public TAOPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhap, int soLuongNhan, String tenSach) {
         this.idPhieu = idPhieu;
         this.idSach = idSach;
         this.soLuongNhap = soLuongNhap;
@@ -45,7 +45,7 @@ public class CHITIETPHIEUDHDTO {
 //        this.giaMua = giaMua;
         this.tenSach = tenSach;
     }
-     public CHITIETPHIEUDHDTO( int idSach, int soLuongNhap,  String tenSach) {
+     public TAOPHIEUDHDTO( int idSach, int soLuongNhap,  String tenSach) {
 //        this.idPhieu = idPhieu;
         this.idSach = idSach;
         this.soLuongNhap = soLuongNhap;
@@ -53,7 +53,7 @@ public class CHITIETPHIEUDHDTO {
 //        this.giaMua = giaMua;
         this.tenSach = tenSach;
     }
-    public CHITIETPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhan) {
+    public TAOPHIEUDHDTO(int idPhieu, int idSach, int soLuongNhan) {
         this.idPhieu = idPhieu;
         this.idSach = idSach;
         this.soLuongNhap = 0;

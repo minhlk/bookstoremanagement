@@ -97,7 +97,7 @@ public class PHIEUDHDAO {
         try{
             
          st = conn.createStatement();
-             String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhap * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
+             String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhan * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
 "from PhieuNhan p,ChiTietPhieuNhan c, SACH s where p.idPhieu = c.idPhieu and s.idSach = c.idSach";
 //             System.out.println(Sql);
              rs = st.executeQuery(Sql);
