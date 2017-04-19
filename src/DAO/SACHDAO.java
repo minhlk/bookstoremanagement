@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DTO.TAOPHIEUDHDTO;
 import DTO.SACHDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,8 +22,6 @@ public class SACHDAO {
     private Statement st;
     private ResultSet rs ;
     private Connection conn = GetConnection.conn;
-    public SACHDAO(){
-    }
     public void saveSach(SACHDTO mSach){
         try{
             st = conn.createStatement();
@@ -93,24 +90,6 @@ public class SACHDAO {
         }
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
     }
-    public void deleteSach(int id){
-        try{
-            
-//            System.out.println("test");
-            st = conn.createStatement();
-            String Sql = "delete SACH where idSach = "+ id;
-//            if(checkExist(mSach.getTenSach(), st)==0)
-            st.executeUpdate(Sql);
-//            System.out.println(Sql);
-//            while (rs.next()) {
-//                System.out.println(rs.getString("tenSach"));
-//            }
-//            System.out.println(mSach.toString());
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
-    }
     public ArrayList<SACHDTO> timKiem(String value,String key){
         ArrayList<SACHDTO> mSachs = new ArrayList<>();
         try{
@@ -137,30 +116,24 @@ public class SACHDAO {
 //        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
             return mSachs;
     } 
-    public void tangSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
-    try{
-        //tang so luong sach khi cap nhat so luong sach nhan duoc
-            st = conn.createStatement();
-            String Case="",condition="";
-            st = conn.createStatement();
-            for(int i= 0; i< arr.size(); i++){
-            Case += " when idSach = "+arr.get(i).getIdSach()+" then (select soLuong  + ( select "+arr.get(i).getSoLuongNhan()+" - soLuongNhan"
-                    + " from sach s,ChiTietPhieuNhan c where s.idSach = c.idSach and s.idSach = "+arr.get(i).getIdSach()+" and c.idPhieu ="+arr.get(i).getIdPhieu()
-                   + " ) as soLuong "
-                   + " from sach where idSach = "+arr.get(i).getIdSach()+" )  ";
-            
-            
-            condition += arr.get(i).getIdSach()+",";
-            }
-            condition = condition.substring(0, condition.length()-1);
-            
-            String Sql ="update sach set soLuong = (case "+Case+" end)" +
-" where idSach in ("+condition+")" ;
-            st.executeUpdate(Sql);
-//System.out.println(Sql);
-            
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void deleteSach(int id){
+//        try{
+//            
+////            System.out.println("test");
+//            st = conn.createStatement();
+//            String Sql = "delete SACH where idSach = "+ id;
+////            if(checkExist(mSach.getTenSach(), st)==0)
+//            st.executeUpdate(Sql);
+////            System.out.println(Sql);
+////            while (rs.next()) {
+////                System.out.println(rs.getString("tenSach"));
+////            }
+////            System.out.println(mSach.toString());
+//        } catch (SQLException ex ) {
+//            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+////        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
+//    }
+    
+    
 }

@@ -7,6 +7,7 @@ package BUS;
 
 import DAO.PHIEUDHDAO;
 import DTO.PHIEUDHDTO;
+import DTO.TAOPHIEUDHDTO;
 import DTO.THONGKECHIDTO;
 import java.util.ArrayList;
 import java.util.Map;
@@ -35,25 +36,25 @@ public class PHIEUDHBUS {
          return arr;
         
     }
-    public void deletePhieu(int idPhieu){
-        phieuDAO.deletePhieu(idPhieu);
-    
-    }
     public void changeState(int idPhieu,int state) {
         phieuDAO.changeState(idPhieu,state);
     }
     public void changetinhTrang(int idPhieu, int tinhTrang) {
         phieuDAO.changetinhTrang(idPhieu, tinhTrang);
     }
-    public ArrayList<THONGKECHIDTO> loadFormThongKeChi() {
-         ArrayList<THONGKECHIDTO> arr= phieuDAO.loadFormThongKeChi();    
-         return arr;
     
+    public void editChiTietPhieu(ArrayList<TAOPHIEUDHDTO> arr) {
+        phieuDAO.editChiTietPhieu(arr);
     }
-    public Map<Integer,Integer> thongKeChi(int year ) {
-        return phieuDAO.thongKeChi(year);
+    public void changeSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
+        phieuDAO.changeSoLuong(arr);
     }
-
+    public ArrayList<TAOPHIEUDHDTO> getChiTietPhieu(int idPhieu){
+        ArrayList<TAOPHIEUDHDTO> arr = phieuDAO.getChiTietPhieu(idPhieu);
+        return arr;
+    }
+    
+   
     
    
 }

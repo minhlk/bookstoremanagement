@@ -25,17 +25,6 @@ public class TAOPHIEUDHBUS {
     public void savePhieu(ArrayList<TAOPHIEUDHDTO> mPhieu){
         chiTietPhieuDAO.savePhieu(mPhieu);   
     }
-    public ArrayList<TAOPHIEUDHDTO> getChiTietPhieu(int idPhieu){
-        ArrayList<TAOPHIEUDHDTO> arr = chiTietPhieuDAO.getChiTietPhieu(idPhieu);
-        return arr;
-    }
-    public void editChiTietPhieu(ArrayList<TAOPHIEUDHDTO> arr) {
-        chiTietPhieuDAO.editChiTietPhieu(arr);
-    }
-//    public void huyChiTietPhieu(ArrayList<CHITIETPHIEUDHDTO> arr) {
-//        chiTietPhieuDAO.huyChiTietPhieu(arr);
-//    }
-    public void tangSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
-        new SACHDAO().tangSoLuong(arr);
-    }
+    
+    
 }

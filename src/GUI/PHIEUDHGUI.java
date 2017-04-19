@@ -401,7 +401,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton24.setEnabled(true);
         }
         jTextField8.setText("Mã phiếu : "+idPhieu);
-        ArrayList<TAOPHIEUDHDTO> arr = new TAOPHIEUDHBUS().getChiTietPhieu(idPhieu);
+        ArrayList<TAOPHIEUDHDTO> arr = new PHIEUDHBUS().getChiTietPhieu(idPhieu);
         DefaultTableModel model;
         model = new DefaultTableModel();
         model.addColumn("Mã phiếu");
@@ -561,10 +561,10 @@ if (result == JFileChooser.APPROVE_OPTION) {
                             arr.add(new TAOPHIEUDHDTO(idPhieu,idSach,soLuongNhan));
                         }
                         // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
-                        TAOPHIEUDHBUS chiTietPhieuBus = new TAOPHIEUDHBUS();
+//                        TAOPHIEUDHBUS chiTietPhieuBus = new TAOPHIEUDHBUS();
                         PHIEUDHBUS phieuBus = new PHIEUDHBUS();
-                        chiTietPhieuBus.tangSoLuong(arr);
-                        chiTietPhieuBus.editChiTietPhieu(arr);
+                        phieuBus.changeSoLuong(arr);
+                        phieuBus.editChiTietPhieu(arr);
                         phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
 
                         // Nếu trình trạng là thiếu thì trạng thái trả về 0(đang chờ),và ngược lại(kết thúc)

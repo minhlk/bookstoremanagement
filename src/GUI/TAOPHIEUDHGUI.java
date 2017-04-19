@@ -377,7 +377,6 @@ public class TAOPHIEUDHGUI extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_getSoLuongEvent
-    
     private void loadSach() {
          SACHBUS sachBus = new SACHBUS();
         ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
@@ -404,6 +403,7 @@ public class TAOPHIEUDHGUI extends javax.swing.JFrame {
           jTable1.setRowSorter(sorter);
         
     }
+    
     /**
      * @param args the command line arguments
      */

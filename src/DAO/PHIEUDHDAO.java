@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.PHIEUDHDTO;
+import DTO.TAOPHIEUDHDTO;
 import DTO.THONGKECHIDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,10 +26,6 @@ public class PHIEUDHDAO {
     private Statement st;
     private ResultSet rs;
     private Connection conn = GetConnection.conn;
-    public PHIEUDHDAO(){
-
-    }
-    
     public ArrayList<PHIEUDHDTO> loadFormNhap(){
         ArrayList<PHIEUDHDTO>arr = new ArrayList<>();
          try {
@@ -53,20 +50,7 @@ public class PHIEUDHDAO {
         
         return new ArrayList<>();
     }
-    public void deletePhieu(int idPhieu){
-     
-          try{
-
-            st = conn.createStatement();
-            String Sql = "delete phieuNhan where idPhieu = " + idPhieu;
-           
-            st.executeUpdate(Sql);
-            
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-     }
+    
     public void changeState(int idPhieu,int state) {
         try{
 
@@ -92,29 +76,23 @@ public class PHIEUDHDAO {
          }
     }
     
-    public ArrayList<THONGKECHIDTO> loadFormThongKeChi() {
-        ArrayList<THONGKECHIDTO> arr = new ArrayList();
-        try{
-            
-         st = conn.createStatement();
-             String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhan * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
-"from PhieuNhan p,ChiTietPhieuNhan c, SACH s where p.idPhieu = c.idPhieu and s.idSach = c.idSach";
+    public ArrayList<TAOPHIEUDHDTO> getChiTietPhieu(int idPhieu){
+    ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
+         try {
+             st = conn.createStatement();
+             String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p,sach s where c.idPhieu = p.idPhieu and s.idSach = c.idSach and c.idPhieu="+idPhieu;
 //             System.out.println(Sql);
              rs = st.executeQuery(Sql);
 //            int idPhieu = 0;
             while (rs.next()) {
 //                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
-                    arr.add(new THONGKECHIDTO(Integer.parseInt(rs.getString("idPhieu"))
+                    arr.add(new TAOPHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("idSach"))
+                            
                             , Integer.parseInt(rs.getString("soLuongNhap"))
                             , Integer.parseInt(rs.getString("soLuongNhan"))
-                            , Integer.parseInt(rs.getString("giaMua"))
-                            ,Integer.parseInt(rs.getString("tongGia"))
-                            , Integer.parseInt(rs.getString("tinhTrang"))
-                            ,Integer.parseInt(rs.getString("trangThai"))
-                            ,rs.getString("tenSach")
-                            ,rs.getString("ngayLap")
-                            
+//                            , Integer.parseInt(rs.getString("giaMua"))
+                            , rs.getString("tenSach")
                             ));
 //                    System.out.println(arr.get(0).toString());;
 }
@@ -124,30 +102,60 @@ public class PHIEUDHDAO {
 //             return null;
          }
          return arr;
+         
+    
     
     }
-    public Map<Integer,Integer> thongKeChi(int year ) {
-        Map<Integer,Integer> mMap = new HashMap<>();
-         try {
-             st = conn.createStatement();
-             String sql = "select MONTH(ngayLap) as thang,sum(soLuongNhap * s.giaMua ) as tongGia " +
-                     "from PhieuNhan p,ChiTietPhieuNhan c,sach s " +
-                     "where p.idPhieu = c.idPhieu and s.idSach = c.idSach and YEAR(ngayLap) = " +year + 
-                     " group by ngayLap";
-             rs = st.executeQuery(sql);
-//            int idPhieu = 0;
-            while (rs.next()) {
-               mMap.put(
-                        Integer.parseInt(rs.getString("thang"))
-                       ,Integer.parseInt(rs.getString("tongGia"))
-               );
-            }       
-            return mMap;
-         } catch (SQLException ex) {
-             Logger.getLogger(PHIEUDHDAO.class.getName()).log(Level.SEVERE, null, ex);
-             return mMap;
-         }
+     
+    public void editChiTietPhieu(ArrayList<TAOPHIEUDHDTO> arr){
+        try{
+            String Case="",condition="";
+            st = conn.createStatement();
+            for(int i= 0; i< arr.size(); i++){
+            Case += " when idSach = "+arr.get(i).getIdSach()+" then "+arr.get(i).getSoLuongNhan();
+            condition += arr.get(i).getIdSach()+",";
+            }
+            condition = condition.substring(0, condition.length()-1);
+            
+            String sql ="update ChiTietPhieuNhan set soLuongNhan = (case "+Case+" end)" +
+" where idSach in ("+condition+") and idPhieu = "+arr.get(0).getIdPhieu();
+//            System.out.println(sql);
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+    
+    public void changeSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
+    try{
+        //tang so luong sach khi cap nhat so luong sach nhan duoc
+//            st = conn.createStatement();
+            String Case="",condition="";
+            st = conn.createStatement();
+            for(int i= 0; i< arr.size(); i++){
+            Case += " when idSach = "+arr.get(i).getIdSach()+" then (select soLuong  + ( select "+arr.get(i).getSoLuongNhan()+" - soLuongNhan"
+                    + " from sach s,ChiTietPhieuNhan c where s.idSach = c.idSach and s.idSach = "+arr.get(i).getIdSach()+" and c.idPhieu ="+arr.get(i).getIdPhieu()
+                   + " ) as soLuong "
+                   + " from sach where idSach = "+arr.get(i).getIdSach()+" )  ";
+            
+            
+            condition += arr.get(i).getIdSach()+",";
+            }
+            condition = condition.substring(0, condition.length()-1);
+            
+            String Sql ="update sach set soLuong = (case "+Case+" end)" +
+" where idSach in ("+condition+")" ;
+            st.executeUpdate(Sql);
+//System.out.println(Sql);
+            
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    
+    
     
      
 }

@@ -29,16 +29,14 @@ public class SACHBUS {
           sachDAO.editSach(mSach);
     }
 
-    public void deleteSach(SACHDTO mSach) {
-          sachDAO.deleteSach(mSach.getIdSach());
-    }
+//    public void deleteSach(SACHDTO mSach) {
+//          sachDAO.deleteSach(mSach.getIdSach());
+//    }
 
     public ArrayList<SACHDTO>  timKiem( String value, String key) {
           ArrayList<SACHDTO> arr= sachDAO.timKiem(value, key);  
           return arr;
     }
-    public void tangSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
-        sachDAO.tangSoLuong(arr);
-    }
+    
     
 }

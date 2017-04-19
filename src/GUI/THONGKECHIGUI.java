@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.PHIEUDHBUS;
+import BUS.THONGKECHIBUS;
 import DTO.THONGKECHIDTO;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -296,9 +297,9 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
 
     private void hienThiThongKeEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hienThiThongKeEvent
                      // TODO add your handling code here:
-        PHIEUDHBUS mPhieu = new PHIEUDHBUS();
+        THONGKECHIBUS tkcBus = new THONGKECHIBUS();
         int year = jYearChooser1.getYear();
-        Map<Integer,Integer> mMap = mPhieu.thongKeChi(year);
+        Map<Integer,Integer> mMap = tkcBus.thongKeChi(year);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i= 1; i <= 12 ;i++){
             dataset.setValue(mMap.get(i), "Tổng tiền (VNĐ)", "Tháng : "+i);
@@ -326,8 +327,8 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         model.addColumn("Tổng giá");
         model.addColumn("Tình trạng");
         model.addColumn("Trạng thái");
-PHIEUDHBUS bus = new PHIEUDHBUS();
-ArrayList<THONGKECHIDTO> arr = bus.loadFormThongKeChi();
+THONGKECHIBUS tkcBus = new THONGKECHIBUS();
+ArrayList<THONGKECHIDTO> arr = tkcBus.loadFormThongKeChi();
  for(int i=0;i< arr.size();i++){
         try {
             model.addRow(new Object[]{arr.get(i).getIdPhieu()

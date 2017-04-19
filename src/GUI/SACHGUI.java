@@ -49,7 +49,6 @@ public class SACHGUI extends javax.swing.JPanel {
         jTextField12 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -99,13 +98,6 @@ public class SACHGUI extends javax.swing.JPanel {
             }
         });
 
-        jButton18.setText("Xóa");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xoaSachEvent(evt);
-            }
-        });
-
         jLabel2.setText("Nhà cung cấp");
 
         jLabel14.setText("Giá Mua");
@@ -149,9 +141,8 @@ public class SACHGUI extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(0, 123, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -187,7 +178,6 @@ public class SACHGUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jButton18)
                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -330,15 +320,13 @@ public class SACHGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         loadSach();
     }//GEN-LAST:event_refreshSachEvent
-
-    private void xoaSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaSachEvent
-         SACHDTO mSach = getSach();
-        if(mSach!=null){
-            sachBus.deleteSach(mSach);
-            loadSach();
-        }
-    }//GEN-LAST:event_xoaSachEvent
-
+//private void xoaSachEvent(java.awt.event.ActionEvent evt) {                              
+//         SACHDTO mSach = getSach();
+//        if(mSach!=null){
+//            sachBus.deleteSach(mSach);
+//            loadSach();
+//        }
+//    }      
     private void getSachEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getSachEvent
       if(jTable1.getSelectedRow() != -1){
         jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
@@ -414,7 +402,6 @@ public class SACHGUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
