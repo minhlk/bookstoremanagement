@@ -20,24 +20,19 @@ import java.util.logging.Logger;
  *
  * @author MKZ
  */
-public class THONGKECHIDAO {
+public class THONGKECHIDAO extends GenericDAO<THONGKECHIDTO>{
     private Statement st;
     private ResultSet rs;
     private Connection conn = GetConnection.conn;
     
     
-    public ArrayList<THONGKECHIDTO> loadFormThongKeChi() {
-        ArrayList<THONGKECHIDTO> arr = new ArrayList();
-        try{
-            
-         st = conn.createStatement();
-             String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhan * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
+    public ArrayList<THONGKECHIDTO> getAll() {
+         String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhan * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
 "from PhieuNhan p,ChiTietPhieuNhan c, SACH s where p.idPhieu = c.idPhieu and s.idSach = c.idSach";
-//             System.out.println(Sql);
-             rs = st.executeQuery(Sql);
-//            int idPhieu = 0;
+        rs = super.getAll(Sql);
+        ArrayList<THONGKECHIDTO> arr = new ArrayList();
+        try{     
             while (rs.next()) {
-//                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
                     arr.add(new THONGKECHIDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("idSach"))
                             , Integer.parseInt(rs.getString("soLuongNhap"))
@@ -50,12 +45,10 @@ public class THONGKECHIDAO {
                             ,rs.getString("ngayLap")
                             
                             ));
-//                    System.out.println(arr.get(0).toString());;
 }
             return arr;
          } catch (SQLException ex) {
              Logger.getLogger(PHIEUDHDAO.class.getName()).log(Level.SEVERE, null, ex);
-//             return null;
          }
          return arr;
     

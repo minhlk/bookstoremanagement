@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import BUS.TAOPHIEUDHBUS;
 import BUS.PHIEUDHBUS;
 import DTO.TAOPHIEUDHDTO;
 import DTO.PHIEUDHDTO;
@@ -17,7 +16,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Button;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,7 +27,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -41,9 +38,13 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
     /**
      * Creates new form DATHANGGUI
      */
+    PHIEUDHBUS phieuBus;
+    TAOPHIEUDHGUI taoPhieuForm ;
     TableRowSorter sorter;
     public PHIEUDHGUI() {
         initComponents();
+        phieuBus = new PHIEUDHBUS();
+        taoPhieuForm = new TAOPHIEUDHGUI();
         jPanel15.setVisible(false);
         jPanel16.setVisible(false);
     }
@@ -401,7 +402,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
         jButton24.setEnabled(true);
         }
         jTextField8.setText("Mã phiếu : "+idPhieu);
-        ArrayList<TAOPHIEUDHDTO> arr = new PHIEUDHBUS().getChiTietPhieu(idPhieu);
+        ArrayList<TAOPHIEUDHDTO> arr = phieuBus.find(idPhieu);
         DefaultTableModel model;
         model = new DefaultTableModel();
         model.addColumn("Mã phiếu");
@@ -437,7 +438,7 @@ public class PHIEUDHGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_RefreshEvent
 
     private void loadFormTaoPhieuEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFormTaoPhieuEvent
-      TAOPHIEUDHGUI taoPhieuForm = new TAOPHIEUDHGUI();
+      
         taoPhieuForm.setVisible(true);
     }//GEN-LAST:event_loadFormTaoPhieuEvent
 
@@ -562,14 +563,14 @@ if (result == JFileChooser.APPROVE_OPTION) {
                         }
                         // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
 //                        TAOPHIEUDHBUS chiTietPhieuBus = new TAOPHIEUDHBUS();
-                        PHIEUDHBUS phieuBus = new PHIEUDHBUS();
+                        
                         phieuBus.changeSoLuong(arr);
                         phieuBus.editChiTietPhieu(arr);
-                        phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
+                        phieuBus.edit(arr.get(0).getIdPhieu(), tinhTrang,"tinhTrang");
 
                         // Nếu trình trạng là thiếu thì trạng thái trả về 0(đang chờ),và ngược lại(kết thúc)
                         int trangThai = tinhTrang == 1? 0:1;
-                        phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
+                        phieuBus.edit(arr.get(0).getIdPhieu(),trangThai,"trangThai");
                         //  Load lại form
                         loadFormPhieu();
                         ((DefaultTableModel)jTable5.getModel()).setRowCount(0);
@@ -606,12 +607,12 @@ if (result == JFileChooser.APPROVE_OPTION) {
                     }
                     // Cập nhật chi tiết của phiếu đặt hàng sau khi kiểm tra
 //                    CHITIETPHIEUDHBUS chiTietPhieuBus = new CHITIETPHIEUDHBUS();
-                    PHIEUDHBUS phieuBus = new PHIEUDHBUS();
+//                    PHIEUDHBUS phieuBus = new PHIEUDHBUS();
 //                    chiTietPhieuBus.huyChiTietPhieu(arr);
 //                    phieuBus.changetinhTrang(arr.get(0).getIdPhieu(), tinhTrang);
 
                     int trangThai = 0;
-                    phieuBus.changeState(arr.get(0).getIdPhieu(),trangThai);
+                    phieuBus.edit(arr.get(0).getIdPhieu(),trangThai,"trangThai");
                     //  Load lại form
                     loadFormPhieu();
                     ((DefaultTableModel)jTable5.getModel()).setRowCount(0);
@@ -630,8 +631,8 @@ if (result == JFileChooser.APPROVE_OPTION) {
         model.addColumn("Ngày lập");
         model.addColumn("Tình trạng");
         model.addColumn("Trạng thái");
-PHIEUDHBUS bus = new PHIEUDHBUS();
-ArrayList<PHIEUDHDTO> arr = bus.loadFormNhap();
+//PHIEUDHBUS bus = new PHIEUDHBUS();
+ArrayList<PHIEUDHDTO> arr = phieuBus.getAll();
  for(int i=0;i< arr.size();i++){
             model.addRow(new Object[]{arr.get(i).getIdPhieu()
                     ,arr.get(i).getNgayLap().trim()

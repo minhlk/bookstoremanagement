@@ -30,14 +30,6 @@ public class SACHDTO {
         this.nhaCungCap = nhaCungCap;
     }
 
-    
-//    public SACHDTO(int idSach, int soLuong, int giaBan, String tenSach, String tacGia) {
-//        this.idSach = idSach;
-//        this.soLuong = soLuong;
-//        this.giaBan = giaBan;
-//        this.tenSach = tenSach;
-//        this.tacGia = tacGia;
-//    }
     public SACHDTO(int soLuong, int giaBan, int giaMua, String tenSach, String tacGia, String nhaCungCap) {
 //        this.idSach = idSach;
         this.soLuong = soLuong;
@@ -47,6 +39,7 @@ public class SACHDTO {
         this.tacGia = tacGia;
         this.nhaCungCap = nhaCungCap;
     }
+    
     public SACHDTO() {
 //         this.idSach = idSach;
         this.soLuong = 0;

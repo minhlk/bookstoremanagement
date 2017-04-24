@@ -6,7 +6,6 @@
 package BUS;
 
 import DAO.TAOPHIEUDHDAO;
-import DAO.SACHDAO;
 import DTO.TAOPHIEUDHDTO;
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class TAOPHIEUDHBUS {
      
     //chiTietPhieuDAO
     public void savePhieu(ArrayList<TAOPHIEUDHDTO> mPhieu){
-        chiTietPhieuDAO.savePhieu(mPhieu);   
+        chiTietPhieuDAO.save(mPhieu);   
     }
     
     

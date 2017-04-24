@@ -16,25 +16,21 @@ import java.util.ArrayList;
  */
 public class SACHBUS {
     private SACHDAO sachDAO =  new SACHDAO();
-    public void saveSach(SACHDTO mSach){
+    public void save(SACHDTO mSach){
           
-        sachDAO.saveSach(mSach);   
+        sachDAO.save(mSach);   
     }
-    public ArrayList<SACHDTO> loadFormNhap(){
-         ArrayList<SACHDTO> arr= sachDAO.loadFormNhap();
+    public ArrayList<SACHDTO> getAll(){
+         ArrayList<SACHDTO> arr= sachDAO.getAll();
          return arr;
         
     }
-    public void editSach(SACHDTO mSach){
-          sachDAO.editSach(mSach);
+    public void edit(SACHDTO mSach){
+          sachDAO.edit(mSach);
     }
-
-//    public void deleteSach(SACHDTO mSach) {
-//          sachDAO.deleteSach(mSach.getIdSach());
-//    }
-
-    public ArrayList<SACHDTO>  timKiem( String value, String key) {
-          ArrayList<SACHDTO> arr= sachDAO.timKiem(value, key);  
+    
+    public ArrayList<SACHDTO>  find( String value, String key) {
+          ArrayList<SACHDTO> arr= sachDAO.find(value, key);  
           return arr;
     }
     

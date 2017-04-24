@@ -379,7 +379,7 @@ public class TAOPHIEUDHGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_getSoLuongEvent
     private void loadSach() {
          SACHBUS sachBus = new SACHBUS();
-        ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
+        ArrayList<SACHDTO> arr = sachBus.getAll();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Tên sách");
         model.addColumn("Tên tác giả");

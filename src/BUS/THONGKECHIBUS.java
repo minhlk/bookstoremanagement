@@ -22,8 +22,8 @@ public class THONGKECHIBUS {
         tkcDAO = new THONGKECHIDAO();
     }
     
-     public ArrayList<THONGKECHIDTO> loadFormThongKeChi() {
-         ArrayList<THONGKECHIDTO> arr= tkcDAO.loadFormThongKeChi();    
+     public ArrayList<THONGKECHIDTO> getAll() {
+         ArrayList<THONGKECHIDTO> arr= tkcDAO.getAll();    
          return arr;
     
     }

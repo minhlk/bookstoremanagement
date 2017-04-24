@@ -268,7 +268,7 @@ public class SACHGUI extends javax.swing.JPanel {
     private void editSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSachEvent
        SACHDTO mSach = getSach();
         if(mSach!=null){
-            sachBus.editSach(mSach);
+            sachBus.edit(mSach);
             loadSach();
         }
     }//GEN-LAST:event_editSachEvent
@@ -276,7 +276,7 @@ public class SACHGUI extends javax.swing.JPanel {
     private void saveSachEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSachEvent
         SACHDTO mSach = getSach();
         if(mSach!=null){
-            sachBus.saveSach(mSach);
+            sachBus.save(mSach);
             loadSach();
         }
     }//GEN-LAST:event_saveSachEvent
@@ -287,13 +287,13 @@ public class SACHGUI extends javax.swing.JPanel {
         ArrayList<SACHDTO> mSachs ;
         switch (jComboBox1.getSelectedItem().toString()){
             case "Tác giả":
-                mSachs = (sachBus.timKiem(value,"tacGia"));
+                mSachs = (sachBus.find(value,"tacGia"));
                 break;
             case "Tên sách":
-                mSachs = (sachBus.timKiem(value,"tenSach"));
+                mSachs = (sachBus.find(value,"tenSach"));
                 break;
             default :
-                mSachs = (sachBus.timKiem(value,"idSach"));
+                mSachs = (sachBus.find(value,"idSach"));
                 
             }
         
@@ -303,7 +303,7 @@ public class SACHGUI extends javax.swing.JPanel {
            model.addColumn("Số lượng");
            model.addColumn("Giá bán");
            model.addColumn("Nhà cung cấp");
-           model.addColumn("id Sách");
+           model.addColumn("Mã sách");
              for(int i=0;i< mSachs.size();i++){
                model.addRow(new Object[]{mSachs.get(i).getTenSach().trim()
                        ,mSachs.get(i).getTacGia().trim()
@@ -320,13 +320,7 @@ public class SACHGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         loadSach();
     }//GEN-LAST:event_refreshSachEvent
-//private void xoaSachEvent(java.awt.event.ActionEvent evt) {                              
-//         SACHDTO mSach = getSach();
-//        if(mSach!=null){
-//            sachBus.deleteSach(mSach);
-//            loadSach();
-//        }
-//    }      
+
     private void getSachEvent(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getSachEvent
       if(jTable1.getSelectedRow() != -1){
         jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
@@ -377,7 +371,7 @@ public class SACHGUI extends javax.swing.JPanel {
     }
     
     private void loadSach() {
-           ArrayList<SACHDTO> arr = sachBus.loadFormNhap();
+           ArrayList<SACHDTO> arr = sachBus.getAll();
            DefaultTableModel model = new DefaultTableModel();
            model.addColumn("Tên sách");
            model.addColumn("Tên tác giả");
@@ -385,7 +379,7 @@ public class SACHGUI extends javax.swing.JPanel {
            model.addColumn("Giá bán");
            model.addColumn("Giá mua");
            model.addColumn("Nhà cung cấp");
-           model.addColumn("id Sách");
+           model.addColumn("Mã sách");
              for(int i=0;i< arr.size();i++){
                model.addRow(new Object[]{arr.get(i).getTenSach().trim()
                        ,arr.get(i).getTacGia().trim()

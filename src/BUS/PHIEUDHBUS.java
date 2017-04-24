@@ -26,22 +26,15 @@ public class PHIEUDHBUS {
     
 
     // phieuDAO
-    public ArrayList<PHIEUDHDTO> loadFormNhap(){ 
-         ArrayList<PHIEUDHDTO> arr= phieuDAO.loadFormNhap();
+    public ArrayList<PHIEUDHDTO> getAll(){ 
+         ArrayList<PHIEUDHDTO> arr= phieuDAO.getAll();
          return arr;
     }
-    
-    public ArrayList<PHIEUDHDTO> timkiem(int idPhieu){
-         ArrayList<PHIEUDHDTO> arr= phieuDAO.timkiem(idPhieu);    
-         return arr;
-        
+
+    public void edit(int idPhieu,int state,String condition) {
+        phieuDAO.edit(idPhieu,state,condition);
     }
-    public void changeState(int idPhieu,int state) {
-        phieuDAO.changeState(idPhieu,state);
-    }
-    public void changetinhTrang(int idPhieu, int tinhTrang) {
-        phieuDAO.changetinhTrang(idPhieu, tinhTrang);
-    }
+  
     
     public void editChiTietPhieu(ArrayList<TAOPHIEUDHDTO> arr) {
         phieuDAO.editChiTietPhieu(arr);
@@ -49,8 +42,8 @@ public class PHIEUDHBUS {
     public void changeSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
         phieuDAO.changeSoLuong(arr);
     }
-    public ArrayList<TAOPHIEUDHDTO> getChiTietPhieu(int idPhieu){
-        ArrayList<TAOPHIEUDHDTO> arr = phieuDAO.getChiTietPhieu(idPhieu);
+    public ArrayList<TAOPHIEUDHDTO> find(int idPhieu){
+        ArrayList<TAOPHIEUDHDTO> arr = phieuDAO.find(idPhieu);
         return arr;
     }
     

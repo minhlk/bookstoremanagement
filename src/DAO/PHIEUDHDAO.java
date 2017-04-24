@@ -22,16 +22,16 @@ import java.util.logging.Logger;
  *
  * @author MKZ
  */
-public class PHIEUDHDAO {
+public class PHIEUDHDAO extends GenericDAO<PHIEUDHDTO>{
     private Statement st;
     private ResultSet rs;
     private Connection conn = GetConnection.conn;
-    public ArrayList<PHIEUDHDTO> loadFormNhap(){
+    public ArrayList<PHIEUDHDTO> getAll(){
+        String Sql = "SELECT * FROM PhieuNhan ORDER BY idPhieu DESC";
+        rs = super.getAll(Sql);
         ArrayList<PHIEUDHDTO>arr = new ArrayList<>();
          try {
-              st = conn.createStatement();
-             String Sql = "SELECT * FROM PhieuNhan ORDER BY idPhieu DESC";
-             rs = st.executeQuery(Sql);
+             
             while (rs.next()) {
                     arr.add(new PHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("tinhTrang"))
@@ -45,68 +45,12 @@ public class PHIEUDHDAO {
          return arr;
     }
     
-    public ArrayList<PHIEUDHDTO> timkiem(int idPhieu){
-    
-        
-        return new ArrayList<>();
+    public void edit(int idPhieu,int state,String condition) {
+        String Sql = "update phieuNhan set "+condition+"  ="+state+" where idPhieu = " + idPhieu;
+        super.edit(Sql);
     }
-    
-    public void changeState(int idPhieu,int state) {
-        try{
 
-            st = conn.createStatement();
-            String Sql = "update phieuNhan set trangThai ="+state+" where idPhieu = " + idPhieu;
-            System.out.println(Sql);
-            st.executeUpdate(Sql);
-            
-            
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void changetinhTrang(int idPhieu, int tinhTrang) {
-         try {
-             st = conn.createStatement();
-             String sql = "update phieunhan set tinhTrang = "+tinhTrang+" where idPhieu = "+idPhieu;
-             System.out.println(sql);
-             st.executeUpdate(sql);
-         } catch (SQLException ex) {
-             Logger.getLogger(PHIEUDHDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }
-    
-    public ArrayList<TAOPHIEUDHDTO> getChiTietPhieu(int idPhieu){
-    ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
-         try {
-             st = conn.createStatement();
-             String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p,sach s where c.idPhieu = p.idPhieu and s.idSach = c.idSach and c.idPhieu="+idPhieu;
-//             System.out.println(Sql);
-             rs = st.executeQuery(Sql);
-//            int idPhieu = 0;
-            while (rs.next()) {
-//                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
-                    arr.add(new TAOPHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
-                            , Integer.parseInt(rs.getString("idSach"))
-                            
-                            , Integer.parseInt(rs.getString("soLuongNhap"))
-                            , Integer.parseInt(rs.getString("soLuongNhan"))
-//                            , Integer.parseInt(rs.getString("giaMua"))
-                            , rs.getString("tenSach")
-                            ));
-//                    System.out.println(arr.get(0).toString());;
-}
-            return arr;
-         } catch (SQLException ex) {
-             Logger.getLogger(PHIEUDHDAO.class.getName()).log(Level.SEVERE, null, ex);
-//             return null;
-         }
-         return arr;
-         
-    
-    
-    }
-     
+    //
     public void editChiTietPhieu(ArrayList<TAOPHIEUDHDTO> arr){
         try{
             String Case="",condition="";
@@ -147,7 +91,6 @@ public class PHIEUDHDAO {
             String Sql ="update sach set soLuong = (case "+Case+" end)" +
 " where idSach in ("+condition+")" ;
             st.executeUpdate(Sql);
-//System.out.println(Sql);
             
         } catch (SQLException ex ) {
             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);

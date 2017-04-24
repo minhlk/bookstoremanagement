@@ -51,9 +51,11 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
     /**
      * Creates new form THONGKENHAPGUI
      */
+    THONGKECHIBUS tkcBus;
     TableRowSorter sorter;
     public THONGKECHIGUI() {
         initComponents();
+        tkcBus = new THONGKECHIBUS();
     }
 
     /**
@@ -297,7 +299,7 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
 
     private void hienThiThongKeEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hienThiThongKeEvent
                      // TODO add your handling code here:
-        THONGKECHIBUS tkcBus = new THONGKECHIBUS();
+        
         int year = jYearChooser1.getYear();
         Map<Integer,Integer> mMap = tkcBus.thongKeChi(year);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -327,8 +329,8 @@ public class THONGKECHIGUI extends javax.swing.JPanel {
         model.addColumn("Tổng giá");
         model.addColumn("Tình trạng");
         model.addColumn("Trạng thái");
-THONGKECHIBUS tkcBus = new THONGKECHIBUS();
-ArrayList<THONGKECHIDTO> arr = tkcBus.loadFormThongKeChi();
+//THONGKECHIBUS tkcBus = new THONGKECHIBUS();
+ArrayList<THONGKECHIDTO> arr = tkcBus.getAll();
  for(int i=0;i< arr.size();i++){
         try {
             model.addRow(new Object[]{arr.get(i).getIdPhieu()
