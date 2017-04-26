@@ -25,7 +25,7 @@ public class THONGKECHIDAO extends GenericDAO<THONGKECHIDTO>{
     public ArrayList<THONGKECHIDTO> getAll() {
          String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhan * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
 "from PhieuNhan p,ChiTietPhieuNhan c, SACH s where p.idPhieu = c.idPhieu and s.idSach = c.idSach";
-        rs = super.executeQuery(Sql);
+        rs = executeQuery(Sql);
         ArrayList<THONGKECHIDTO> arr = new ArrayList();
         try{     
             while (rs.next()) {
@@ -55,7 +55,7 @@ public class THONGKECHIDAO extends GenericDAO<THONGKECHIDTO>{
                      "from PhieuNhan p,ChiTietPhieuNhan c,sach s " +
                      "where p.idPhieu = c.idPhieu and s.idSach = c.idSach and YEAR(ngayLap) = " +year + 
                      " group by ngayLap";
-        rs = super.executeQuery(Sql);
+        rs = executeQuery(Sql);
          try {
             while (rs.next()) {
                mMap.put(
