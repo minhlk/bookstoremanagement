@@ -28,7 +28,7 @@ public class THONGKECHIBUS {
     
     }
     public Map<Integer,Integer> thongKeChi(int year ) {
-        return tkcDAO.thongKeChi(year);
+        return tkcDAO.thongKe(year);
     }
     
 }

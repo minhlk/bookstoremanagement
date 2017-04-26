@@ -6,10 +6,8 @@
 package DAO;
 
 import DTO.SACHDTO;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,14 +17,11 @@ import java.util.logging.Logger;
  * @author MKZ
  */
 public class SACHDAO extends GenericDAO<SACHDAO>{
-    private Statement st;
     private ResultSet rs ;
-    private Connection conn = GetConnection.conn;
-    
     
     public ArrayList<SACHDTO> getAll(){
         String Sql = "select * from sach";
-        rs = super.getAll(Sql);
+        rs = super.executeQuery(Sql);
         ArrayList<SACHDTO> mSachs = new ArrayList<>();
         try{
             while (rs.next()) {
@@ -39,7 +34,7 @@ public class SACHDAO extends GenericDAO<SACHDAO>{
                        , rs.getString("nhaCungCap")));
             }
         } catch (SQLException ex ) {
-//            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
             return mSachs;
     }

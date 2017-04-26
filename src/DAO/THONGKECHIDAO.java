@@ -6,10 +6,8 @@
 package DAO;
 
 import DTO.THONGKECHIDTO;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,15 +19,13 @@ import java.util.logging.Logger;
  * @author MKZ
  */
 public class THONGKECHIDAO extends GenericDAO<THONGKECHIDTO>{
-    private Statement st;
     private ResultSet rs;
-    private Connection conn = GetConnection.conn;
     
     
     public ArrayList<THONGKECHIDTO> getAll() {
          String Sql = "select c.idPhieu,c.idSach,s.tenSach,p.ngayLap,c.soLuongNhap,c.soLuongNhan,s.giaMua,c.soLuongNhan * s.giaMua as tongGia,p.tinhTrang,p.trangThai " +
 "from PhieuNhan p,ChiTietPhieuNhan c, SACH s where p.idPhieu = c.idPhieu and s.idSach = c.idSach";
-        rs = super.getAll(Sql);
+        rs = super.executeQuery(Sql);
         ArrayList<THONGKECHIDTO> arr = new ArrayList();
         try{     
             while (rs.next()) {
@@ -53,16 +49,14 @@ public class THONGKECHIDAO extends GenericDAO<THONGKECHIDTO>{
          return arr;
     
     }
-    public Map<Integer,Integer> thongKeChi(int year ) {
+    public Map<Integer,Integer> thongKe(int year ) {
         Map<Integer,Integer> mMap = new HashMap<>();
-         try {
-             st = conn.createStatement();
-             String sql = "select MONTH(ngayLap) as thang,sum(soLuongNhan * s.giaMua ) as tongGia " +
+        String Sql = "select MONTH(ngayLap) as thang,sum(soLuongNhan * s.giaMua ) as tongGia " +
                      "from PhieuNhan p,ChiTietPhieuNhan c,sach s " +
                      "where p.idPhieu = c.idPhieu and s.idSach = c.idSach and YEAR(ngayLap) = " +year + 
                      " group by ngayLap";
-             rs = st.executeQuery(sql);
-//            int idPhieu = 0;
+        rs = super.executeQuery(Sql);
+         try {
             while (rs.next()) {
                mMap.put(
                         Integer.parseInt(rs.getString("thang"))

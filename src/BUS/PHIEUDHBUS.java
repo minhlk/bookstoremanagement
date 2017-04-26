@@ -40,7 +40,7 @@ public class PHIEUDHBUS {
         phieuDAO.editChiTietPhieu(arr);
     }
     public void changeSoLuong(ArrayList<TAOPHIEUDHDTO> arr){
-        phieuDAO.changeSoLuong(arr);
+        phieuDAO.editSoLuong(arr);
     }
     public ArrayList<TAOPHIEUDHDTO> find(int idPhieu){
         ArrayList<TAOPHIEUDHDTO> arr = phieuDAO.find(idPhieu);

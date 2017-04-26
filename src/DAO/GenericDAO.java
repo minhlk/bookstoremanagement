@@ -23,15 +23,7 @@ public class GenericDAO<T> {
     private Statement st;
     private ResultSet rs ;
     private Connection conn = GetConnection.conn;
-    public ResultSet getAll(String Sql){
-        try{
-            st = conn.createStatement();         
-            rs = st.executeQuery(Sql);
-
-        } catch (SQLException ex ) {
-        }
-            return rs;
-    }
+   
    public void save(SACHDTO mSach){
         try{
             st = conn.createStatement();
@@ -48,6 +40,22 @@ public class GenericDAO<T> {
 //            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   public void edit(SACHDTO mSach){
+        try{
+            st = conn.createStatement();
+            String Sql = "update sach set "
+                    +"tacGia="+"N'"+mSach.getTacGia().toUpperCase()+"',"
+                    +"soLuong="+"'"+mSach.getSoLuong()+"',"
+                    +"giaBan="+"'"+mSach.getGiaBan()+"',"
+                    +"giaMua="+"'"+mSach.getGiaMua()+"',"
+                    +"nhaCungCap=N'"+mSach.getNhaCungCap()+"'"
+                    + " where idSach = "+mSach.getIdSach();
+            st.executeUpdate(Sql);
+        } catch (SQLException ex ) {
+            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
    public void save(ArrayList<TAOPHIEUDHDTO> mPhieu){
         try{
             
@@ -88,38 +96,11 @@ public class GenericDAO<T> {
         }
 }
    
-   public void edit(SACHDTO mSach){
-        try{
-            st = conn.createStatement();
-            String Sql = "update sach set "
-                    +"tacGia="+"N'"+mSach.getTacGia().toUpperCase()+"',"
-                    +"soLuong="+"'"+mSach.getSoLuong()+"',"
-                    +"giaBan="+"'"+mSach.getGiaBan()+"',"
-                    +"giaMua="+"'"+mSach.getGiaMua()+"',"
-                    +"nhaCungCap=N'"+mSach.getNhaCungCap()+"'"
-                    + " where idSach = "+mSach.getIdSach();
-            st.executeUpdate(Sql);
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-   public void edit(String Sql){
-       try{
-            st = conn.createStatement();
-            st.executeUpdate(Sql);
-        } catch (SQLException ex ) {
-            Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-   }
-   
-   
-   
    public ArrayList<SACHDTO> find(String value,String key){
         ArrayList<SACHDTO> mSachs = new ArrayList<>();
         try{
-            st = conn.createStatement();
             String Sql = "select * from sach where "+key+" like '%"+value+"%'";
-            rs = st.executeQuery(Sql);
+            rs = executeQuery(Sql);
             while (rs.next()) {
                mSachs.add(new SACHDTO(Integer.parseInt(rs.getString("idSach"))
                         ,Integer.parseInt(rs.getString("soLuong"))
@@ -129,43 +110,51 @@ public class GenericDAO<T> {
                        , rs.getString("tacGia")
                        ,rs.getString("nhaCungCap")));
             }
-//            System.out.println(mSach.toString());
         } catch (SQLException ex ) {
             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        catch( com.microsoft.sqlserver.jdbc.SQLServerException e){}
             return mSachs;
     } //
    public ArrayList<TAOPHIEUDHDTO> find(int idPhieu){
     ArrayList<TAOPHIEUDHDTO> arr = new ArrayList<>();
+    String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p,sach s where c.idPhieu = p.idPhieu and s.idSach = c.idSach and c.idPhieu="+idPhieu;
+    rs = executeQuery(Sql);
          try {
-             st = conn.createStatement();
-             String Sql = "SELECT * FROM ChiTietPhieuNhan c,PhieuNhan p,sach s where c.idPhieu = p.idPhieu and s.idSach = c.idSach and c.idPhieu="+idPhieu;
-//             System.out.println(Sql);
-             rs = st.executeQuery(Sql);
-//            int idPhieu = 0;
             while (rs.next()) {
-//                idPhieu = Integer.parseInt(rs.getString("idPhieu"));
                     arr.add(new TAOPHIEUDHDTO(Integer.parseInt(rs.getString("idPhieu"))
                             , Integer.parseInt(rs.getString("idSach"))
-                            
                             , Integer.parseInt(rs.getString("soLuongNhap"))
                             , Integer.parseInt(rs.getString("soLuongNhan"))
-//                            , Integer.parseInt(rs.getString("giaMua"))
                             , rs.getString("tenSach")
                             ));
-//                    System.out.println(arr.get(0).toString());;
 }
             return arr;
          } catch (SQLException ex) {
              Logger.getLogger(PHIEUDHDAO.class.getName()).log(Level.SEVERE, null, ex);
-//             return null;
          }
          return arr;
          
     
     
     }
+  
      
-   
+    public void executeUpdate(String query){
+    try{
+             st = conn.createStatement();
+             st.executeUpdate(query);
+         } catch (SQLException ex ) {
+             Logger.getLogger(SACHDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+    }
+    public ResultSet executeQuery(String Sql){
+        try{
+            st = conn.createStatement();         
+            rs = st.executeQuery(Sql);
+
+        } catch (SQLException ex ) {
+        }
+            return rs;
+    }
 }
